@@ -1,0 +1,47 @@
+type Pathway {
+    _id: String
+    name: String
+    steps: [StepData] @relation(name: "HAS_PARENT_PATHWAY", direction: "IN")
+}
+
+type StepContent {
+    _id: String
+    content: String
+}
+
+union Step = Pathway | StepContent
+
+type StepData {
+    _id: String
+    name: String
+    difficulty: Int
+    index: Int
+    content: [Step] @relation(name: "HAS_CONTENT", direction: "OUT")
+}
+
+enum _StepDataOrdering {
+    index_asc
+}
+
+input StepPayload {
+    name: String!
+    difficulty: Int!
+    index: Int!
+    isPathway: Boolean!
+    pathwayId: String
+    content: String
+}
+
+type StatusMessage {
+    status: String!
+    message: String
+}
+
+type Mutation {
+    makePathway(
+        name: String!
+        steps: [StepPayload]
+    ): StatusMessage
+}
+
+

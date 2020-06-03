@@ -1,25 +1,25 @@
 type Pathway {
-    _id: String
+    id: String
     name: String
-    steps: [StepData] @relation(name: "HAS_PARENT_PATHWAY", direction: "IN")
+    steps: [Step] @relation(name: "HAS_PARENT_PATHWAY", direction: "IN")
 }
 
-type StepContent {
-    _id: String
+type Content {
+    id: String
     content: String
 }
 
-union Step = Pathway | StepContent
-
-type StepData {
-    _id: String
+type Step {
+    id: String
     name: String
     difficulty: Int
     index: Int
-    content: [Step] @relation(name: "HAS_CONTENT", direction: "OUT")
+    isPathway: Boolean
+    pathway: Pathway @relation(name: "INCLUDES", direction: "OUT")
+    content: Content @relation(name: "HAS_CONTENT", direction: "OUT")
 }
 
-enum _StepDataOrdering {
+enum _StepOrdering {
     index_asc
 }
 

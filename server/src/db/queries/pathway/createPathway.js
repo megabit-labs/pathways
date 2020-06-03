@@ -33,17 +33,17 @@ const createPathway = ({name, steps}) => {
 
     return new Query({
         statement: `
-        CREATE (p:Pathway {_id: $pathwayId, name: $name})
+        CREATE (p:Pathway {id: $pathwayId, name: $name})
             FOREACH (prop IN $contentProps | 
-                CREATE (sd:StepData {_id: prop.stepDataId, name: prop.name, difficulty: prop.difficulty, index: prop.index})
-                CREATE (sc:StepContent {_id: prop.stepContentId, content: prop.content})
+                CREATE (sd:Step {id: prop.stepDataId, name: prop.name, difficulty: prop.difficulty, index: prop.index, isPathway: false})
+                CREATE (sc:Content {id: prop.stepContentId, content: prop.content})
                 MERGE (p)<-[:HAS_PARENT_PATHWAY]-(sd)-[:HAS_CONTENT]->(sc)
             )
         WITH p
             FOREACH (prop IN $pathwayProps | 
-                CREATE (sd:StepData {_id: prop.stepDataId, name: prop.name, difficulty: prop.difficulty, index: prop.index})
-                MERGE (p1:Pathway {_id: prop.pathwayId})
-                MERGE (p)<-[:HAS_PARENT_PATHWAY]-(sd)-[:HAS_CONTENT]->(p1)
+                CREATE (sd:Step {id: prop.stepDataId, name: prop.name, difficulty: prop.difficulty, index: prop.index, isPathway: true})
+                MERGE (p1:Pathway {id: prop.pathwayId})
+                MERGE (p)<-[:HAS_PARENT_PATHWAY]-(sd)-[:INCLUDES]->(p1)
             )
         RETURN p
         `,

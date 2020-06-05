@@ -1,25 +1,29 @@
-const Query = require('../../core/Query')
+const Query = require("../../core/Query");
+const utils = require("../utils");
 
-const findOne = ({id=null, username=null, name=null}) => {
+const findOne = ({ id = null, username = null, name = null }) => {
     const args = {
         id: id,
         username: username,
-        name: name
-    }
+        name: name,
+    };
 
-    Object.keys().forEach((key) => args[key] === null ? delete args[key] : null)
-    if (Object.keys().length === 0) {
-        throw new Error('User.findOne: No arguments provided')
+    Object.keys(args).forEach((key) =>
+        args[key] === null ? delete args[key] : null
+    );
+
+    if (Object.keys(args).length === 0) {
+        throw new Error("User.findOne: No arguments provided");
     }
 
     const query = new Query({
         statement: `
-            MATCH (u:User $params) RETURN u
+            MATCH (u:User $params ) RETURN u
         `,
-        params: args
-    })
+        params: { params: utils.matchParams(args) }
+    });
 
-    return query
-}
+    return query;
+};
 
-module.exports = findOne
+module.exports = findOne;

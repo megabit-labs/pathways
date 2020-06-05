@@ -8,7 +8,7 @@ import {
     Header
 } from "gitstar-components";
 
-const CLIENT_ID = "8b508ba452a263f604b4";
+const CLIENT_ID = "37454df5e11a69f88833";
 const REDIRECT_URI = "http://localhost:3000/";
 
 class GithubAuth extends Component {

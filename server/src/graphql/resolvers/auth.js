@@ -1,16 +1,13 @@
-const axios = require("axios");
+const axios = require("axios")
 
-const queries = require("../../db/queries/queries");
-const secrets = require("../../secrets");
+const queries = require("../../db/queries/queries")
+const secrets = require("../../secrets")
 
-const User = require("../../db/models/user");
+const User = require("../../db/models/user")
 
-function generateRandomPassword() {
-    return Math.random().toString(36).slice(-8);
-}
 
 async function getGHAccessToken(code) {
-    const ghUrl = "https://github.com/login/oauth/access_token";
+    const ghUrl = "https://github.com/login/oauth/access_token"
     const ghResponse = await axios.get(ghUrl, {
         headers: {
             Accept: "application/json",
@@ -20,80 +17,86 @@ async function getGHAccessToken(code) {
             client_secret: secrets.GH_CLIENT_SECRET,
             code: code,
         },
-    });
-    console.log('HERE')
+    })
     if (ghResponse.data.hasOwnProperty("error")) {
-        throw new Error("GitHub: Invalid code.");
+        throw new Error("GitHub: Invalid code.")
     }
 
-    console.log('HERE')
-    return ghResponse.data.access_token;
+    return ghResponse.data.access_token
 }
 
 async function getGHUser(accessToken) {
-    const ghUrl = "https://api.github.com/user";
+    const ghUrl = "https://api.github.com/user"
 
     const ghResponse = await axios.get(ghUrl, {
         headers: {
             Authorization: "token " + accessToken,
         },
-    });
+    })
 
     if (ghResponse.status != 200) {
-        throw new Error("Github: Invalid access token");
+        throw new Error("Github: Invalid access token")
     }
 
     return {
         username: ghResponse.data.login,
         email: ghResponse.data.email,
         name: ghResponse.data.name,
-    };
+    }
 }
 
 const resolver = {
     Mutation: {
         async GithubAuth(_, { code }) {
-            let accessToken = "";
+            let accessToken = ""
             try {
-                accessToken = await getGHAccessToken(code);
+                accessToken = await getGHAccessToken(code)
             } catch (e) {
-                return { status: "ERROR", message: e.toString(), token: null };
+                return { status: "ERROR", message: e.toString(), token: null }
             }
 
-            let ghUser = "";
+            let ghUser = ""
             try {
-                ghUser = await getGHUser(accessToken);
+                ghUser = await getGHUser(accessToken)
             } catch (e) {
-                return { status: "ERROR", message: e.toString(), token: null };
+                return { status: "ERROR", message: e.toString(), token: null }
             }
 
-            console.log(ghUser)
 
-            const query = queries.user.findOne(ghUser);
+            const query = queries.user.findOne({ username: ghUser.username })
 
-            let user = null;
+            let result = null
             try {
-                user = await query.run();
+                result = await query.run()
             } catch (e) {
-                return { status: "ERROR", message: e.toString(), token: null };
+                return { status: "ERROR", message: e.toString(), token: null }
             }
 
-            if (user = null) {
-                const query = queries.user.createUser(ghUser);
+            if (result.records.length == 0) {
+                // If user does not exist create a new user
+                try {
+                    const newQuery = queries.user.createUser(ghUser)
+                    result = await newQuery.run()
+                    console.log(result)
+                } catch (e) {
+                    return { status: "ERROR", message: e.toString(), token: null }
+                }
             }
+            
+            const records = result.records
 
-            jwt = user.getJWT();
+            const userNode = records[0].get(0)
+            const user = new User(userNode)
 
-            return { status: OK, message: null, token: jwt };
+            console.log(user)
 
-            // try {
-            //     await query.run()
-            //     return {'status': 'OK', message: null }
-            // } catch(e) {
-            //     return {'status': 'ERROR', message: e.toString() }
-            // }
+            const jwt = user.generateToken()
+            console.log("JWT", jwt)
+
+            return { status: 'OK', message: null, token: jwt }
+
         },
     },
-};
+}
 
-module.exports = resolver;
+module.exports = resolver

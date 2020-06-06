@@ -1,0 +1,13 @@
+type ResponseMessage {
+    status: String!
+    message: String
+    token: String
+}
+
+
+type Mutation {
+    GithubAuth(
+        code: String
+    ): ResponseMessage
+}
+

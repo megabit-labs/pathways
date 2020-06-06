@@ -1,0 +1,7 @@
+
+module.exports = {
+    GH_CLIENT_ID: "37454df5e11a69f88833",
+    GH_CLIENT_SECRET: "952090694f312a7fe926825c12a7b82a44947940"
+}
+
+

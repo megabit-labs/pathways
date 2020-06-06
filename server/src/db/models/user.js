@@ -31,6 +31,13 @@ class User extends Model {
             return null
         }
     }
+
+    getJWT = async function () {
+        user = this
+
+        encoded = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'lolmao12345')
+        return encoded
+    }
 }
 
 module.exports = User

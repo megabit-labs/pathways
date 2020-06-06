@@ -5,6 +5,13 @@ const jwt = require('jsonwebtoken')
 class User extends Model {
     constructor(neoResult) {
         super(neoResult)
+
+        this.generateToken = () => {
+            console.log("HERE")
+            const encoded = jwt.sign({ id: this.id }, process.env.JWT_SECRET || 'lolmao12345')
+            console.log("ENC", encoded)
+            return encoded
+        }
     }
 
     static schema = () => ({
@@ -32,12 +39,6 @@ class User extends Model {
         }
     }
 
-    getJWT = async function () {
-        user = this
-
-        encoded = jwt.sign({ id: user.id }, process.env.JWT_SECRET || 'lolmao12345')
-        return encoded
-    }
 }
 
 module.exports = User

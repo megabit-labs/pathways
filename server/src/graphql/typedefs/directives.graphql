@@ -1,0 +1,5 @@
+directive @isAuthenticated on FIELD_DEFINITION
+
+directive @allowedFor(
+    roles: [String!]
+) on FIELD_DEFINITION

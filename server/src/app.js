@@ -9,12 +9,20 @@ const resolvers = require('./graphql/resolvers')
 
 const User = require('./db/models/user')
 
+const AllowedForDirective = require('./graphql/directives/allowedFor')
+const IsAuthenticatedDirective = require('./graphql/directives/isAuthenticated')
+
+
 const schema = makeAugmentedSchema({
     typeDefs: typedefs,
     resolvers: resolvers,
     config: {
         query: true,
         mutation: false
+    },
+    schemaDirectives: {
+        isAuthenticated: IsAuthenticatedDirective,
+        allowedFor: AllowedForDirective
     }
 })
 

@@ -33,8 +33,8 @@ class User extends Model {
             const user = new User(userNode)
             return user
         } catch (e) {
-            console.log("logging")
-            console.log(e)
+            console.log("Got unauthorized request")
+            // console.log(e)
             return null
         }
     }

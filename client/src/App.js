@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import GithubAuth from './GithubAuth/GithubAuth';
+import GithubAuth from './components/GithubAuth/GithubAuth';
 
 class App extends Component {
 

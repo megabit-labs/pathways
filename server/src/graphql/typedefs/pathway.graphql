@@ -24,6 +24,7 @@ enum _StepOrdering {
 }
 
 input StepPayload {
+    id: String
     name: String!
     difficulty: Int!
     index: Int!
@@ -42,7 +43,10 @@ type Mutation {
         name: String!
         steps: [StepPayload]
     ): StatusMessage
-
+    modifyPathwaySteps(
+        id: String
+        createSteps: [StepPayload]!
+        updateSteps: [StepPayload]!
+        deleteSteps: [StepPayload]!
+    ): StatusMessage
 }
-
-

@@ -2,9 +2,9 @@ const queries = require('../../db/queries/queries')
 
 const resolver = {
     Mutation: {
-        async makePathway(_, {name, steps}) {
-            const query = queries.pathway.createPathway({
-                name, steps
+        async createUpdatePathway(_, {id, name, steps}) {
+            const query = queries.pathway.createUpdatePathway({
+                id, name, steps
             })
 
             try {
@@ -13,12 +13,10 @@ const resolver = {
             } catch (e) {
                 return { status: 'ERROR', message: e.toString() }
             }
-
-            return { status: 'OK', message: null }
         },
-        async modifyPathwaySteps(_, {id, createSteps, updateSteps, deleteSteps}) {
-            const query = queries.pathway.modifyPathwaySteps({
-                id, createSteps, updateSteps, deleteSteps
+        async deletePathway(_, {id, steps, whole}) {
+            const query = queries.pathway.deletePathway({
+                id, steps, whole
             })
 
             try {
@@ -27,8 +25,6 @@ const resolver = {
             } catch (e) {
                 return { status: 'ERROR', message: e.toString() }
             }
-
-            return { status: 'OK', message: null }
         }
     }
 }

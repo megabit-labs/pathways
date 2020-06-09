@@ -12,7 +12,7 @@ type Content {
 type Step {
     id: String
     name: String
-    difficulty: Int
+    time: Int
     index: Int
     isPathway: Boolean
     pathway: Pathway @relation(name: "INCLUDES", direction: "OUT")
@@ -25,12 +25,11 @@ enum _StepOrdering {
 
 input StepPayload {
     id: String
-    name: String!
-    difficulty: Int!
-    index: Int!
+    name: String
+    time: Int
+    index: Int
     isPathway: Boolean!
-    pathwayId: String
-    content: String
+    typeId: String
 }
 
 type StatusMessage {
@@ -39,14 +38,14 @@ type StatusMessage {
 }
 
 type Mutation {
-    makePathway(
-        name: String!
-        steps: [StepPayload]
-    ): StatusMessage
-    modifyPathwaySteps(
+    createUpdatePathway(
         id: String
-        createSteps: [StepPayload]!
-        updateSteps: [StepPayload]!
-        deleteSteps: [StepPayload]!
+        name: String!
+        steps: [StepPayload]!
+    ): StatusMessage
+    deletePathway(
+        id: String!
+        steps: [StepPayload]!
+        whole: Boolean!
     ): StatusMessage
 }

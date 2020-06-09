@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  neo4j:
+    container_name: "pathways_neo4j"
+    image: neo4j:4.0.4
+    env_file: 
+        - ./neo4j.env
+    ports:
+      - "7474:7474"
+      - "7473:7473"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+  server:
+    container_name: "pathways_server"
+    build: ./server
+    env_file: ./server/config.env
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./server:/home/node/app
+    depends_on:
+      - neo4j
+  client:
+    container_name: "pathways_client"
+    build: ./client
+    env_file: ./client/config.env
+    ports:
+      - "3000:3000"
+    volumes:
+      - react_build:/app/build
+  nginx:
+    container_name: "pathways_nginx"
+    image: nginx:mainline-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - react_build:/var/www/html
+    depends_on:
+      - server
+      - client
+
+volumes:
+  neo4j_data:
+  react_build:

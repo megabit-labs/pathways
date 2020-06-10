@@ -13,7 +13,6 @@ import {
 
 
 const CLIENT_ID = "37454df5e11a69f88833";
-const REDIRECT_URI = "http://localhost:3000/";
 
 
 const GET_TOKEN = gql`
@@ -38,7 +37,7 @@ const GithubAuth = (props) => {
                 <Logo />
                 <Logotype />
             </div>
-            <a href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}>
+            <a href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user`}>
                 Login
             </a>
         </Header>

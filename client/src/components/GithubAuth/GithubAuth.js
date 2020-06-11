@@ -1,73 +1,75 @@
-import React, { Component } from "react";
-import { gql } from 'apollo-boost';
-import { Mutation } from 'react-apollo';
+import React, { useState } from "react";
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+
 
 import {
-    STATUS,
     Logo,
     Logotype,
     Container,
     Header
 } from "gitstar-components";
 
-const getToken = gql`
-mutation($code: String!){
-    GithubAuth(code: $code){
-        status
-        message
-        token
-    }
-}
-`;
+
 
 const CLIENT_ID = "37454df5e11a69f88833";
-const REDIRECT_URI = "http://localhost:3000/";
 
-class GithubAuth extends Component {
-    state = {
-        status: STATUS.INITIAL,
-        token: null,
-        isLoggedIn: false,
-        code: null,
-    };
 
-    render() {
-
-        let loggedIn = null;
-        if (this.state.isLoggedIn) {
-            loggedIn = <p>You are Logged In</p>
+const GET_TOKEN = gql`
+    mutation($code: String!){
+        GithubAuth(code: $code){
+            status
+            message
+            token
         }
-
-        let display = <Container>
-            <Header>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                    <Logo />
-                    <Logotype />
-                </div>
-                <a href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}>
-                    Login
-            </a>
-            </Header>
-            {loggedIn}
-        </Container>
-
-        let code = decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('code').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-        if (code) {
-            console.log(code);
-            this.setState({ isLoggedIn: true });
-            display = <Mutation mutation={getToken} variables={{ code }}>
-                {(GithubAuth, { data }) => {
-                    GithubAuth(code);
-                    this.setState({ token: data.GithubAuth.token })
-                    return <p>{data.GithubAuth.token}</p>
-                }}
-            </Mutation>
-        }
-
-
-
-        return display;
     }
+`;
+
+
+const GithubAuth = (props) => {
+
+    const [isTouched, isTouchedHandler] = useState(false);
+    const [getToken, { loading, data }] = useMutation(GET_TOKEN);
+
+    let display = <Container>
+        <Header>
+            <div style={{ display: "flex", alignItems: "center" }}>
+                <Logo />
+                <Logotype />
+            </div>
+            <a href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user`}>
+                Login
+            </a>
+        </Header>
+    </Container>
+
+    let displayedData = null;
+    let code = null;
+    code = decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('code').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    if (code && !isTouched) {
+        isTouchedHandler(true);
+        getToken({ variables: { code: code } })
+    }
+
+    if(!isTouched){
+        displayedData = null;
+    }
+    else{
+        if (loading) {
+            displayedData = <div>Loading ...</div>
+        }
+        else {
+            let token = data.GithubAuth.token;
+            displayedData = <div>Your Token is <br />{token}</div>
+        }
+    }
+
+    return (
+        <div>
+            {display}
+            <div>{displayedData}</div>
+        </div>
+    );
 }
 
 export default GithubAuth;

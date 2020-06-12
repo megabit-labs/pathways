@@ -1,12 +1,10 @@
 # pathways
-Pathways aims to reduce the replication of information when creating tutorials in different fields.
+Pathways aims to be the roadmap for learning any skill. It is a curated and opinionated collection of tutorials.
 
 ## The Goal
-The internet is full of amazing and *free* resources to learn all kinds of skills. The problem is, most such resources are focussed. There are no comprehensive tutorials to learn a new skill on the internet. Not free ones anyway. This is what Pathways is supposed to solve. 
+The internet is full of amazing and *free* resources of varying qualities. However there is **no guide to decide which one is best or relevant for a particular skill level**. Not free ones anyway. **Pathways solves this by collecting the best tutorials into steps**. Steps that form a comprehensive guide for learning any skill upto a desired level.
 
-**Pathways' purpose is not to create amazing resources for learning, but to arrange existing resources sequentially**. A sequence of these steps will be called a *pathway*. A pathway will allow learners to learn a skill topic-by-topic without having to google around too much. Basically, the first N-1 steps of a pathway will prepare the user for the N<sup>th</sup> step.
-
-Take learning Django, for example. If you're a complete newbie to software development and want to learn django, you might end up doing something like this - 
+Suppose you're a complete newbie to software development and want to learn Django, you might end up doing something like this - 
 
 1. You google "Learn Django"
 2. You read an article that tells you what Django follows the MVT pattern.
@@ -20,22 +18,16 @@ Take learning Django, for example. If you're a complete newbie to software devel
 
 It can go on and on till all those articles push you around like a pin ball and things finally begin to make sense. *If only you knew what to read first. Or even what to read at all*. That's what we want Pathways to do for you - tell you what to read first, and what to leave for later.
 
-## Limiting the replication of information
-Every pathway is supposed to be comprehensive. That means that the pathway should show the user how to go from level 0 to level 100 in that skill. The less assumptions a pathway author makes about the reader, the better it is. For example, don't assume that your reader already knows Python.
+Pathways does **NOT** create new resources for learning. It arranges existing resources into steps. Each **step** introduces a new topic and adds to accumulated knowledge. A sequence of these steps will be called a **pathway**. Following a pathway to the end is sure to let learners to gain a skill, topic-by-topic without having to google around too much.
 
-### Other pathways as steps
+## Less assumptions, more comprehensive
+Every pathway is supposed to be comprehensive. The pathway should show the user how to go from level 0 to level 100 in that skill, **the less assumptions it makes the better**. For example, a pathway to learn django should not assume that reader already knows Python.
 
-That means if you wanna learn Django, the pathway is gonna ask you to learn Python first. However, learning python does not need to be just a link to a tutorial. No, learning Python is gonna be a pathway itself.
+## Reuse and Reduce
+Does this mean a writer creating any pathway will have to rewrite all the tutorials from absolute beginner level? **NO**. Pathways helps the writer harness the experience of others by including their pathways and steps.
 
-*A step to a pathway can be a pathway itself*.
+This means if you're writing a Django pathway, you can include the Python pathway someone else created as the first step in your pathway. The advantage to using **a different pathway as a step in your pathway** is that you can just focus on the actual content instead of the pre-requisites.
 
-This way, every pathway that requires a user to learn Python, can simply include the Python pathway as a step at the right location. The advantage to this is that when crearting a pathway, you don't need to worry about telling the user how to learn Python - someone else probably already did it for you. You can just focus on the actual content instead of the pre-requisites.
+You can even **include individual steps from other pathways**, as steps in your pathway, if you feel they are well written or relevant. For example, suppose Python Advanced pathway has a step for network IO in Python. If your pathway only needs the user to know about network IO in Python, you can include that particular step ignore the rest.
 
-### Other pathway steps as steps
-
-If you can use another pathway as a step, why not just go ahead and use *individual steps* from other pathways as steps too? You can "borrow" steps from another pathway if you think someone exlpained it better than you.
-
-For example, let's say that the Python pathway is too comprehensive and has one step for network IO in Python and another step for automation using Python. If your pathway only needs the user to know how to do network IO in Python, you can include that step from the Python pathway in your own pathway (instead of including the whole Python pathway itself).
-
-#### Hence, less replicaton
-This is how replication of information is reduced. If someone wrote about a step once, you don't need to write it again. YOu can just "include" it in your own Pathway.
+From the readers' point of view the experience will be seamless and engaging. Pathways will track and show readers' their progress and help them decide what they can learn next.

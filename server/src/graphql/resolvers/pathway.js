@@ -38,18 +38,6 @@ const resolver = {
                 return { status: 'ERROR', message: e.toString() }
             }
         },
-        async deleteContent(_, {id}) {
-            const query = queries.content.deleteContent({
-                id
-            })
-
-            try {
-                contentId = await query.run()
-                return { status: 'OK', message: null, data: contentId}
-            } catch (e) {
-                return { status: 'ERROR', message: e.toString() }
-            }
-        },
     }
 }
 

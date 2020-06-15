@@ -52,7 +52,4 @@ type Mutation {
         id: String
         content: String
     ): StatusMessage
-    deleteContent(
-        id: String
-    ): StatusMessage
 }

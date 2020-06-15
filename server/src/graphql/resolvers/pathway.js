@@ -26,9 +26,9 @@ const resolver = {
                 return { status: 'ERROR', message: e.toString() }
             }
         },
-        async createUpdateContent(_, {id, content}) {
+        async createUpdateContent(_, {id, title, content}) {
             const query = queries.content.createUpdateContent({
-                id, content 
+                id, title, content 
             })
 
             try {

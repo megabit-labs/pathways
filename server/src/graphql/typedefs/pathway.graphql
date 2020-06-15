@@ -6,6 +6,7 @@ type Pathway {
 
 type Content {
     id: String
+    title: String
     content: String
 }
 
@@ -50,6 +51,7 @@ type Mutation {
     ): StatusMessage
     createUpdateContent(
         id: String
+        title: String
         content: String
     ): StatusMessage
 }

@@ -1,0 +1,55 @@
+.ControlsArea {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    height: 100%;
+    /* background-color: aqua; */
+}
+
+.StepListArea {
+    height: 100%;
+    /* background-color: green; */
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.MoreControls {
+    /* background-color: yellow; */
+    background-color: white;
+    width: 100px;
+}
+
+.StepListTitle {
+    display: flex;
+    background-color: #fafafa;
+    /* background-color: red; */
+    width: 500px;
+    height: 50px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 35px;
+    justify-content: space-between;
+    color: #777;
+    font-weight: 700;
+}
+
+.StepListTitle p {
+    /* margin-top: 5px; */
+}
+
+.AddBtn {
+    background-color: #eee;
+    border-radius: 5px;
+    font-size: 30px;
+    vertical-align: middle;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.AddBtn:hover {
+    background-color: #ccc;
+}

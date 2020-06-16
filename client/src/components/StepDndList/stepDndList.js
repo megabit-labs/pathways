@@ -44,6 +44,7 @@ class StepDndList extends Component {
     onAddBtnClick = () => {
         this.props.onAddStep({
             content: 'This is a step',
+            stepType: 'Shared Step',
             id: `${Math.random()}`
         })
     }
@@ -77,6 +78,7 @@ class StepDndList extends Component {
                                             id={index}
                                             index={index}
                                             content={item.content}
+                                            stepType={item.stepType}
                                         />
                                     ))}
                                     {provided.placeholder}

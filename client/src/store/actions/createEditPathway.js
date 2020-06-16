@@ -7,7 +7,7 @@ export const addStep = (stepData) => {
     }
 }
 
-export const reorderSteps = () => {
+export const reorderSteps = (result) => {
     return {
         type: actionTypes.REORDER_STEPS,
         result: result

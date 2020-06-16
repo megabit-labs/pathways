@@ -1,24 +1,15 @@
 import React, { Component } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { connect } from 'react-redux'
 
 import Step from "./Step/step";
 import PlusIcon from 'react-ionicons/lib/MdAdd'
 
+import * as actions from '../../store/actions/index'
+
 import classes from './StepDndList.module.css'
 
-const getItems = (count) =>
-    Array.from({ length: count }, (v, k) => k).map((k) => ({
-        id: `${k}`,
-        content: `item-${k + 1}`,
-    }));
 
-const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
-};
 
 const getListStyle = (isDraggingOver) => ({
     background: "#fafafa",
@@ -31,12 +22,13 @@ const getListStyle = (isDraggingOver) => ({
     flex: "1 1 auto"
 });
 
+/**
+ * But...but...
+ * class based components are so easy to use!
+ */
 class StepDndList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            items: getItems(7),
-        };
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
@@ -45,26 +37,32 @@ class StepDndList extends Component {
             return;
         }
 
-        const items = reorder(
-            this.state.items,
-            result.source.index,
-            result.destination.index
-        );
+        // from redux
+        this.props.onReorderSteps(result)
+    }
 
-        this.setState({ items: items });
+    onAddBtnClick = () => {
+        this.props.onAddStep({
+            content: 'This is a step',
+            id: `${Math.random()}`
+        })
     }
 
     render() {
-        console.log(this.state.items);
         return (
             <div className={classes.ControlsArea}>
                 <div className={classes.StepListArea}>
+
                     <div className={classes.StepListTitle}>
                         <p style={{fontSize: "40px"}}>Steps</p>
-                        <div className={classes.AddBtn}>
+                        <div 
+                            className={classes.AddBtn}
+                            onClick={this.onAddBtnClick}
+                        >
                             <PlusIcon fontSize="30px" color="#555" />
                         </div>
                     </div>
+
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         <Droppable droppableId="myNiggaThatsCrazy">
                             {(provided, snapshot) => (
@@ -73,7 +71,7 @@ class StepDndList extends Component {
                                     ref={provided.innerRef}
                                     style={getListStyle(snapshot.isDraggingOver)}
                                 >
-                                    {this.state.items.map((item, index) => (
+                                    {this.props.steps.map((item, index) => (
                                         <Step
                                             key={index}
                                             id={index}
@@ -86,6 +84,7 @@ class StepDndList extends Component {
                             )}
                         </Droppable>
                     </DragDropContext>
+
                 </div>
                 <div className={classes.MoreControls}>
                     More
@@ -95,4 +94,17 @@ class StepDndList extends Component {
     }
 }
 
-export default StepDndList;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAddStep: (stepData) => dispatch(actions.addStep(stepData)),
+        onReorderSteps: (result) => dispatch(actions.reorderSteps(result))
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        steps: state.createEditPathway.steps
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StepDndList);

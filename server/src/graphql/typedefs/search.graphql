@@ -1,0 +1,9 @@
+type Query {
+    SearchPathways(
+        searchQuery: String!
+    ): [Pathway] 
+    SearchContents(
+        searchQuery: String!
+    ): [Content]
+}
+

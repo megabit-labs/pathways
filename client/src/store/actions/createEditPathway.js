@@ -13,3 +13,10 @@ export const reorderSteps = (result) => {
         result: result
     }
 }
+
+export const deleteStep = (stepId) => {
+    return {
+        type: actionTypes.DELETE_STEP,
+        stepId: stepId
+    }
+}

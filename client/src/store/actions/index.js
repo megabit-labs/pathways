@@ -1,4 +1,5 @@
 export {
     addStep,
-    reorderSteps
+    reorderSteps,
+    deleteStep
 } from './createEditPathway'

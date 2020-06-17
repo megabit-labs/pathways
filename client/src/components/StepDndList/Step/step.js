@@ -1,8 +1,10 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { connect } from 'react-redux'
 
 import DeleteIcon from 'react-ionicons/lib/IosTrash'
 
+import * as actions from '../../../store/actions/index'
 import classes from './Step.module.css'
 
 
@@ -11,13 +13,11 @@ const getItemStyle = (isDragging, draggableStyle) => {
 
     if (isDragging) {
         variableStyles = {
-            // border: "1px solid #aaa",
             boxShadow: "0px 0px 16px 4px #ddd",
             background: "white"
         }
     } else {
         variableStyles = {
-            // border: "1px solid #aaa",
             boxShadow: "0px 0px 8px 4px #eee",
             background: "white"
         }
@@ -27,7 +27,6 @@ const getItemStyle = (isDragging, draggableStyle) => {
         userSelect: "none",
         padding: 16,
         margin: "0 0 16px 0",
-        // height: "100px",
         borderRadius: "5px",
         ...variableStyles,
         ...draggableStyle,
@@ -89,7 +88,10 @@ const step = (props) => {
                         <div style={typeStyle}>
                             <p>{props.stepType}</p>
                         </div>
-                        <div className={classes.DeleteBtn}>
+                        <div 
+                            className={classes.DeleteBtn}
+                            onClick={() => props.onDeleteStep(props.id)}
+                        >
                             <DeleteIcon color="#aaa" fontSize="30px"/>
                         </div>
                     </div>
@@ -99,4 +101,10 @@ const step = (props) => {
     );
 };
 
-export default step;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDeleteStep: (stepId) => dispatch(actions.deleteStep(stepId))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(step)

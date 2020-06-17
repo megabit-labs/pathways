@@ -53,10 +53,28 @@ const reorderSteps = (state, action) => {
     }
 }
 
+/**
+ * Remove the step from the stepOrder list so that it doesn't appear,
+ * but do not delete the step's data from the steps object. This can
+ * be used to give the user a restore option.
+ */
+const deleteStep = (state, action) => {
+    let stepOrder = state.stepOrder
+    const index = stepOrder.indexOf(action.stepId)
+    stepOrder.splice(index, 1)
+    const newStepOrder = [...stepOrder]
+    
+    return {
+        ...state,
+        stepOrder: newStepOrder
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_STEP: return addStep(state, action)
         case actionTypes.REORDER_STEPS: return reorderSteps(state, action)
+        case actionTypes.DELETE_STEP: return deleteStep(state, action)
         default: return state
     }
 }

@@ -1,7 +1,10 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 
+import DeleteIcon from 'react-ionicons/lib/IosTrash'
+
 import classes from './Step.module.css'
+
 
 const getItemStyle = (isDragging, draggableStyle) => {
     let variableStyles = {}
@@ -40,21 +43,28 @@ const step = (props) => {
         case 'Shared Step': tagColor = '#9b5de5'; break;
     }
 
+    // These styles are kinda messed up, with the transform and all.
+    // TODO: Get a real front-end dev to fix these.
     const typeStyle = {
         display: "inline-block",
         backgroundColor: tagColor,
         height: "23px",
-        borderRadius: "12.5px",
+        borderRadius: "5px",
         fontSize: "15px",
         boxSizing: "border-box",
         paddingLeft: "10px",
         paddingRight: "10px",
-        marginTop: "10px",
+        marginTop: "auto",
+        marginBottom: "auto",
+        transform: "translateY(-20%)",
         textAlign: "center",
         color: "white",
         fontWeight: "800",
         verticalAligh: "middle"
     }
+
+    const content = props.content.length < 40 ? props.content
+                                              : `${props.content.slice(0, 40)}...`
 
     return (
         <Draggable
@@ -73,10 +83,15 @@ const step = (props) => {
                     )}
                 >
                     <div className={classes.StepTitle}>
-                        {props.content}
+                        <p>{content}</p>
                     </div>
-                    <div style={typeStyle}>
-                        <p>{props.stepType}</p>
+                    <div className={classes.BottomRow}>
+                        <div style={typeStyle}>
+                            <p>{props.stepType}</p>
+                        </div>
+                        <div className={classes.DeleteBtn}>
+                            <DeleteIcon color="#aaa" fontSize="30px"/>
+                        </div>
                     </div>
                 </div>
             )}

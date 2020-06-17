@@ -44,12 +44,24 @@ class StepDndList extends Component {
     onAddBtnClick = () => {
         this.props.onAddStep({
             content: 'This is a step',
-            stepType: 'Shared Step',
+            stepType: 'Content',
             id: `${Math.random()}`
         })
     }
 
     render() {
+        const stepData = this.props.steps
+        console.log(this.props.stepOrder)
+        const steps = this.props.stepOrder.map((stepId, index) => (
+            <Step
+                key={index}
+                id={stepId}
+                index={index}
+                content={stepData[stepId].content}
+                stepType={stepData[stepId].stepType}
+            />
+        ))
+
         return (
             <div className={classes.ControlsArea}>
                 <div className={classes.StepListArea}>
@@ -72,15 +84,7 @@ class StepDndList extends Component {
                                     ref={provided.innerRef}
                                     style={getListStyle(snapshot.isDraggingOver)}
                                 >
-                                    {this.props.steps.map((item, index) => (
-                                        <Step
-                                            key={index}
-                                            id={index}
-                                            index={index}
-                                            content={item.content}
-                                            stepType={item.stepType}
-                                        />
-                                    ))}
+                                    {steps}
                                     {provided.placeholder}
                                 </div>
                             )}
@@ -105,6 +109,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
+        stepOrder: state.createEditPathway.stepOrder,
         steps: state.createEditPathway.steps
     }
 }

@@ -32,8 +32,20 @@ const resolver = {
             })
 
             try {
-                contentId = await query.run()
-                return { status: 'OK', message: null, data: contentId}
+                await query.run()
+                return { status: 'OK', message: null}
+            } catch (e) {
+                return { status: 'ERROR', message: e.toString() }
+            }
+        },
+        async forkContent(_, {id, title, content, stepId}) {
+            const query = queries.content.createUpdateContent({
+                id, title, content, stepId
+            })
+
+            try {
+                await query.run()
+                return { status: 'OK', message: null}
             } catch (e) {
                 return { status: 'ERROR', message: e.toString() }
             }

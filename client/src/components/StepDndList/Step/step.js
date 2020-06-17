@@ -5,24 +5,27 @@ import Rating from '../../Rating/Rating'
 
 import DeleteIcon from 'react-ionicons/lib/IosTrash'
 import EditIcon from 'react-ionicons/lib/IosCreateOutline'
+import ClockIcon from 'react-ionicons/lib/IosTimeOutline'
 
 import * as actions from '../../../store/actions/index'
 import classes from './Step.module.css'
 
 
-const getItemStyle = (isDragging, draggableStyle) => {
+const getItemStyle = (isDragging, draggableStyle, selected = false, color) => {
     let variableStyles = {}
 
     if (isDragging) {
         variableStyles = {
-            boxShadow: "0px 0px 16px 4px #ddd",
-            background: "white"
+            boxShadow: "0px 0px 16px 4px #ddd"
         }
     } else {
         variableStyles = {
-            boxShadow: "0px 0px 8px 4px #eee",
-            background: "white"
+            boxShadow: "0px 0px 8px 4px #eee"
         }
+    }
+
+    if (selected) {
+        variableStyles['border'] = `3px solid ${color}`
     }
 
     return {
@@ -30,6 +33,7 @@ const getItemStyle = (isDragging, draggableStyle) => {
         padding: 16,
         margin: "0 0 16px 0",
         borderRadius: "5px",
+        background: "white",
         ...variableStyles,
         ...draggableStyle,
     };
@@ -39,8 +43,8 @@ const step = (props) => {
 
     let tagColor
     switch (props.stepType) {
-        case 'Content': tagColor = '#ff5400'; break;
-        case 'Pathway': tagColor = '#ff0054'; break;
+        case 'Content': tagColor = '#0077b6'; break;
+        case 'Pathway': tagColor = '#2ec4b6'; break;
         case 'Shared Step': tagColor = '#9b5de5'; break;
     }
 
@@ -67,6 +71,7 @@ const step = (props) => {
     const content = props.content.length < 40 ? props.content
                                               : `${props.content.slice(0, 40)}...`
 
+    const selected = props.selected
 
     return (
         <Draggable
@@ -81,7 +86,9 @@ const step = (props) => {
                     {...provided.dragHandleProps}
                     style={getItemStyle(
                         snapshot.isDragging,
-                        provided.draggableProps.style
+                        provided.draggableProps.style,
+                        selected,
+                        tagColor
                     )}
                 >
                     <div className={classes.TopRow}>
@@ -97,14 +104,19 @@ const step = (props) => {
                         </div>
                     </div>
                     
-                    <div>
+                    <div className={classes.Details}>
                         <Rating value={props.rating}/>
+                        
+                        
                     </div>
+
+                    
                     
                     <div className={classes.BottomRow}>
                         <div style={typeStyle}>
                             <p>{props.stepType}</p>
                         </div>
+                        
                         <div 
                             className={classes.DeleteBtn}
                             onClick={() => props.onDeleteStep(props.id)}

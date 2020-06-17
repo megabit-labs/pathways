@@ -61,6 +61,7 @@ class StepDndList extends Component {
                 stepType={currentStep.stepType}
                 selected={currentStep.selected}
                 rating={currentStep.rating}
+                selected={currentStep.selected}
             />
         })
 

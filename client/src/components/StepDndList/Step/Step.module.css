@@ -46,3 +46,20 @@
     background-color: #eee;
     cursor: pointer
 }
+
+.Details {
+    display: flex;
+    /* margin-top: 10px; */
+}
+
+.TimeDisplay {
+    display: flex;
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.TimeDisplay p {
+    margin-left: 10px;
+}
+

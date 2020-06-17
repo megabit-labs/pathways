@@ -12,17 +12,24 @@ const initialState = {
     steps: {
         step1: {
             content: 'This is a pathway step',
-            stepType: 'Pathway'
+            stepType: 'Pathway',
+            selected: false,
+            rating: 2
         },
         step2: {
             content: 'This is a content step',
-            stepType: 'Content'
+            stepType: 'Content',
+            selected: false,
+            rating: 1
         },
         step3: {
             content: 'This is a shared step',
-            stepType: 'Shared Step'
+            stepType: 'Shared Step',
+            selected: false,
+            rating: 3
         }
-    }
+    },
+    selectedStep: ""
 }
 
 const addStep = (state, action) => {
@@ -70,11 +77,27 @@ const deleteStep = (state, action) => {
     }
 }
 
+const selectStepForEditing = (state, action) => {
+    let newSteps = {...(state.steps)}
+    if (state.selectedStep != "") {
+        newSteps[state.selectedStep].selected = false
+    }
+
+    newSteps[action.stepId].selected = true
+
+    return {
+        ...state,
+        steps: newSteps,
+        selectedStep: action.stepId
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_STEP: return addStep(state, action)
         case actionTypes.REORDER_STEPS: return reorderSteps(state, action)
         case actionTypes.DELETE_STEP: return deleteStep(state, action)
+        case actionTypes.SELECT_FOR_EDITING: return selectStepForEditing(state, action)
         default: return state
     }
 }

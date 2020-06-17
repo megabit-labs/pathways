@@ -20,3 +20,18 @@ export const deleteStep = (stepId) => {
         stepId: stepId
     }
 }
+
+export const selectForEditing = (stepId) => {
+    return {
+        type: actionTypes.SELECT_FOR_EDITING,
+        stepId: stepId
+    }
+}
+
+export const updateStepData = (stepId, stepData) => {
+    return {
+        type: actionTypes.UPDATE_STEP_DATA,
+        stepId: stepId,
+        stepData: stepData
+    }
+}

@@ -51,16 +51,18 @@ class StepDndList extends Component {
 
     render() {
         const stepData = this.props.steps
-        console.log(this.props.stepOrder)
-        const steps = this.props.stepOrder.map((stepId, index) => (
-            <Step
+        const steps = this.props.stepOrder.map((stepId, index) => {
+            const currentStep = stepData[stepId]
+            return <Step
                 key={index}
                 id={stepId}
                 index={index}
-                content={stepData[stepId].content}
-                stepType={stepData[stepId].stepType}
+                content={currentStep.content}
+                stepType={currentStep.stepType}
+                selected={currentStep.selected}
+                rating={currentStep.rating}
             />
-        ))
+        })
 
         return (
             <div className={classes.ControlsArea}>

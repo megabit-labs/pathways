@@ -1,8 +1,10 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { connect } from 'react-redux'
+import Rating from '../../Rating/Rating'
 
 import DeleteIcon from 'react-ionicons/lib/IosTrash'
+import EditIcon from 'react-ionicons/lib/IosCreateOutline'
 
 import * as actions from '../../../store/actions/index'
 import classes from './Step.module.css'
@@ -65,6 +67,7 @@ const step = (props) => {
     const content = props.content.length < 40 ? props.content
                                               : `${props.content.slice(0, 40)}...`
 
+
     return (
         <Draggable
             key={props.id}
@@ -81,9 +84,23 @@ const step = (props) => {
                         provided.draggableProps.style
                     )}
                 >
-                    <div className={classes.StepTitle}>
-                        <p>{content}</p>
+                    <div className={classes.TopRow}>
+                        <div className={classes.StepTitle}>
+                            <p>{content}</p>
+                        </div>
+
+                        <div 
+                            className={classes.EditBtn}
+                            onClick={() => props.onSelectStep(props.id)}
+                        >
+                            <EditIcon fontSize="45px" color="#555"/>
+                        </div>
                     </div>
+                    
+                    <div>
+                        <Rating value={props.rating}/>
+                    </div>
+                    
                     <div className={classes.BottomRow}>
                         <div style={typeStyle}>
                             <p>{props.stepType}</p>
@@ -103,7 +120,8 @@ const step = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDeleteStep: (stepId) => dispatch(actions.deleteStep(stepId))
+        onDeleteStep: (stepId) => dispatch(actions.deleteStep(stepId)),
+        onSelectStep: (stepId) => dispatch(actions.selectForEditing(stepId))
     }
 }
 

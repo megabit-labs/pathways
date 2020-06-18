@@ -10,6 +10,7 @@ class StepEditArea extends Component {
         super(props)
         this.state = {
             heading: "This is a step",
+            stepType: "Content",
             content: "# hello"
         }
     }
@@ -22,11 +23,17 @@ class StepEditArea extends Component {
         this.setState({ heading: event.target.value })
     }
 
+    stepTypeChangeHandler = (value) => {
+        console.log(value)
+        this.setState({ stepType: value })
+    }
+
     render() {
         return (
             <div className={classes.StepEditArea}>
                 <StepDataEdit
                     onHeadingChange={this.headingChangeHandler}
+                    onStepTypeChange={this.stepTypeChangeHandler}
                     value={this.props.heading}
                 />
                 <StepContentEdit 

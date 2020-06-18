@@ -5,6 +5,7 @@
     box-sizing: border-box;
     padding-top: 20px;
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .TitleInput {
@@ -23,4 +24,11 @@
     height: 100px;
     background-color: #fafafa;
     /* border-bottom: 1px solid black; */
+}
+
+.StepMetaEdit {
+    /* background-color: red; */
+    height: 30px;
+    /* padding-left: 5px; */
+    /* border: 1px solid black; */
 }

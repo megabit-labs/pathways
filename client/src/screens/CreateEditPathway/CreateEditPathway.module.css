@@ -8,8 +8,8 @@
 
 .EditArea {
     /* background-color: greenyellow; */
-    background-color: aqua;
-    /* background-color: #fafafa; */
+    /* background-color: aqua; */
+    background-color: #fafafa;
     height: 100%;
     flex: 1 1 auto;
     overflow-y: auto;

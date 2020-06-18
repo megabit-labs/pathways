@@ -1,11 +1,12 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { connect } from 'react-redux'
+
 import Rating from '../../Rating/Rating'
+import StepTag from '../../stepTag/stepTag'
 
 import DeleteIcon from 'react-ionicons/lib/IosTrash'
 import EditIcon from 'react-ionicons/lib/IosCreateOutline'
-import ClockIcon from 'react-ionicons/lib/IosTimeOutline'
 
 import * as actions from '../../../store/actions/index'
 import classes from './Step.module.css'
@@ -46,26 +47,6 @@ const step = (props) => {
         case 'Content': tagColor = '#0077b6'; break;
         case 'Pathway': tagColor = '#2ec4b6'; break;
         case 'Shared Step': tagColor = '#9b5de5'; break;
-    }
-
-    // These styles are kinda messed up, with the transform and all.
-    // TODO: Get a real front-end dev to fix these.
-    const typeStyle = {
-        display: "inline-block",
-        backgroundColor: tagColor,
-        height: "23px",
-        borderRadius: "5px",
-        fontSize: "15px",
-        boxSizing: "border-box",
-        paddingLeft: "10px",
-        paddingRight: "10px",
-        marginTop: "auto",
-        marginBottom: "auto",
-        transform: "translateY(-20%)",
-        textAlign: "center",
-        color: "white",
-        fontWeight: "800",
-        verticalAligh: "middle"
     }
 
     const content = props.content.length < 40 ? props.content
@@ -113,9 +94,7 @@ const step = (props) => {
                     
                     
                     <div className={classes.BottomRow}>
-                        <div style={typeStyle}>
-                            <p>{props.stepType}</p>
-                        </div>
+                        <StepTag stepType={props.stepType} />
                         
                         <div 
                             className={classes.DeleteBtn}

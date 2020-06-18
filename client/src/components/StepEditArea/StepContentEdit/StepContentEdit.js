@@ -13,7 +13,6 @@ import './prism.css'
 
 
 const stepContentEdit = (props) => {
-    console.log("languages", languages)
     return (
         <div className={classes.StepContentEdit}>
             <Editor

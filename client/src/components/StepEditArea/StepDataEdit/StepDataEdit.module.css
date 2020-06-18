@@ -1,5 +1,26 @@
 .StepDataEdit {
-    background-color: greenyellow;
-    height: 200px;
+    /* background-color: greenyellow; */
+    height: auto;
     width: 100%;
+    box-sizing: border-box;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.TitleInput {
+    /* margin-top: 50px; */
+    /* background-color: red; */
+    width: 900px;
+    font-size: 50px;
+    line-height: 1.25em;
+    font-weight: 800;
+}
+
+.TitleInput textarea {
+    outline: 0;
+    border: none;
+    width: 100%;
+    height: 100px;
+    background-color: #fafafa;
+    /* border-bottom: 1px solid black; */
 }

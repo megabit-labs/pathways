@@ -6,9 +6,11 @@
 }
 
 .EditArea {
-    background-color: #fafafa;
+    background-color: greenyellow;
+    /* background-color: #fafafa; */
     height: 100%;
     flex: 1 1 auto;
+    display: flex;
 }
 
 .StepList {

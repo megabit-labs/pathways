@@ -20,7 +20,6 @@ class StepEditArea extends Component {
     render() {
         return (
             <div className={classes.StepEditArea}>
-                Henlo
                 <StepDataEdit />
                 <StepContentEdit 
                     onContentChange={this.contentChangeHandler}

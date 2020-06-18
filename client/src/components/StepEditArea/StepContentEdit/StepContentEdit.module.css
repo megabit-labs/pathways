@@ -1,7 +1,9 @@
 .StepContentEdit {
     background-color: white;
-    width: 80%;
-    min-height: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    /* flex: 1 1 auto; */
+    /* height: 100%; */
+}
+
+textarea {
+    outline: 0;
 }

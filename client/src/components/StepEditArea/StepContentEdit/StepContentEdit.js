@@ -17,7 +17,6 @@ const stepContentEdit = (props) => {
     return (
         <div className={classes.StepContentEdit}>
             <Editor
-                // value={code}
                 value={props.content}
                 onValueChange={props.onContentChange}
                 highlight={(code) => highlight(code, languages.markdown)}
@@ -25,7 +24,9 @@ const stepContentEdit = (props) => {
                 style={{
                     fontFamily: '"Fira code", "Fira Mono", monospace',
                     fontSize: 16,
+                    minHeight: "500px"
                 }}
+                wrap="soft"
             />
         </div>
     );

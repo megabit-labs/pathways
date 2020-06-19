@@ -11,22 +11,28 @@ const initialState = {
     stepOrder: ['step1', 'step2', 'step3'],
     steps: {
         step1: {
-            content: 'This is a pathway step',
+            heading: 'This is a pathway step',
+            content: "# hello",
             stepType: 'Pathway',
             selected: false,
-            rating: 2
+            timeLimit: 30
+            // rating: 2
         },
         step2: {
-            content: 'This is a content step',
+            heading: 'This is a content step',
+            content: "# hello",
             stepType: 'Content',
             selected: false,
-            rating: 1
+            timeLimit: 30
+            // rating: 1
         },
         step3: {
-            content: 'This is a shared step',
+            heading: 'This is a shared step',
+            content: "# hello",
             stepType: 'Shared Step',
             selected: false,
-            rating: 3
+            timeLimit: 30
+            // rating: 3
         }
     },
     selectedStep: ""

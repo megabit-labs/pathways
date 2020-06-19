@@ -43,7 +43,7 @@ class StepDndList extends Component {
 
     onAddBtnClick = () => {
         this.props.onAddStep({
-            content: 'This is a step',
+            heading: 'This is a step',
             stepType: 'Content',
             id: `${Math.random()}`
         })
@@ -57,7 +57,7 @@ class StepDndList extends Component {
                 key={index}
                 id={stepId}
                 index={index}
-                content={currentStep.content}
+                heading={currentStep.heading}
                 stepType={currentStep.stepType}
                 selected={currentStep.selected}
                 rating={currentStep.rating}

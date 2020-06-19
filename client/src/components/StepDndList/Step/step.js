@@ -2,7 +2,7 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { connect } from 'react-redux'
 
-import Rating from '../../Rating/Rating'
+// import Rating from '../../Rating/Rating'
 import StepTag from '../../StepTag/stepTag'
 
 import DeleteIcon from 'react-ionicons/lib/IosTrash'
@@ -49,8 +49,8 @@ const step = (props) => {
         case 'Shared Step': tagColor = '#9b5de5'; break;
     }
 
-    const content = props.content.length < 40 ? props.content
-                                              : `${props.content.slice(0, 40)}...`
+    const content = props.heading.length < 40 ? props.heading
+                                              : `${props.heading.slice(0, 40)}...`
 
     const selected = props.selected
 
@@ -86,7 +86,7 @@ const step = (props) => {
                     </div>
                     
                     <div className={classes.Details}>
-                        <Rating value={props.rating}/>
+                        {/* <Rating value={props.rating}/> */}
                         
                         
                     </div>

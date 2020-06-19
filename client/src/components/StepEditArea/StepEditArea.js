@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import StepDataEdit from './StepDataEdit/StepDataEdit'
 import StepContentEdit from './StepContentEdit/StepContentEdit'
 
 import classes from './StepEditArea.module.css'
+import Aux from '../../hoc/Aux/Aux'
 
 class StepEditArea extends Component {
     constructor(props) {
@@ -12,8 +14,33 @@ class StepEditArea extends Component {
             heading: "This is a step",
             stepType: "Content",
             content: "# hello",
-            timeLimit: 30
+            timeLimit: 30,
+            stepId: ""
         }
+        const step = this.props.steps[this.props.selectedStep]
+        console.log(step)
+    }
+
+    componentDidMount() {
+        const step = this.props.steps[this.props.selectedStep]
+        console.log(step)
+    }
+
+    componentWillReceiveProps(next) {
+        let newState = {}
+        if (next.selectedStep === "") {
+            return
+        }
+
+        newState.stepId = next.selectedStep
+        const step = next.steps[next.selectedStep]
+        delete step.selected
+        newState = {
+            ...newState,
+            ...step
+        }
+
+        this.setState({ ...newState })
     }
 
     stepUpdateHandler = (key, value) => {
@@ -24,22 +51,37 @@ class StepEditArea extends Component {
     }
 
     render() {
+        let editAreaComponent = (<div></div>)
+        if (this.state.stepId != "") {
+            editAreaComponent = (
+                <Aux>
+                    <StepDataEdit
+                        onStepDataUpdate={this.stepUpdateHandler}
+
+                        heading={this.state.heading}
+                        stepType={this.state.stepType}
+                        timeLimit={this.state.timeLimit}
+                    />
+                    <StepContentEdit 
+                        onContentChange={(content) => this.stepUpdateHandler('content', content)}
+                        content={this.state.content}  
+                    />
+                </Aux>
+            )
+        }
         return (
             <div className={classes.StepEditArea}>
-                <StepDataEdit
-                    onStepDataUpdate={this.stepUpdateHandler}
-
-                    heading={this.state.heading}
-                    stepType={this.state.stepType}
-                    timeLimit={this.state.timeLimit}
-                />
-                <StepContentEdit 
-                    onContentChange={(content) => this.stepUpdateHandler('content', content)}
-                    content={this.state.content}  
-                />
+                {editAreaComponent}
             </div>
         )
     }
 }
 
-export default StepEditArea
+const mapStateToProps = (state) => {
+    return {
+        selectedStep: state.createEditPathway.selectedStep,
+        steps: state.createEditPathway.steps
+    }
+}
+
+export default connect(mapStateToProps)(StepEditArea)

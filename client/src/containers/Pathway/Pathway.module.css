@@ -1,0 +1,33 @@
+.outerContainer {
+  width: 100vw;
+  /* height: 100vh; */
+  min-height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.pathwayContainer {
+  position: absolute;
+  width: 25vw;
+  /* background-color:green; */
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.nodeContainerLeft{
+  width: 100%;
+  display: flex;
+}
+
+.nodeContainerRight{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,0 +1,28 @@
+.circleContainer {
+  height: 25vh;
+  width: 25vh;
+  display: flex;
+  /* justify-content: flex-end; */
+  align-items: center;
+  z-index: 10;
+}
+
+.circle {
+  height: 25vh;
+  width: 25vh;
+  background-color: white;
+  border: 1vh solid #09695d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: center;
+  font-size: 3vh;
+  color: black;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.circle:hover{
+  background-color: #09695d;
+  color: white;
+}

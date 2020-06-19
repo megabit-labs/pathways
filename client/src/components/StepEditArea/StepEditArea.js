@@ -1,35 +1,50 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import * as actions from '../../store/actions/index'
+
+import Aux from '../../hoc/Aux/Aux'
 import StepDataEdit from './StepDataEdit/StepDataEdit'
 import StepContentEdit from './StepContentEdit/StepContentEdit'
 
 import classes from './StepEditArea.module.css'
-import Aux from '../../hoc/Aux/Aux'
 
+/**
+ * I'm scared.
+ * This component gets the step being edited from redux. Once 
+ * it has the state, it will communicate no more with redux and
+ * all state will be managed locally from here on.
+ * 
+ * Then whenever any new props as passed to this component,
+ * it will push all the state it has to redux again. This ensures
+ * that if someone changes the step they are editing without
+ * saving the current step, that progress isn't lost.
+ */
 class StepEditArea extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            heading: "This is a step",
+            heading: "This the heading",
             stepType: "Content",
-            content: "# hello",
+            content: "This is the content",
             timeLimit: 30,
             stepId: ""
         }
-        const step = this.props.steps[this.props.selectedStep]
-        console.log(step)
-    }
-
-    componentDidMount() {
-        const step = this.props.steps[this.props.selectedStep]
-        console.log(step)
     }
 
     componentWillReceiveProps(next) {
         let newState = {}
-        if (next.selectedStep === "") {
+
+        // The second conditional is to make sure that 
+        // we don't get stuck into an infinite loop, (since
+        // saveStepDataToStore is going to trigger this
+        // function again)
+        if (next.selectedStep === "" || next.selectedStep === this.state.stepId) {
             return
+        }
+
+        if (this.state.stepId != "") {
+            this.saveStepDataToStore()
         }
 
         newState.stepId = next.selectedStep
@@ -45,14 +60,21 @@ class StepEditArea extends Component {
         this.setState({ ...newState })
     }
 
+    saveStepDataToStore = () => {
+        const stepData = {...this.state}
+        delete stepData.stepId
+
+        this.props.onSaveToStore(this.state.stepId, stepData)
+    }
+
     stepUpdateHandler = (key, value) => {
-        console.log(key, value)
         let newStateObj = {}
         newStateObj[key] = value
         this.setState(newStateObj)
     }
 
     render() {
+        // console.log(this.state.stepType)
         let editAreaComponent = (<div></div>)
         if (this.state.stepId != "") {
             editAreaComponent = (
@@ -86,4 +108,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(StepEditArea)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSaveToStore: (stepId, stepData) =>  dispatch(actions.updateStep(stepId, stepData))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StepEditArea)

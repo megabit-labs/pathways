@@ -98,12 +98,30 @@ const selectStepForEditing = (state, action) => {
     }
 }
 
+const updateStep = (state, action) => {
+    console.log('called reducer', action.stepData)
+    const id = action.stepId
+    let updatedStep = state.steps[id]
+    updatedStep = {
+        ...updatedStep,
+        ...(action.stepData)
+    }
+    const updatedSteps = {...(state.steps)}
+    updatedSteps[id] = updatedStep
+
+    return {
+        ...state,
+        steps: updatedSteps
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_STEP: return addStep(state, action)
         case actionTypes.REORDER_STEPS: return reorderSteps(state, action)
         case actionTypes.DELETE_STEP: return deleteStep(state, action)
         case actionTypes.SELECT_FOR_EDITING: return selectStepForEditing(state, action)
+        case actionTypes.UPDATE_STEP: return updateStep(state, action)
         default: return state
     }
 }

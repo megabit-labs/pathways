@@ -3,5 +3,5 @@ export {
     reorderSteps,
     deleteStep,
     selectForEditing,
-    updateStepData
+    updateStep
 } from './createEditPathway'

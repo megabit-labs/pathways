@@ -11,33 +11,30 @@ class StepEditArea extends Component {
         this.state = {
             heading: "This is a step",
             stepType: "Content",
-            content: "# hello"
+            content: "# hello",
+            timeLimit: 30
         }
     }
 
-    contentChangeHandler = (content) => {
-        this.setState({ content: content })
-    }
-
-    headingChangeHandler = (event) => {
-        this.setState({ heading: event.target.value })
-    }
-
-    stepTypeChangeHandler = (value) => {
-        console.log(value)
-        this.setState({ stepType: value })
+    stepUpdateHandler = (key, value) => {
+        console.log(key, value)
+        let newStateObj = {}
+        newStateObj[key] = value
+        this.setState(newStateObj)
     }
 
     render() {
         return (
             <div className={classes.StepEditArea}>
                 <StepDataEdit
-                    onHeadingChange={this.headingChangeHandler}
-                    onStepTypeChange={this.stepTypeChangeHandler}
-                    value={this.props.heading}
+                    onStepDataUpdate={this.stepUpdateHandler}
+
+                    heading={this.state.heading}
+                    stepType={this.state.stepType}
+                    timeLimit={this.state.timeLimit}
                 />
                 <StepContentEdit 
-                    onContentChange={this.contentChangeHandler}
+                    onContentChange={(content) => this.stepUpdateHandler('content', content)}
                     content={this.state.content}  
                 />
             </div>

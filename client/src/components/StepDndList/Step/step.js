@@ -3,7 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { connect } from 'react-redux'
 
 import Rating from '../../Rating/Rating'
-import StepTag from '../../stepTag/stepTag'
+import StepTag from '../../StepTag/stepTag'
 
 import DeleteIcon from 'react-ionicons/lib/IosTrash'
 import EditIcon from 'react-ionicons/lib/IosCreateOutline'

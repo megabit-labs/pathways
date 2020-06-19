@@ -21,7 +21,7 @@ const stepTag = (props) => {
         paddingRight: "10px",
         marginTop: "auto",
         marginBottom: "auto",
-        transform: "translateY(-20%)",
+        // transform: "translateY(-20%)",
         textAlign: "center",
         color: "white",
         fontWeight: "800",

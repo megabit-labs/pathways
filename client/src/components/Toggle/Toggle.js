@@ -4,7 +4,9 @@ import classes from './Toggle.module.css'
 
 const Toggle = (props) => {
     const len = props.vals.length
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState(props.initialValue)
+
+    console.log(index)
 
     const handleDivClick = () => {
         if (index === len - 1) {

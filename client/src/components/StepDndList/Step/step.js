@@ -53,6 +53,7 @@ const step = (props) => {
                                               : `${props.heading.slice(0, 40)}...`
 
     const selected = props.selected
+    console.log(selected)
 
     return (
         <Draggable

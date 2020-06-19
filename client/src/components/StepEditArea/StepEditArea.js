@@ -34,11 +34,13 @@ class StepEditArea extends Component {
 
         newState.stepId = next.selectedStep
         const step = next.steps[next.selectedStep]
-        delete step.selected
+
         newState = {
             ...newState,
             ...step
         }
+
+        delete newState.selected
 
         this.setState({ ...newState })
     }

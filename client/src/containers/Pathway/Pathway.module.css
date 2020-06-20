@@ -1,33 +1,94 @@
 .outerContainer {
   width: 100vw;
-  /* height: 100vh; */
   min-height: 100vh;
-  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
 }
 
+.pathwayHeading {
+  height: 5vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 4vh;
+  margin-bottom: 5vh;
+}
+
 .pathwayContainer {
   position: absolute;
   width: 25vw;
-  /* background-color:green; */
-  /* border: 1px solid black; */
+  overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
+.pathwayContainer::-webkit-scrollbar {
+  width: 0 !important;
+}
 
-.nodeContainerLeft{
+.move {
+  transform: translateX(-100%);
+  transition: all 0.7s cubic-bezier(0.5, 0.47, 0.46, 0.89);
+}
+
+.svgContainer {
+  position: absolute;
+  height: 100%;
+  width: 100vw;
+}
+
+.nodeContainerLeft {
   width: 100%;
   display: flex;
 }
 
-.nodeContainerRight{
+.nodeContainerRight {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.stepDescContainer {
+  position: absolute;
+  height: 50vh;
+  width: 40vw;
+  right: 5vw;
+}
+
+.showStep {
+  display: block;
+  animation: enter 0.7s linear 1;
+}
+
+.hideStep {
+  animation: leave 0.7s linear 1;
+  display: none;
+}
+
+@keyframes enter{
+  0%{
+    opacity: 0;
+    transform: scale(0);
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes leave{
+  0%{
+    opacity: 1;
+    transform: scale(1);
+  }
+  100%{
+    opacity: 0;
+    transform: scale(0);
+  }
 }

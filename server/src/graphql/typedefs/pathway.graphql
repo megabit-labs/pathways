@@ -6,6 +6,7 @@ type Pathway {
 
 type Content {
     id: String
+    title: String
     content: String
 }
 
@@ -24,7 +25,7 @@ enum _StepOrdering {
 }
 
 input StepPayload {
-    id: String
+    id: String!
     name: String
     time: Int
     index: Int
@@ -39,7 +40,7 @@ type StatusMessage {
 
 type Mutation {
     createUpdatePathway(
-        id: String
+        id: String!
         name: String!
         steps: [StepPayload]!
     ): StatusMessage
@@ -47,5 +48,16 @@ type Mutation {
         id: String!
         steps: [StepPayload]!
         whole: Boolean!
+    ): StatusMessage
+    createUpdateContent(
+        id: String!
+        title: String
+        content: String
+    ): StatusMessage
+    forkContent(
+        id: String!
+        title: String
+        content: String
+        stepId: String!
     ): StatusMessage
 }

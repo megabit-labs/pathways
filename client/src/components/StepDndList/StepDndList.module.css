@@ -3,6 +3,7 @@
     /* flex-direction: column; */
     justify-content: space-between;
     height: 100%;
+    /* transform: translateX(50px) */
     /* background-color: aqua; */
 }
 
@@ -18,6 +19,23 @@
     /* background-color: yellow; */
     background-color: white;
     width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.MoreControlsIcon {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background-color 0.3s;
+    /* background-color: red; */
+}
+
+.MoreControlsIcon:hover {
+    background-color: #ccc;
+    cursor: pointer;
 }
 
 .StepListTitle {

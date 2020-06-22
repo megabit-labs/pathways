@@ -3,7 +3,13 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from 'react-redux'
 
 import Step from "./Step/step";
+import NumberStat from '../NumberStat/NumberStat'
+
 import PlusIcon from 'react-ionicons/lib/MdAdd'
+import SaveIcon from 'react-ionicons/lib/IosCheckmarkCircleOutline'
+import PreviewIcon from 'react-ionicons/lib/IosPlay'
+import DownloadIcon from 'react-ionicons/lib/IosDownloadOutline'
+import SettingsIcon from 'react-ionicons/lib/IosSettings'
 
 import * as actions from '../../store/actions/index'
 
@@ -96,7 +102,23 @@ class StepDndList extends Component {
 
                 </div>
                 <div className={classes.MoreControls}>
-                    More
+                    <div>
+                        <div className={classes.MoreControlsIcon}>
+                            <SaveIcon fontSize="50px" color="#102e4a"/>
+                        </div>
+                        <div className={classes.MoreControlsIcon}>
+                            <SettingsIcon fontSize="50px" color="#102e4a"/>
+                        </div>
+                        <div className={classes.MoreControlsIcon}>
+                            {/* Clicking on this icon should render a preview of the pathway */}
+                            <PreviewIcon fontSize="50px" color="#102e4a"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div className={classes.MoreControlsIcon}>
+                            <DownloadIcon fontSize="50px" color="#102e4a"/>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

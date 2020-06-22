@@ -6,7 +6,10 @@ const Toggle = (props) => {
     const len = props.vals.length
     const [index, setIndex] = useState(props.initialValue)
 
-    // console.log(index)
+    // TODO - Ask Shreyans if this is an anti-pattern.
+    if (index != props.initialValue) {
+        setIndex(props.initialValue)
+    }
 
     const handleDivClick = () => {
         if (index === len - 1) {

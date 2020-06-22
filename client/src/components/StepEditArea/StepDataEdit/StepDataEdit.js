@@ -9,7 +9,8 @@ import classes from './StepDataEdit.module.css'
 
 const stepDataEdit = (props) => {
     const stepTypes = ['Content', 'Pathway', 'Shared Step']
-
+    // console.log(stepTypes.indexOf(props.stepType))
+    
     return (
         <div className={classes.StepDataEdit}>
             <div className={classes.StepMetaEdit}>

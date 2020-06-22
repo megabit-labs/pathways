@@ -15,7 +15,7 @@ const initialState = {
             content: "# hello",
             stepType: 'Pathway',
             selected: false,
-            timeLimit: 30
+            timeLimit: 20
             // rating: 2
         },
         step2: {
@@ -31,7 +31,7 @@ const initialState = {
             content: "# hello",
             stepType: 'Shared Step',
             selected: false,
-            timeLimit: 30
+            timeLimit: 40
             // rating: 3
         }
     },
@@ -99,7 +99,6 @@ const selectStepForEditing = (state, action) => {
 }
 
 const updateStep = (state, action) => {
-    console.log('called reducer', action.stepData)
     const id = action.stepId
     let updatedStep = state.steps[id]
     updatedStep = {

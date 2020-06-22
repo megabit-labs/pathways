@@ -29,7 +29,6 @@ export const selectForEditing = (stepId) => {
 }
 
 export const updateStep = (stepId, stepData) => {
-    console.log('called action')
     return {
         type: actionTypes.UPDATE_STEP,
         stepId: stepId,

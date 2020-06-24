@@ -1,24 +1,25 @@
 import React, {Component} from 'react';
 import {Navbar, Nav, NavLink} from 'react-bootstrap';
-import './Header.css'
+import classes from './Header.module.css'
 import Menu from '../assets/menu.png'
-import Icon from '../assets/icon.png'
+import Icon from  '../assets/icon.png' 
+   
 class Header extends Component{
 
     render() {
         return(
 <React.Fragment>
-<Navbar className="navbar">
-    <Nav className="navlinks">
+<Navbar className={classes.navbar}>
+    <Nav className={classes.navlinks}>
         <Nav.Link href="#">
             <img
                 src={Menu}
-                className="apps"/>
+                className={classes.apps}/>
         </Nav.Link>
         <Nav.Link href="#">
             <img
                 src={Icon}
-                className="dp"/>
+                className={classes.dp}/>
         </Nav.Link>
     </Nav>
 </Navbar>

@@ -95,7 +95,10 @@ const step = (props) => {
                     
                     <div className={classes.BottomRow}>
                         <StepTag stepType={props.stepType} />
-                        
+
+                        {selected ? <div className={classes.Unsaved} style={{backgroundColor: `${tagColor}`}}/> 
+                                  : null}
+
                         <div 
                             className={classes.DeleteBtn}
                             onClick={() => props.onDeleteStep(props.id)}

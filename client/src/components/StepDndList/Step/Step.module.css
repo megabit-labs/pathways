@@ -20,6 +20,12 @@
     text-align: center;
 }
 
+.Unsaved {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}
+
 .DeleteBtn {
     border-radius: 5px;
     background-color: #fff;

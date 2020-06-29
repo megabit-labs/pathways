@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .pathwayHeading {
@@ -18,29 +18,47 @@
   margin-bottom: 5vh;
 }
 
-.pathwayContainer {
-  position: absolute;
+.pathwayContainer{
+  display: flex;
+  width: 100vw;
+  flex-direction: row;
+  /* border: 1px solid black; */
+  /* justify-content: center; */
+  /* background-color: red; */
+}
+.pathwayInnerContainer{
+  /* background-color: red; */
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.pathway {
+  /* position: absolute; */
+  /* border: 1px solid black; */
   width: 25vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  /* overflow-y: scroll; */
+  /* overflow-x: scroll; */
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.pathwayContainer::-webkit-scrollbar {
+.pathway::-webkit-scrollbar {
   width: 0 !important;
 }
-
+/*
 .move {
   transform: translateX(-100%);
   transition: all 0.7s cubic-bezier(0.5, 0.47, 0.46, 0.89);
-}
+} */
 
 .svgContainer {
+  /* background-color: green; */
   position: absolute;
   height: 100%;
-  width: 100vw;
+  width: 100%;
+  left: 0;
 }
 
 .nodeContainerLeft {
@@ -49,29 +67,72 @@
 }
 
 .nodeContainerRight {
+  /* background-color: red; */
+  /* transform: scale(1.1); */
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
+.rightContainer{
+  /* position: absolute; */
+  position: fixed;
+  right: 8vw;
+  width: 50%;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+}
+
+.illContainer{
+  height: 50vh;
+  /* width: auto; */
+}
+
+.ill{
+  height: 100%;
+}
+
 .stepDescContainer {
-  position: absolute;
+  /* position: absolute; */
   height: 50vh;
   width: 40vw;
   right: 5vw;
+  /* background-color: red; */
 }
 
-.showStep {
+.stepDescInnerContainerInactive{
+  display: none;
+  animation: leave 0.3s linear 1;
+}
+
+.stepDescInnerContainerActive{
   display: block;
-  animation: enter 0.7s linear 1;
+  animation: enter 0.3s linear 1;
+}
+
+/* .showStep {
+  display: block;
+  animation: enter 0.4s linear 1;
 }
 
 .hideStep {
-  animation: leave 0.7s linear 1;
+  animation: leave 0.4s linear 1;
   display: none;
-}
+} */
 
 @keyframes enter{
+  0%{
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* @keyframes enter{
   0%{
     opacity: 0;
     transform: scale(0);
@@ -80,7 +141,7 @@
     opacity: 1;
     transform: scale(1);
   }
-}
+} */
 
 @keyframes leave{
   0%{

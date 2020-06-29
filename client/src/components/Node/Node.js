@@ -4,7 +4,14 @@ import classes from './Node.module.css';
 
 const Node = props => {
 
-    let circleClasses = [classes.circle, classes.inactive];
+    let circleClasses = [classes.circle];
+
+    if(props.active){
+        circleClasses.push(classes.active);
+    }
+    else{
+        circleClasses.push(classes.inactive)
+    }
 
     const showStep = (event) => {
         props.clicked(event);

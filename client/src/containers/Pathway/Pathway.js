@@ -6,6 +6,7 @@ import { Fragment } from 'react';
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
 import AcmNavbar from '../../components/AcmNavbar/AcmNavbar';
 import StepDescription from '../../components/StepDescription/StepDescription';
+import Ill from '../../assets/dummy.png';
 
 class Pathway extends Component {
 
@@ -14,7 +15,6 @@ class Pathway extends Component {
     state = {
         pos: [],
         top: 0,
-        classesList: [],
         showStep: false,
         activeStep: null,
     }
@@ -34,8 +34,8 @@ class Pathway extends Component {
                 }
                 pos.push(temp)
             };
+            console.log(pos);
             let top = this.pathwayRef.current.getBoundingClientRect().top;
-            console.log(top)
             this.setState({ pos: pos, top: top });
         })
     }
@@ -43,23 +43,40 @@ class Pathway extends Component {
     showStep = (step, event) => {
         event.preventDefault();
         this.setState({ showStep: true, activeStep: step });
-        let arr = [...this.state.classesList];
-        arr.push(classes.move)
-        this.setState({ classesList: arr })
     };
 
 
     render() {
-
-        let stepDescClasses = [classes.stepDescContainer];
-        if (!this.state.showStep) {
-            stepDescClasses.push(classes.hideStep);
-        }
-        else {
-            stepDescClasses.push(classes.showStep)
-        }
+        // let stepDescClasses = [classes.stepDescContainer];
+        // if (this.state.showStep) {
+        //     stepDescClasses.push(classes.showStep)
+        // }
+        // else {
+        //     stepDescClasses.push(classes.hideStep)
+        // }
 
         let display;
+        let rightDisplay;
+        if (!this.state.showStep) {
+            rightDisplay = <div className={classes.illContainer}>
+                <img src={Ill} alt="illustration" className={classes.ill} />
+            </div>
+        }
+        else {
+            console.log(this.state.activeStep)
+            console.log(this.props.pathway)
+            rightDisplay = <div className={classes.stepDescContainer}>
+                {this.props.pathway.steps.map(step => {
+                    if (step.id === this.state.activeStep.id) {
+                        return <div className={classes.stepDescInnerContainerActive} key={step.id}><StepDescription step={this.state.activeStep} /></div>
+                    }
+                    return <div className={classes.stepDescInnerContainerInactive} key={step.id}><StepDescription step={this.state.activeStep} /></div>
+                })}
+
+            </div>
+        }
+
+
         if (this.state.pos.length === 0) {
             display = null;
         }
@@ -84,29 +101,45 @@ class Pathway extends Component {
                 <TopNavbar />
                 <div className={classes.pathwayHeading}><b>{this.props.pathway.name}</b></div>
                 <div className={classes.outerContainer}>
-                    <div className={classes.topBar}>
-                    </div>
-                    <div className={this.state.classesList.join(' ')} ref={this.pathwayRef}>
-                        {display}
-                        {this.props.pathway.steps.map((step, index) => {
-                            if (index % 2 === 0) {
-                                return (
-                                    <div key={index} className={classes.nodeContainerLeft}>
-                                        <Node step={step} id={step.id} clicked={(event) => this.showStep(step, event)} />
-                                    </div>
-                                );
-                            }
-                            else {
-                                return (
-                                    <div key={index} className={classes.nodeContainerRight}>
-                                        <Node step={step} id={step.id} clicked={(event) => this.showStep(step, event)} />
-                                    </div>
-                                );
-                            }
-                        })}
-                    </div>
-                    <div className={stepDescClasses.join(' ')}>
-                        <StepDescription step={this.state.activeStep} />
+                    <div className={classes.pathwayContainer}>
+                        <div className={classes.pathwayInnerContainer}>
+                            {display}
+                            <div className={classes.pathway} ref={this.pathwayRef}>
+                                {this.props.pathway.steps.map((step, index) => {
+                                    if (index % 2 === 0) {
+                                        if(this.state.activeStep && this.state.activeStep.id === step.id){
+                                            return (
+                                                <div key={index} id={step.id} className={classes.nodeContainerLeft}>
+                                                    <Node step={step} active={true} id={step.id} clicked={(event) => this.showStep(step, event)} />
+                                                </div>
+                                            );
+                                        }
+                                        return (
+                                            <div key={index} id={step.id} className={classes.nodeContainerLeft}>
+                                                <Node step={step} active={false} id={step.id} clicked={(event) => this.showStep(step, event)} />
+                                            </div>
+                                        );
+                                    }
+                                    else {
+                                        if(this.state.activeStep && this.state.activeStep.id === step.id){
+                                            return (
+                                                <div key={index} id={step.id} className={classes.nodeContainerRight }>
+                                                    <Node step={step} active={true} id={step.id} clicked={(event) => this.showStep(step, event)} />
+                                                </div>
+                                            );
+                                        }
+                                        return (
+                                            <div key={index} id={step.id} className={classes.nodeContainerRight}>
+                                                <Node step={step} id={step.id} clicked={(event) => this.showStep(step, event)} />
+                                            </div>
+                                        );
+                                    }
+                                })}
+                            </div>
+                        </div>
+                        <div className={classes.rightContainer}>
+                            {rightDisplay}
+                        </div>
                     </div>
                 </div>
                 <AcmNavbar />

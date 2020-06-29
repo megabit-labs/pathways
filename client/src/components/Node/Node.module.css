@@ -3,6 +3,7 @@
   width: 25vh;
   display: flex;
   align-items: center;
+  /* background-color: red; */
   z-index: 10;
 }
 
@@ -16,6 +17,8 @@
   background-color: #09695d;
   border: 1vh solid #09695d;
   color: white;
+  transition: all 0.1s linear;
+  transform: scale(1.1);
 }
 
 .circle {

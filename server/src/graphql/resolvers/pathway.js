@@ -1,4 +1,5 @@
 const queries = require('../../db/queries/queries')
+const github = require("../../utils/github")
 
 const resolver = {
     Mutation: {
@@ -33,6 +34,10 @@ const resolver = {
 
             try {
                 await query.run()
+
+                let file_name = github.slugifyTitle(title)
+                let commit_message = `Update content ${file_name}`
+                github.githubCommit({file_name, commit_message, content, })
                 return { status: 'OK', message: null}
             } catch (e) {
                 return { status: 'ERROR', message: e.toString() }

@@ -31,8 +31,6 @@ const CreateEditPathway = (props) => {
         let charCode = String.fromCharCode(event.which).toLowerCase()
         if ((event.ctrlKey || event.metaKey) && charCode === 's') {
             event.preventDefault()
-            // console.log('User tried to save')
-            // console.log(steps[stepID]["heading"])
             let heading = steps[stepID]["heading"]            
             let content = steps[stepID]["content"]            
             updateStep({variables: {

@@ -1,9 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import TextareaAutosize from 'react-textarea-autosize';
 
 import Toggle from '../../Toggle/Toggle'
 import StepTag from '../../StepTag/stepTag'
 import TimeInput from '../../TimeInput/timeInput'
+
+import * as actions from '../../../store/actions'
 
 import classes from './StepDataEdit.module.css'
 
@@ -26,7 +29,12 @@ const stepDataEdit = (props) => {
                         initialValue={stepTypes.indexOf(props.stepType)}
                     />
                     <div className={classes.ActionButton}>Save</div>
-                    <div className={classes.ActionButton}>Preview</div>
+                    <div 
+                        className={classes.ActionButton} 
+                        onClick={props.selectStepForPreview(props.selectedStep)}
+                    >
+                        Preview
+                    </div>
                 </div>
                 <div style={{
                     float: "right"
@@ -48,4 +56,16 @@ const stepDataEdit = (props) => {
     )
 }
 
-export default stepDataEdit
+const mapStateToProps = (state) => {
+    return {
+        selectedStep: state.createEditPathway.selectedStep,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        selectStepForPreview: (stepId) => dispatch(actions.selectForPreview(stepId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(stepDataEdit)

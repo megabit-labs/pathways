@@ -1,0 +1,7 @@
+type User {
+  username: String
+  name: String
+  hasCompleted: [Step] @relation(name: "HAS_COMPLETED", direction: "OUT")
+  inProgress: [Step] @relation(name: "IN_PROGRESS", direction: "OUT")
+}
+

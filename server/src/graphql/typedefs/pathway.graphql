@@ -10,6 +10,12 @@ type Content {
     content: String
 }
 
+enum StepStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  HAS_COMPLETED
+}
+
 type Step {
     id: String
     name: String
@@ -18,6 +24,7 @@ type Step {
     isPathway: Boolean
     pathway: Pathway @relation(name: "INCLUDES", direction: "OUT")
     content: Content @relation(name: "HAS_CONTENT", direction: "OUT")
+    userStatus: StepStatus
 }
 
 enum _StepOrdering {
@@ -59,5 +66,10 @@ type Mutation {
         title: String
         content: String
         stepId: String!
+    ): StatusMessage
+    updateUserStepStatus(
+        username: String!
+        stepId: String!
+        status: StepStatus!
     ): StatusMessage
 }

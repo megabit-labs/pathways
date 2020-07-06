@@ -15,7 +15,8 @@ const initialState = {
             content: "# hello",
             stepType: 'Pathway',
             selected: false,
-            timeLimit: 20
+            timeLimit: 20,
+            isPreview: false
             // rating: 2
         },
         step2: {
@@ -23,7 +24,8 @@ const initialState = {
             content: "# hello",
             stepType: 'Content',
             selected: false,
-            timeLimit: 30
+            timeLimit: 30,
+            isPreview: false
             // rating: 1
         },
         step3: {
@@ -31,7 +33,8 @@ const initialState = {
             content: "# hello",
             stepType: 'Shared Step',
             selected: false,
-            timeLimit: 40
+            timeLimit: 40,
+            isPreview: false
             // rating: 3
         }
     },
@@ -53,6 +56,7 @@ const addStep = (state, action) => {
         steps: newSteps
     }
 }
+
 
 const reorderSteps = (state, action) => {
     const result = action.result
@@ -98,6 +102,17 @@ const selectStepForEditing = (state, action) => {
     }
 }
 
+const selectStepForPreview = (state, action) => {
+    let newSteps = {...(state.steps)}
+    let isPreview = newSteps[state.selectedStep].isPreview
+
+    newSteps[action.stepId].isPreview = !isPreview
+    return {
+        ...state,
+        steps: newSteps,
+    }
+}
+
 const updateStep = (state, action) => {
     const id = action.stepId
     let updatedStep = state.steps[id]
@@ -121,6 +136,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DELETE_STEP: return deleteStep(state, action)
         case actionTypes.SELECT_FOR_EDITING: return selectStepForEditing(state, action)
         case actionTypes.UPDATE_STEP: return updateStep(state, action)
+        case actionTypes.SELECT_FOR_PREVIEW: return selectStepForPreview(state,action)
         default: return state
     }
 }

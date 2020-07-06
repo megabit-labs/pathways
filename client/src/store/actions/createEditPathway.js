@@ -28,6 +28,13 @@ export const selectForEditing = (stepId) => {
     }
 }
 
+export const selectForPreview = (stepId) => {
+    return {
+        type: actionTypes.SELECT_FOR_PREVIEW,
+        stepId: stepId
+    }
+}
+
 export const updateStep = (stepId, stepData) => {
     return {
         type: actionTypes.UPDATE_STEP,

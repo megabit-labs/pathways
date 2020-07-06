@@ -14,14 +14,20 @@ const stepDataEdit = (props) => {
     return (
         <div className={classes.StepDataEdit}>
             <div className={classes.StepMetaEdit}>
-                <Toggle
-                    vals={stepTypes.map((val) => ({
-                        component: (<StepTag stepType={val} />),
-                        value: val
-                    }))}
-                    onValueChange={(value) => props.onStepDataUpdate("stepType", value)}
-                    initialValue={stepTypes.indexOf(props.stepType)}
-                />
+                <div style={{
+                    display: "flex"
+                }}>
+                    <Toggle
+                        vals={stepTypes.map((val) => ({
+                            component: (<StepTag stepType={val} />),
+                            value: val
+                        }))}
+                        onValueChange={(value) => props.onStepDataUpdate("stepType", value)}
+                        initialValue={stepTypes.indexOf(props.stepType)}
+                    />
+                    <div className={classes.ActionButton}>Save</div>
+                    <div className={classes.ActionButton}>Preview</div>
+                </div>
                 <div style={{
                     float: "right"
                 }}>

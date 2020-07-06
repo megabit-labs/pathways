@@ -27,7 +27,6 @@ const CreateEditPathway = (props) => {
 
     const handleKeyDown = (event) => {
         const {stepID, steps} = props
-        console.log(steps[stepID]["heading"])
         let charCode = String.fromCharCode(event.which).toLowerCase()
         if ((event.ctrlKey || event.metaKey) && charCode === 's') {
             event.preventDefault()
@@ -44,7 +43,6 @@ const CreateEditPathway = (props) => {
     return (
         <div 
             className={classes.Content}
-            onKeyDown={(e) => handleKeyDown(e)}
         >
             <div className={classes.EditArea}>
                 <StepEditArea />

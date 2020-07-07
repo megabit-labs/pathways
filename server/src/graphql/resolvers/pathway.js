@@ -35,9 +35,9 @@ const resolver = {
             try {
                 await query.run()
 
-                let file_name = github.slugifyTitle(title)
-                let commit_message = `Update content ${file_name}`
-                github.githubCommit({file_name, commit_message, content, })
+                // commit changes to github in the background
+                github.githubCommit({title, content, author_name: "Ishan Bhanuka", author_email: "bhanuka.ishan@gmail.com"})
+
                 return { status: 'OK', message: null}
             } catch (e) {
                 return { status: 'ERROR', message: e.toString() }

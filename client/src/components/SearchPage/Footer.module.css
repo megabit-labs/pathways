@@ -1,0 +1,41 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  padding: 15px 10px 11px 30px;
+  width: 100%;
+  display: block;
+  background-color: #0d0d0d;
+}
+
+.footer a {
+  padding-right: 22.5px;
+  font-size: 14px;
+  color: #666666;
+}
+
+.leftfoot {
+  margin-bottom: -17px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.leftfoot a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.rightfoot {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 30px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+.rightfoot a {
+  padding-right: 28px;
+  padding-bottom: 1px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}

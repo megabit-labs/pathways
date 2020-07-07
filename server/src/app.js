@@ -31,7 +31,7 @@ const app = new ApolloServer({
     context: async ({ req }) => {
         let authToken = req.header('Authorization')
         if (authToken) {
-            authToken = authToken.replace('Bearer', '')
+            authToken = authToken.replace('Bearer ', '')
         }
         const user = await User.findByToken(authToken)
         return {

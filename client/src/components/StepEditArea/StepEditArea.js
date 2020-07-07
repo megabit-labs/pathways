@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ReactMarkdown from 'react-markdown'
+import CodeBlock from '../Markdown/CodeBlock'
+import Header from '../Markdown/Header'
 
 import * as actions from '../../store/actions/index'
 
@@ -74,7 +77,27 @@ class StepEditArea extends Component {
     }
 
     render() {
-        // console.log(this.state.stepType)
+        const {steps, selectedStep} = this.props
+
+        let displayComponent = null
+        if (selectedStep && steps[selectedStep]["isPreview"]) {
+            const markdown = this.state.content
+            displayComponent = (
+                <ReactMarkdown 
+                    source={markdown} 
+                    escapeHtml={false}
+                    renderers={{code: CodeBlock}}
+                />
+            )
+        } else {
+            displayComponent = (
+                <StepContentEdit 
+                    onContentChange={(content) => this.stepUpdateHandler('content', content)}
+                    content={this.state.content}  
+                />
+            )
+        }
+        
         let editAreaComponent = (<div></div>)
         if (this.state.stepId != "") {
             editAreaComponent = (
@@ -86,10 +109,7 @@ class StepEditArea extends Component {
                         stepType={this.state.stepType}
                         timeLimit={this.state.timeLimit}
                     />
-                    <StepContentEdit 
-                        onContentChange={(content) => this.stepUpdateHandler('content', content)}
-                        content={this.state.content}  
-                    />
+                    {displayComponent}
                 </Aux>
             )
         }

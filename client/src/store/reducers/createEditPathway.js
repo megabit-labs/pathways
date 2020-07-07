@@ -104,7 +104,7 @@ const selectStepForEditing = (state, action) => {
 
 const selectStepForPreview = (state, action) => {
     let newSteps = {...(state.steps)}
-    let isPreview = newSteps[state.selectedStep].isPreview
+    let isPreview = newSteps[state.selectedStep]["isPreview"]
 
     newSteps[action.stepId].isPreview = !isPreview
     return {

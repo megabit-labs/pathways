@@ -4,11 +4,11 @@ const Query = require('../../core/Query')
 const getUserStepStatus = ({username, stepIds}) => {
     return new Query({
         statement: `
-        MATCH (u:User {username: "hedonhermdev"}), (s:Step)
-        WHERE s.id IN $stepIds
+        UNWIND $stepIds as stepId
+        MATCH (u:User {username: $username}), (s:Step {id: stepId})
         OPTIONAL MATCH (u)-[r]->(s)
         RETURN CASE 
-            WHEN r IS NOT NULL THEN type(r)
+            WHEN r IS NOT NULL THEN r.status
             ELSE "NOT_STARTED"
         END
     `,

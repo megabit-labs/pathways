@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import CodeBlock from '../Markdown/CodeBlock'
-import Header from '../Markdown/Header'
 
 import * as actions from '../../store/actions/index'
 

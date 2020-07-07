@@ -1,10 +1,12 @@
 const { Octokit } = require("@octokit/rest");
 
-const owner = "";
-const repo = "";
-const commiter_name = "";
-const commiter_email = "";
-const oauth_token = "";
+const config = require('../../config')
+
+const owner = config.GITHUB_OWNER
+const repo = config.GITHUB_REPO
+const commiter_name = config.COMMITTER_NAME;
+const commiter_email = config.COMMITTER_EMAIL;
+const oauth_token = config.OAUTH_TOKEN;
 
 const octokit = new Octokit({ auth: oauth_token });
 

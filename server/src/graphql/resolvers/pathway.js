@@ -38,8 +38,6 @@ const resolver = {
                 // commit changes to github in the background
                 // slugify id to create file name so that file name
                 // remains unchanged even if title changes
-                console.log(context)
-                console.log(content.user)
                 github.githubCommit({id, content, author_name: context.user.name, author_email: context.user.email})
 
                 return { status: 'OK', message: null}

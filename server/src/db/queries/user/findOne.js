@@ -1,11 +1,12 @@
 const Query = require('../../core/Query');
 const { createMatchParams } = require('../../../utils/cypherUtils')
 
-const findOne = ({ id = null, username = null, name = null }) => {
+const findOne = ({ id = null, username = null, name = null, email = null }) => {
     const args = {
         id: id,
         username: username,
         name: name,
+        email: email
     };
 
     Object.keys(args).forEach((key) =>

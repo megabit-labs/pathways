@@ -1,10 +1,11 @@
 const Query = require('../../core/Query')
 
-const createUser = ( { username = null, name = null, password = null }) => {
+const createUser = ( { username = null, name = null, password = null, email = null }) => {
     const args = {
         username: username,
         name: name,
         password: password,
+        email: email
     }
 
     Object.keys(args).forEach((key) =>

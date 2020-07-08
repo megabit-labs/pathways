@@ -1,10 +1,10 @@
-const axios = require('axios')
+const axios = require("axios")
 
-const config = require('../../config')
+const config = require("../../config")
 
-axios.interceptors.request.use(request => {
-  console.log('Starting Request', request)
-  return request
+axios.interceptors.request.use((request) => {
+    console.log("Starting Request", request)
+    return request
 })
 
 async function getGHAccessToken(code) {
@@ -80,5 +80,5 @@ async function getGHUser(accessToken) {
 
 module.exports = {
     getGHAccessToken,
-    getGHUser
+    getGHUser,
 }

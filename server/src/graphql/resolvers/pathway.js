@@ -1,35 +1,41 @@
-const queries = require('../../db/queries/queries')
+const queries = require("../../db/queries/queries")
 const github = require("../../utils/github")
 
 const resolver = {
     Mutation: {
-        async createUpdatePathway(_, {id, name, steps}) {
+        async createUpdatePathway(_, { id, name, steps }) {
             const query = queries.pathway.createUpdatePathway({
-                id, name, steps
+                id,
+                name,
+                steps,
             })
 
             try {
                 await query.run()
-                return { status: 'OK', message: null }
+                return { status: "OK", message: null }
             } catch (e) {
-                return { status: 'ERROR', message: e.toString() }
+                return { status: "ERROR", message: e.toString() }
             }
         },
-        async deletePathway(_, {id, steps, whole}) {
+        async deletePathway(_, { id, steps, whole }) {
             const query = queries.pathway.deletePathway({
-                id, steps, whole
+                id,
+                steps,
+                whole,
             })
 
             try {
                 await query.run()
-                return { status: 'OK', message: null }
+                return { status: "OK", message: null }
             } catch (e) {
-                return { status: 'ERROR', message: e.toString() }
+                return { status: "ERROR", message: e.toString() }
             }
         },
-        async createUpdateContent(_, {id, title, content}, context) {
+        async createUpdateContent(_, { id, title, content }, context) {
             const query = queries.content.createUpdateContent({
-                id, title, content 
+                id,
+                title,
+                content,
             })
 
             try {
@@ -38,16 +44,24 @@ const resolver = {
                 // commit changes to github in the background
                 // slugify id to create file name so that file name
                 // remains unchanged even if title changes
-                github.githubCommit({id, content, author_name: context.user.name, author_email: context.user.email})
+                github.githubCommit({
+                    id,
+                    content,
+                    author_name: context.user.name,
+                    author_email: context.user.email,
+                })
 
-                return { status: 'OK', message: null}
+                return { status: "OK", message: null }
             } catch (e) {
-                return { status: 'ERROR', message: e.toString() }
+                return { status: "ERROR", message: e.toString() }
             }
         },
-        async forkContent(_, {id, title, content, stepId}, context) {
+        async forkContent(_, { id, title, content, stepId }, context) {
             const query = queries.content.createUpdateContent({
-                id, title, content, stepId
+                id,
+                title,
+                content,
+                stepId,
             })
 
             try {
@@ -57,14 +71,19 @@ const resolver = {
                 // commit changes to github in the background
                 // slugify id to create file name so that file name
                 // remains unchanged even if title changes
-                github.githubCommit({id, content, author_name: context.user.name, author_email: context.user.email})
+                github.githubCommit({
+                    id,
+                    content,
+                    author_name: context.user.name,
+                    author_email: context.user.email,
+                })
 
-                return { status: 'OK', message: null}
+                return { status: "OK", message: null }
             } catch (e) {
-                return { status: 'ERROR', message: e.toString() }
+                return { status: "ERROR", message: e.toString() }
             }
         },
-    }
+    },
 }
 
 module.exports = resolver

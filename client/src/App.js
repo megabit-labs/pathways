@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import GithubAuth from './components/GithubAuth/GithubAuth';
+import SearchPage from './components/SearchPage/SearchPage';
 
 class App extends Component {
 
   render() {
     return (
-      <GithubAuth />
+      <SearchPage />
     );
   }
 }

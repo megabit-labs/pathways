@@ -17,6 +17,7 @@ class User extends Model {
     static schema = () => ({
         id: String,
         name: String,
+        email: String,
         username: String,
         password: String
     })

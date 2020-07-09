@@ -18,3 +18,4 @@ jobs:
           host: bitsacm.in
           user: git
           key: ${{secrets.SERVERSSHKEY}}
+          args: "-tt -vvv"

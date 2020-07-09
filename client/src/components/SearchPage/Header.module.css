@@ -1,0 +1,34 @@
+.navbar {
+    top: 0px;
+    overflow: hidden;
+    padding: 12px;
+}
+.navlinks {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navlinks a{
+    padding-right: 20px;
+    font-size: small;
+    color: #2c2c2c;
+}
+.dp {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    border: 2px solid black;
+
+}
+
+.apps {
+    opacity: 0.75;
+    height: 32px;
+    width: 32px;
+}
+.apps:hover {
+    opacity: 1;
+    height: 32px;
+    width: 32px;
+}

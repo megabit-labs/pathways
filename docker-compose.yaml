@@ -34,8 +34,7 @@ services:
     container_name: "pathways_nginx"
     image: nginx:mainline-alpine
     ports:
-      - "80:80"
-      - "443:443"
+      - "1337:80"
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - react_build:/var/www/html

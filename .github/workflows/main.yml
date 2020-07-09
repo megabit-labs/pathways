@@ -14,6 +14,7 @@ jobs:
         with:
           command: |
             cd pathways
+            git pull origin master
             docker-compose up --build -d
           host: bitsacm.in
           user: git

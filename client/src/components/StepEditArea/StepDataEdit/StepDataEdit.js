@@ -13,7 +13,7 @@ import * as actions from '../../../store/actions'
 import classes from './StepDataEdit.module.css'
 
 const UPDATE_STEP = gql`
-    mutation($id: String, $title: String, $content: String) {
+    mutation($id: String!, $title: String, $content: String) {
         createUpdateContent(id: $id, title: $title, content: $content) {
             status,
             message
@@ -45,6 +45,7 @@ function StepDataEdit(props) {
                     <div 
                         className={classes.ActionButton}
                         onClick={e => {
+                            console.log("clicked")
                             e.preventDefault()
                             updateStep({variables: {
                                 id: selectedStep, 

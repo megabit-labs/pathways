@@ -4,9 +4,10 @@ import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 
 
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-markup';
-import 'prismjs/components/prism-markdown';
+import 'prismjs/components/prism-clike'
+// import 'prismjs/components/clike'
+import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-markdown'
 
 import classes from "./StepContentEdit.module.css"
 import './prism.css'

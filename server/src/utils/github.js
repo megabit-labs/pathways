@@ -130,7 +130,7 @@ async function githubCommit({ title, content, author_name, author_email }) {
             sha: new_commit_sha,
         })
 
-        console.log(`Update reference to master branch`)
+        console.log("Update reference to master branch")
     } catch (err) {
         console.log("Failed to update master branch")
         throw err
@@ -138,7 +138,7 @@ async function githubCommit({ title, content, author_name, author_email }) {
 }
 
 // slugify title to get file name
-function slugifyTitle(title) {
+function slugifyId(title) {
     return title
         .toString()
         .trim()
@@ -150,6 +150,35 @@ function slugifyTitle(title) {
         .replace(/-+$/, "")
 }
 
+const delay = (ms) => new Promise((res) => setTimeout(res, ms))
+
+async function safeGithubCommit({ id, content, author_name, author_email }) {
+    const maxTries = 3
+    const title = slugifyId(id)
+    let backOffTime = 500
+
+    for (i = 0; i < maxTries; i++) {
+        try {
+            await githubCommit({ title, content, author_name, author_email })
+            console.log(
+                `Successful github commit on attempt ${i} by ${author_name} for title ${title}`
+            )
+            return
+        } catch (err) {
+            await delay(backOffTime)
+
+            console.log(
+                `Failed github commit attempt ${i} by ${author_name} for ${title}`
+            )
+            backOffTime *= 2
+        }
+    }
+
+    console.log(
+        `Failed to make commit by ${author_name} for ${title}. Fix manually.`
+    )
+}
+
 module.exports = {
-    githubCommit,
+    safeGithubCommit,
 }

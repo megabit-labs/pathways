@@ -44,7 +44,7 @@ const resolver = {
                 // commit changes to github in the background
                 // slugify id to create file name so that file name
                 // remains unchanged even if title changes
-                github.githubCommit({
+                github.safeGithubCommit({
                     id,
                     content,
                     author_name: context.user.name,
@@ -71,7 +71,7 @@ const resolver = {
                 // commit changes to github in the background
                 // slugify id to create file name so that file name
                 // remains unchanged even if title changes
-                github.githubCommit({
+                github.safeGithubCommit({
                     id,
                     content,
                     author_name: context.user.name,

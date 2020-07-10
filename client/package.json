@@ -28,7 +28,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json}": [
-      "eslint . --fix"
+      "eslint --fix"
     ]
   },
   "husky": {

@@ -8,7 +8,7 @@ import ApolloClient from 'apollo-boost';
 import { BrowserRouter } from 'react-router-dom';
 
 const client = new ApolloClient({
-  uri: 'https://pathways.bitsacm.in/graphql',
+  uri: 'http://localhost:3003/',
 });
 
 

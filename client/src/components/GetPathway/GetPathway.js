@@ -8,7 +8,7 @@ const GetPathway = props => {
 
     const GET_PATHWAY = gql`
         query {
-            Pathway(id: "Pathway_1591726599819_4077") {
+            Pathway(id: "React") {
                 id
                 name
                 steps {

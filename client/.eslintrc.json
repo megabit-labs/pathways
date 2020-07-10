@@ -20,8 +20,10 @@
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "error",   // use prettier rules while formatting
-        "no-unused-vars": "warn",   // only warn if there is an unused variable, instead of throwing an error
-        "no-console": "off"         // this shuts off any errors about using console logs in the app
+        "prettier/prettier": "error",           // use prettier rules while formatting
+        "no-unused-vars": "warn",               // only warn if there is an unused variable, instead of throwing an error
+        "no-console": "off",                    // this shuts off any errors about using console logs in the app
+        "prefer-stateless-function": "off",
+        "jsx-filename-extension": "off"
     }
 }

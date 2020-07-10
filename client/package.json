@@ -15,16 +15,12 @@
     "react-apollo": "^3.1.5",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
-<<<<<<< HEAD
     "react-graph-vis": "^1.0.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "react-spring": "^8.0.27"
-=======
-    "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27",
     "react-social-login-buttons": "^3.1.0"
->>>>>>> cbcb765021f3948934df79d0428a0f4fc7640853
   },
   "scripts": {
     "start": "react-scripts start",

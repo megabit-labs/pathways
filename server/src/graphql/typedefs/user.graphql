@@ -2,6 +2,7 @@ type User {
   username: String
   name: String
   stepsInProgress: [ProgressStatus]
+  pathwaysInProgress: [Pathway] @relation(name: "PATHWAY_PROGRESS", direction: "OUT")
 }
 
 type ProgressStatus @relation(name: "PROGRESS_STATUS") {

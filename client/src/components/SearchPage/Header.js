@@ -1,14 +1,13 @@
 import React, { useState } from "react"
-import { Navbar, Nav, NavLink, Button } from "react-bootstrap"
+import { Navbar, Nav } from "react-bootstrap"
 import gql from "graphql-tag"
 import { useMutation } from "@apollo/react-hooks"
-import { withRouter } from "react-router-dom"
 
 import classes from "./Header.module.css"
 import Menu from "../assets/menu.png"
+import GithubIcon from "../../assets/github.png"
 
-const CLIENT_ID =
-    process.env.REACT_APP_GITHUB_CLIENT_ID || "8b508ba452a263f604b4"
+const CLIENT_ID = "8b508ba452a263f604b4"
 
 const GET_TOKEN = gql`
     mutation($code: String!) {
@@ -46,14 +45,11 @@ const Header = (props) => {
     }
 
     if (data && !isTouched) {
-        isTouchedHandler(true);
-        console.log(data)
+        isTouchedHandler(true)
         token = data.GithubAuth.token
         localStorage.setItem("token", token)
-        props.history.push("/pathway")
+        alert("You are logged in !!!")
     }
-
-    console.log(code)
 
     return (
         <React.Fragment>
@@ -62,18 +58,14 @@ const Header = (props) => {
                     <Nav.Link href="#">
                         <img src={Menu} className={classes.apps} />
                     </Nav.Link>
-                    <Nav.Link href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user`}>
+                    <Nav.Link
+                        href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user`}
+                    >
                         <div className={classes.login}>
-                            <img
-                                className={classes.github}
-                                src="https://ik.imagekit.io/m52sq26n4h/icons8-github-48__1_.png"
-                            />
-                            <text
-                                // href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user`}
-                                className={classes.text}
-                            >
+                            <img className={classes.github} src={GithubIcon} />
+                            <div className={classes.text}>
                                 Login with GitHub
-                            </text>
+                            </div>
                         </div>
                     </Nav.Link>
                 </Nav>
@@ -81,4 +73,4 @@ const Header = (props) => {
         </React.Fragment>
     )
 }
-export default withRouter(Header)
+export default Header

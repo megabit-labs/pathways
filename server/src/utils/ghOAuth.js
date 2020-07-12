@@ -1,10 +1,10 @@
-const axios = require('axios')
+const axios = require("axios")
 
-const config = require('../../config')
+const config = require("../../config")
 
-axios.interceptors.request.use(request => {
-  console.log('Starting Request', request)
-  return request
+axios.interceptors.request.use((request) => {
+    console.log("Starting Request", request)
+    return request
 })
 
 async function getGHAccessToken(code) {
@@ -30,6 +30,7 @@ async function getGHAccessToken(code) {
 
 async function getGHUser(accessToken) {
     const ghUrl = "https://api.github.com/user"
+    const ghMailUrl = "https://api.github.com/user/public_emails"
 
     const ghResponse = await axios.get(ghUrl, {
         headers: {
@@ -41,14 +42,43 @@ async function getGHUser(accessToken) {
         throw new Error("Github: Invalid access token")
     }
 
+    const username = ghResponse.data.login
+    const name = ghResponse.data.name
+    var email = ghResponse.data.email
+
+    if (!email) {
+        const ghMailResponse = await axios.get(ghMailUrl, {
+            headers: {
+                Authorization: "token " + accessToken,
+            },
+        })
+
+        if (ghMailResponse.status != 200) {
+            throw new Error("Github: Invalid access token")
+        }
+
+        for (const mail of ghMailResponse.data) {
+            if (mail.verified) {
+                email = mail.email
+                break
+            }
+        }
+
+        // TODO: reconsider behaviour
+        // One option is to author commits from pathway bot
+        if (!email) {
+            throw new Error("Github: No public email")
+        }
+    }
+
     return {
-        username: ghResponse.data.login,
-        email: ghResponse.data.email,
-        name: ghResponse.data.name,
+        username,
+        email,
+        name,
     }
 }
 
 module.exports = {
     getGHAccessToken,
-    getGHUser
+    getGHUser,
 }

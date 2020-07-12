@@ -1,29 +1,35 @@
-const Query = require('../../core/Query')
+const Query = require("../../core/Query")
 
-const createUser = ( { username = null, name = null, password = null }) => {
+const createUser = ({
+    username = null,
+    name = null,
+    password = null,
+    email = null,
+}) => {
     const args = {
-        username: username,
-        name: name,
-        password: password,
+        username,
+        name,
+        password,
+        email,
     }
 
     Object.keys(args).forEach((key) =>
         args[key] === null ? delete args[key] : null
-    );
+    )
 
     if (Object.keys(args).length === 0) {
-        throw new Error('User.findOne: No arguments provided');
+        throw new Error("User.findOne: No arguments provided")
     }
 
-    if ( username === null ||  name === null ) {
-        throw new Error('User.createUser: Username or name cannot be null.')
+    if (username === null || name === null) {
+        throw new Error("User.createUser: Username or name cannot be null.")
     }
 
     const query = new Query({
         statement: `
             CREATE (u:User $params) RETURN u;
         `,
-        params: { params: args }
+        params: { params: args },
     })
 
     return query

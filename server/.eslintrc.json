@@ -1,0 +1,25 @@
+{
+    "env": {
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb-base",
+        "prettier",
+        "plugin:node/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 11
+    },
+    "rules": {
+        "prettier/prettier": "error",   // use prettier rules while formatting
+        "no-unused-vars": "warn",       // only warn if there is an unused variable, instead of throwing an error
+        "no-console": "off",            // this shuts off any errors about using console logs in the app
+        "func-names": "off",            // allow usage of anonymous functions
+        "object-shorthand": "off"       // allow usage of {fieldName:fieldName} instead of just {fieldName} 
+    },
+    "plugins": [
+        "prettier"
+    ]
+}

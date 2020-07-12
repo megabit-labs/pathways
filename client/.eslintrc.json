@@ -1,0 +1,30 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "airbnb",
+        "prettier",
+        "prettier/react"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": "error",           // use prettier rules while formatting
+        "no-unused-vars": "warn",               // only warn if there is an unused variable, instead of throwing an error
+        "no-console": "off",                    // this shuts off any errors about using console logs in the app
+        "react/prefer-stateless-function": "off",
+        "react/jsx-filename-extension": "off",
+        "no-useless-escape": "off"
+    }
+}

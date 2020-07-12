@@ -1,8 +1,6 @@
-// Github Oauth.
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || "37454df5e11a69f88833"
-const GITHUB_CLIENT_SECRET =
-    process.env.GITHUB_CLIENT_SECRET ||
-    "952090694f312a7fe926825c12a7b82a44947940"
+// Github Oauth. 
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || "8b508ba452a263f604b4"
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || "16ef48033babee3d5325c03c50389ec8eed087a7"
 
 // Github owner and repo for pathway contents
 const GITHUB_OWNER = process.env.GITHUB_OWNER || "megabit-labs"

@@ -157,6 +157,11 @@ async function safeGithubCommit({ id, content, author_name, author_email }) {
     const title = slugifyId(id)
     let backOffTime = 500
 
+    if (!oauth_token) {
+        console.log("Cannot commit without oauth token to authorize commiter")
+        return
+    }
+
     for (i = 0; i < maxTries; i++) {
         try {
             await githubCommit({ title, content, author_name, author_email })

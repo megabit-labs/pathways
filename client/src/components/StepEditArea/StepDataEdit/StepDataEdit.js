@@ -23,7 +23,7 @@ const UPDATE_STEP = gql`
 
 function StepDataEdit(props) {
     const stepTypes = ['Content', 'Pathway', 'Shared Step']
-    const {selectedStep, selectStepForPreview, onStepDataUpdate, steps} = props
+    const {selectedStep, selectStepForPreview, onStepDataUpdate, steps, onSaveStep} = props
     const [updateStep, { error: mutationError }] = useMutation(UPDATE_STEP)
 
     const {heading, content} = steps[selectedStep]
@@ -46,10 +46,11 @@ function StepDataEdit(props) {
                         className={classes.ActionButton}
                         onClick={e => {
                             e.preventDefault()
+                            onSaveStep();
                             updateStep({variables: {
                                 id: selectedStep, 
-                                title: heading, 
-                                content: content}}
+                                title: props.heading, 
+                                content: props.content}}
                             ).catch(e => console.log(e))
                         }}
                     >

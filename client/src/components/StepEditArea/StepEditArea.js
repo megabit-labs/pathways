@@ -92,7 +92,7 @@ class StepEditArea extends Component {
             displayComponent = (
                 <StepContentEdit 
                     onContentChange={(content) => this.stepUpdateHandler('content', content)}
-                    content={this.state.content}  
+                    content={this.state.content} 
                 />
             )
         }
@@ -103,10 +103,11 @@ class StepEditArea extends Component {
                 <Aux>
                     <StepDataEdit
                         onStepDataUpdate={this.stepUpdateHandler}
-
                         heading={this.state.heading}
+                        content={this.state.content}
                         stepType={this.state.stepType}
                         timeLimit={this.state.timeLimit}
+                        onSaveStep={this.saveStepDataToStore}
                     />
                     {displayComponent}
                 </Aux>

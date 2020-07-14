@@ -1,0 +1,22 @@
+name: Deploy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start deployment script on server
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd pathways
+            git pull origin master
+            docker-compose up --build -d
+          host: bitsacm.in
+          user: git
+          key: ${{secrets.SERVERSSHKEY}}
+          args: "-tt -vvv"

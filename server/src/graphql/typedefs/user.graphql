@@ -1,0 +1,17 @@
+type User {
+  username: String
+  name: String
+  stepsInProgress: [ProgressStatus]
+}
+
+type ProgressStatus @relation(name: "PROGRESS_STATUS") {
+  from: User
+  to: Step
+  status: StepStatus
+}
+
+enum StepStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  HAS_COMPLETED
+}

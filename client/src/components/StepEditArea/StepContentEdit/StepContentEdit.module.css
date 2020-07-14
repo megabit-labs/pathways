@@ -1,0 +1,9 @@
+.StepContentEdit {
+    background-color: #fafafa;
+    /* flex: 1 1 auto; */
+    /* height: 100%; */
+}
+
+textarea {
+    outline: 0;
+}

@@ -1,0 +1,53 @@
+.StepDataEdit {
+    /* background-color: greenyellow; */
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.ActionButton {
+    font-size: 15px;
+    font-weight: 800;
+    padding: 0 10px;
+    margin: auto 0 auto 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    transition: 0.2s ease;
+}
+
+.ActionButton:hover {
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+    border: 1px solid cornflowerblue;
+}
+
+.TitleInput {
+    /* margin-top: 50px; */
+    /* background-color: red; */
+    width: 900px;
+    font-size: 50px;
+    line-height: 1.25em;
+    font-weight: 800;
+}
+
+.TitleInput textarea {
+    outline: 0;
+    border: none;
+    width: 100%;
+    height: 100px;
+    background-color: #fafafa;
+}
+
+.StepMetaEdit {
+    /* background-color: aqua; */
+    height: 30px;
+    width: 900px;
+    /* padding-left: 5px; */
+    /* border: 1px solid black; */
+}

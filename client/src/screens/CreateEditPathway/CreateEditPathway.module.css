@@ -1,0 +1,24 @@
+.Content {
+    background-color: aqua;
+    height: 100vh;
+    display: flex;
+    /* flex-grow: 0; */
+    /* flex-flow: column; */
+}
+
+.EditArea {
+    /* background-color: greenyellow; */
+    /* background-color: aqua; */
+    background-color: #fafafa;
+    height: 100%;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    float: left;
+}
+
+.StepList {
+    /* float: right; */
+    background-color: red;
+    width: 600px;
+    height: 100%;
+}

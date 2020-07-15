@@ -1,8 +1,8 @@
 import React from "react"
 
-import Header from "./Header"
-import SearchField from "./SearchField"
-import Footer from "./Footer"
+import Header from "../../components/SearchPage/Header/Header"
+import SearchField from "../../components/SearchPage/SearchField/SearchField"
+import Footer from "../../components/SearchPage/Footer/Footer"
 
 const searchPage = (props) => {
 

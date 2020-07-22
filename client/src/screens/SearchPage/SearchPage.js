@@ -4,7 +4,7 @@ import Header from "../../components/SearchPage/Header/Header"
 import SearchField from "../../components/SearchPage/SearchField/SearchField"
 import Footer from "../../components/SearchPage/Footer/Footer"
 
-const searchPage = (props) => {
+const SearchPage = (props) => {
 
     return (
         <div>
@@ -15,4 +15,4 @@ const searchPage = (props) => {
     )
 }
 
-export default searchPage;
+export default SearchPage;

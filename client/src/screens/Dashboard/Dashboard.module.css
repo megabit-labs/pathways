@@ -1,5 +1,5 @@
 .Main {
-    /* background-color: green; */
+    background-color: #fafafa;
     height: 100vh;
 }
 
@@ -25,6 +25,7 @@
 
 .Name {
     /* background-color: yellow; */
+    margin-top: 10px;
     padding-left: 5%;
     padding-right: 5%;
     font-size: 26px;
@@ -54,7 +55,35 @@
     line-height: 1.5em;
 }
 
+.Stats {
+    /* background-color: green; */
+    width: 90%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #e1e4e8;
+    font-size: 16px;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.CreatePathwayBtn {
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    width: 95%;
+    margin: 16px auto;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.CreatePathwayBtn:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
 .DashboardContent {
-    /* background-color: red; */
+    background-color: red;
     flex: 1 1 auto;
 }

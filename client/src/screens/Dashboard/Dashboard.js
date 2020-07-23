@@ -17,7 +17,7 @@ class Dashboard extends Component {
 
                         <div className={classes.Name}>
                             {this.props.name}
-                        </div>
+                        </div>  
 
                         <div className={classes.Username}>
                             <div>
@@ -28,6 +28,16 @@ class Dashboard extends Component {
 
                         <div className={classes.Bio}>
                             <p>{this.props.bio}</p>
+                        </div>
+
+                        <div className={classes.Stats}>
+                            <strong>{this.props.pathwaysCompleted}</strong> pathways completed<br></br>
+                            <strong>{this.props.pathwaysOngoing}</strong> pathways ongoing<br></br>
+                            <strong>{this.props.pathwaysCreated}</strong> pathways created
+                        </div>
+
+                        <div className={classes.CreatePathwayBtn}>
+                            Create Pathway
                         </div>
 
                     </div>

@@ -6,3 +6,7 @@ export {
     selectForPreview,
     updateStep
 } from './createEditPathway'
+
+export {
+    changeTab
+} from './dashboard'

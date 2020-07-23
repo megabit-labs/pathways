@@ -1,27 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import DashboardContent from '../../components/DashboardContent/DashboardContent'
 import GithubIcon from 'react-ionicons/lib/LogoGithub'
 
 import classes from './Dashboard.module.css'
 
 class Dashboard extends Component {
+    onCreatePathwayClick = () => {
+        console.log('Create pathway clicked bruh')
+    }
 
     render() {
         return (
             <div className={classes.Main}>
-                <div className = {classes.Content}>
-
+                <div className={classes.Content}>
                     <div className={classes.ProfileInfo}>
                         <img src={this.props.imageURL} />
 
-                        <div className={classes.Name}>
-                            {this.props.name}
-                        </div>  
+                        <div className={classes.Name}>{this.props.name}</div>
 
                         <div className={classes.Username}>
                             <div>
-                                <GithubIcon fontSize="26px"/> 
+                                <GithubIcon fontSize='26px' />
                             </div>
                             <p>{this.props.username}</p>
                         </div>
@@ -31,18 +32,23 @@ class Dashboard extends Component {
                         </div>
 
                         <div className={classes.Stats}>
-                            <strong>{this.props.pathwaysCompleted}</strong> pathways completed<br></br>
-                            <strong>{this.props.pathwaysOngoing}</strong> pathways ongoing<br></br>
-                            <strong>{this.props.pathwaysCreated}</strong> pathways created
+                            <strong>{this.props.pathwaysCompleted}</strong>{' '}
+                            pathways completed<br></br>
+                            <strong>{this.props.pathwaysOngoing}</strong>{' '}
+                            pathways ongoing<br></br>
+                            <strong>{this.props.pathwaysCreated}</strong>{' '}
+                            pathways created
                         </div>
 
-                        <div className={classes.CreatePathwayBtn}>
+                        <div
+                            className={classes.CreatePathwayBtn}
+                            onClick={this.onCreatePathwayClick}
+                        >
                             Create Pathway
                         </div>
-
                     </div>
                     <div className={classes.DashboardContent}>
-                        DashboardContent
+                        <DashboardContent />
                     </div>
                 </div>
                 Dashboard
@@ -59,7 +65,7 @@ const mapStateToProps = (state) => {
         username: state.user.username,
         pathwaysCreated: state.user.pathwaysCreated,
         pathwaysCompleted: state.user.pathwaysCompleted,
-        pathwaysOngoing: state.user.pathwaysOngoing
+        pathwaysOngoing: state.user.pathwaysOngoing,
     }
 }
 

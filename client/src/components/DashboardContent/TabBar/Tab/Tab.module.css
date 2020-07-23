@@ -1,0 +1,21 @@
+.Tab {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    /* background-color: red; */
+    height: 100%;
+    font-size: 14px;
+    border-bottom: 3px solid transparent;
+    transition: border-bottom 0.3s
+}
+
+.Tab:hover {
+    border-bottom: 3px solid #ccc;
+    cursor: pointer
+}
+
+.Active {
+    border-bottom: 3px solid #9b5de5;
+    font-weight: 600;
+}

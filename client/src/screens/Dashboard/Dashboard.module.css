@@ -84,6 +84,6 @@
 }
 
 .DashboardContent {
-    background-color: red;
+    /* background-color: red; */
     flex: 1 1 auto;
 }

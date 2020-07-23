@@ -13,11 +13,13 @@ import thunk from 'redux-thunk'
 
 import createEditPathwayReducer from './store/reducers/createEditPathway'
 import userReducer from './store/reducers/user'
+import dashboardReducer from './store/reducers/dashboard'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
   createEditPathway: createEditPathwayReducer,
-  user: userReducer
+  user: userReducer,
+  dashboard: dashboardReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

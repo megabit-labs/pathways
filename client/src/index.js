@@ -12,10 +12,12 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 
 import createEditPathwayReducer from './store/reducers/createEditPathway'
+import userReducer from './store/reducers/user'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
-  createEditPathway: createEditPathwayReducer
+  createEditPathway: createEditPathwayReducer,
+  user: userReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

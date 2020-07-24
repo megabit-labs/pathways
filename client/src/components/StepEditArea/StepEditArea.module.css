@@ -1,0 +1,24 @@
+.StepEditArea {
+    background-color: #fafafa;
+    width: 1000px;
+    margin: auto;
+    height: 100%;
+}
+
+.ActionButton {
+    font-size: 15px;
+    font-weight: 800;
+    padding: 0 10px;
+    margin: auto 0 auto 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    transition: 0.2s ease;
+}
+
+.ActionButton:hover {
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+    border: 1px solid cornflowerblue;
+}

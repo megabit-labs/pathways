@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import classes from "./SearchField.module.css"
-import Logo from "../assets/logo.png"
-import Search from "../assets/search.png"
-import Mic from "../assets/mic.png"
+import Logo from "../../assets/logo.png"
+import Search from "../../assets/search.png"
 import data from "./data"
 
 class SearchField extends Component {

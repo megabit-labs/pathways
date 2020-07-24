@@ -16,5 +16,5 @@ RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
 
 # Build the public directory.
-RUN npm run build
+CMD npm run build
 

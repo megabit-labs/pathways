@@ -1,20 +1,22 @@
-const queries = require("../../db/queries/queries")
-const github = require("../../utils/github")
+const queries = require('../../db/queries/queries')
+const github = require('../../utils/github')
 
 const resolver = {
     Mutation: {
-        async createUpdatePathway(_, { id, name, steps }) {
+        async createUpdatePathway(_, { id, name, steps, tags }) {
+            console.log(tags)
             const query = queries.pathway.createUpdatePathway({
                 id,
                 name,
                 steps,
+                tags,
             })
 
             try {
                 await query.run()
-                return { status: "OK", message: null }
+                return { status: 'OK', message: null }
             } catch (e) {
-                return { status: "ERROR", message: e.toString() }
+                return { status: 'ERROR', message: e.toString() }
             }
         },
         async deletePathway(_, { id, steps, whole }) {
@@ -26,9 +28,9 @@ const resolver = {
 
             try {
                 await query.run()
-                return { status: "OK", message: null }
+                return { status: 'OK', message: null }
             } catch (e) {
-                return { status: "ERROR", message: e.toString() }
+                return { status: 'ERROR', message: e.toString() }
             }
         },
         async createUpdateContent(_, { id, title, content }, context) {
@@ -51,9 +53,9 @@ const resolver = {
                     author_email: context.user.email,
                 })
 
-                return { status: "OK", message: null }
+                return { status: 'OK', message: null }
             } catch (e) {
-                return { status: "ERROR", message: e.toString() }
+                return { status: 'ERROR', message: e.toString() }
             }
         },
         async forkContent(_, { id, title, content, stepId }, context) {
@@ -78,9 +80,9 @@ const resolver = {
                     author_email: context.user.email,
                 })
 
-                return { status: "OK", message: null }
+                return { status: 'OK', message: null }
             } catch (e) {
-                return { status: "ERROR", message: e.toString() }
+                return { status: 'ERROR', message: e.toString() }
             }
         },
     },

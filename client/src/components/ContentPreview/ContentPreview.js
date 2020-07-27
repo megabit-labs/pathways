@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import classes from './ContentPreview.modue.css'
+import classes from './ContentPreview.module.css'
 import StepPreview from './StepPreview'
 import PathwayPreview from './PathwayPreview'
 
@@ -33,9 +33,8 @@ function ContentPreview(props) {
                 >
                     Done
                 </div>
-
-                {displayComponent}
             </div>
+            {displayComponent}
         </div>
     )
 }

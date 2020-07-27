@@ -28,6 +28,7 @@ function StepDataEdit(props) {
         selectStepForPreview,
         onStepDataUpdate,
         onSaveStep,
+        stepType,
     } = props
     const [updateStep] = useMutation(UPDATE_STEP)
 

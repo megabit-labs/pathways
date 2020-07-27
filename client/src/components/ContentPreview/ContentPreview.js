@@ -17,7 +17,7 @@ function ContentPreview(props) {
     }
 
     return (
-        <div>
+        <div style={{ marginLeft: '18px' }}>
             <div style={{ display: 'flex' }}>
                 <input
                     className={classes.InputField}
@@ -36,7 +36,9 @@ function ContentPreview(props) {
                     Done
                 </div>
             </div>
-            {shouldDisplay ? displayComponent : null}
+            <div className={classes.PreviewContainer}>
+                {shouldDisplay ? displayComponent : null}
+            </div>
         </div>
     )
 }

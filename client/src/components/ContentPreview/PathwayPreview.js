@@ -25,11 +25,13 @@ export default function PathwayPreview(props) {
 
     return (
         <div>
-            <div>Pathway: {data.name}</div>
-            <div>Steps:</div>
-            {data.steps.map((step) => (
-                <div key={step.id}>{step.name}</div>
-            ))}
+            <h3>Pathway: {data.name}</h3>
+            <div style={{ marginTop: '10px' }}>Steps:</div>
+            <ul style={{ marginLeft: '30px' }}>
+                {data.steps.map((step) => (
+                    <li key={step.id}>{step.name}</li>
+                ))}
+            </ul>
         </div>
     )
 }

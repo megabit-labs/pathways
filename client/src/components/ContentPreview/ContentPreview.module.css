@@ -4,7 +4,6 @@
     font-size: 17px;
     border-radius: 3px;
     margin-top: 20px;
-    margin-left: 18px;
     width: 40%;
 }
 
@@ -24,4 +23,9 @@
     color: white;
     cursor: pointer;
     border: 1px solid cornflowerblue;
+}
+
+.PreviewContainer {
+    margin-top: 20px;
+    font-size: 17px;
 }

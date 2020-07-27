@@ -2,7 +2,7 @@ import React from 'react'
 
 import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
-import InputBox from '../../InputBox/input-box'
+import ContentPreview from '../../ContentPreview/ContentPreview'
 
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-markup'
@@ -16,7 +16,7 @@ const stepContentEdit = (props) => {
 
     let editor = null
     if (selectedStepType === 'Shared Step' || selectedStepType === 'Pathway') {
-        editor = <InputBox />
+        editor = <ContentPreview stepType={selectedStepType} />
     } else {
         editor = (
             <Editor

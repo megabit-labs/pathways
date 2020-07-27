@@ -8,6 +8,7 @@
         "prettier",
         "prettier/react"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -25,6 +26,8 @@
         "no-console": "off",                    // this shuts off any errors about using console logs in the app
         "react/prefer-stateless-function": "off",
         "react/jsx-filename-extension": "off",
-        "no-useless-escape": "off"
+        "no-useless-escape": "off",
+        "react/prop-types": "off",
+        "react/destructuring-assignment": "off"
     }
 }

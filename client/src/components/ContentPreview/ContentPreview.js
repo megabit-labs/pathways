@@ -6,9 +6,15 @@ import PathwayPreview from './PathwayPreview'
 
 function ContentPreview(props) {
     const [id, setId] = useState('')
+    const [shouldDisplay, setDisplay] = useState(false)
     const { stepType } = props
 
     let displayComponent = null
+    if (stepType === 'Shared Step') {
+        displayComponent = <StepPreview stepId={id} />
+    } else {
+        displayComponent = <PathwayPreview pathwayId={id} />
+    }
 
     return (
         <div>
@@ -23,18 +29,14 @@ function ContentPreview(props) {
                     className={classes.ActionButton}
                     onClick={(e) => {
                         e.preventDefault()
-                        if (stepType === 'Shared Step') {
-                            displayComponent = <StepPreview stepId={id} />
-                        } else {
-                            displayComponent = <PathwayPreview pathwayId={id} />
-                        }
+                        setDisplay(true)
                     }}
                     aria-hidden='true'
                 >
                     Done
                 </div>
             </div>
-            {displayComponent}
+            {shouldDisplay ? displayComponent : null}
         </div>
     )
 }

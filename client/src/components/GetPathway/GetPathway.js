@@ -9,6 +9,7 @@ import Pathway from '../../screens/Pathway/Pathway'
 import * as actions from '../../store/actions/index'
 
 const GetPathway = (props) => {
+    console.log(props)
     const value = queryString.parse(props.location.search).id
     const GET_PATHWAY = gql`
         query {

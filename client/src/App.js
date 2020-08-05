@@ -12,6 +12,7 @@ class App extends Component {
                 <Switch>
                     <Route path="/" exact component={SearchPage} />
                     <Route path="/create" exact component={CreateEditPathway} />
+                    <Route path="/results" exact component={Results}/>
                 </Switch>
             </Fragment>
         )

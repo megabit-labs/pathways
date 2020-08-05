@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from "react"
 import { Route, Switch } from "react-router-dom"
 
-import GithubAuth from './components/GithubAuth/GithubAuth'
 import CreateEditPathway from './screens/CreateEditPathway/CreateEditPathway'
 import SearchPage from "../src/screens/SearchPage/SearchPage"
-
+import SearchResultPage from "../src/screens/SearchResultPage/SearchResultPage"
 class App extends Component {
     render() {
         return (
@@ -12,7 +11,7 @@ class App extends Component {
                 <Switch>
                     <Route path="/" exact component={SearchPage} />
                     <Route path="/create" exact component={CreateEditPathway} />
-                    <Route path="/results" exact component={Results}/>
+                    <Route path="/results" exact component={SearchResultPage}/>
                 </Switch>
             </Fragment>
         )

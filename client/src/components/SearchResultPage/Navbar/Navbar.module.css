@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+.nav li {
+    position: absolute;
+}
+.navbar {
+    width: 100%;
+    float: left;
+    margin: 0 0 3em 0;
+    padding: 0;
+    list-style: none;
+    background-color: #000000;
+    border-bottom: 5px solid;
+    position: absolute;
+    height: 60px;
+    border-image: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff) 3;
+    text-align: center;
+}
+.navbar{
+    text-decoration: none;
+
+}
+.container{
+    text-align: center;
+}
+.pathways{
+    color:white;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+
+}

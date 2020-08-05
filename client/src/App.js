@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom"
 
 import GithubAuth from './components/GithubAuth/GithubAuth'
 import CreateEditPathway from './screens/CreateEditPathway/CreateEditPathway'
-import SearchPage from "./components/SearchPage/SearchPage"
+import SearchPage from "../src/screens/SearchPage/SearchPage"
 
 class App extends Component {
     render() {

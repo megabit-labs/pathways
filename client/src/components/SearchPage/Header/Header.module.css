@@ -31,7 +31,7 @@
     height: 32px;
     width: 32px;
 }
-.login{
+.login {
     background-color: black;
     height: 32px;
     display: flex;
@@ -46,6 +46,7 @@
     width: 30px;
     padding-right: 4px;
 }
-.text{
+.text {
     font-weight: bold;
+    margin-right: 3px;
 }

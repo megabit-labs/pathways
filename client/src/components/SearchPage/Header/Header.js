@@ -4,8 +4,8 @@ import gql from "graphql-tag"
 import { useMutation } from "@apollo/react-hooks"
 
 import classes from "./Header.module.css"
-import Menu from "../assets/menu.png"
-import GithubIcon from "../../assets/github.png"
+import Menu from "../../assets/menu.png"
+import GithubIcon from "../../../assets/github.png"
 
 const CLIENT_ID = "8b508ba452a263f604b4"
 

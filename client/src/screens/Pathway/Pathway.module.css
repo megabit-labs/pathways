@@ -18,17 +18,17 @@
 
 .smallHeading {
     font-family: Roboto;
-font-style: normal;
-font-weight: 300;
-color: #1A4058;
+    font-style: normal;
+    font-weight: 300;
+    color: #1a4058;
     cursor: pointer;
 }
 
 .largeHeading {
     font-family: Roboto;
-font-style: normal;
-font-weight: 300;
-color: #1A4058;
+    font-style: normal;
+    font-weight: 300;
+    color: #1a4058;
     font-size: 4vh;
 }
 

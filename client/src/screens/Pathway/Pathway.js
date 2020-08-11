@@ -70,7 +70,7 @@ class Pathway extends Component {
         }
         let top = this.pathwayRef.current.getBoundingClientRect().top
         this.setState({ pos: pos, top: top })
-        this.setState({url: window.location.href});
+        this.setState({ url: window.location.href })
     }
 
     showStep = (step, event) => {
@@ -94,7 +94,6 @@ class Pathway extends Component {
     }
 
     render() {
-
         let pathwayTrail = this.props.pathwayTrail
         let mainHeading
         let secondaryHeading
@@ -309,7 +308,12 @@ class Pathway extends Component {
                     <div className={classes.rightContainer}>
                         {this.state.activeStep === null ? null : (
                             <div className={classes.buttonsContainer}>
-                                <div className={classes.nextButton} onClick={() => this.goRight()}>Next Step</div>
+                                <div
+                                    className={classes.nextButton}
+                                    onClick={() => this.goRight()}
+                                >
+                                    Next Step
+                                </div>
                             </div>
                         )}
                         {rightDisplay}

@@ -13,10 +13,10 @@ import classes from './StepEditArea.module.css'
 
 /**
  * I'm scared.
- * This component gets the step being edited from redux. Once 
+ * This component gets the step being edited from redux. Once
  * it has the state, it will communicate no more with redux and
  * all state will be managed locally from here on.
- * 
+ *
  * Then whenever any new props as passed to this component,
  * it will push all the state it has to redux again. This ensures
  * that if someone changes the step they are editing without
@@ -26,26 +26,30 @@ class StepEditArea extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            heading: "This the heading",
-            stepType: "Content",
-            content: "This is the content",
+            heading: 'This the heading',
+            stepType: 'Content',
+            content: 'This is the content',
             timeLimit: 30,
-            stepId: ""
+            stepId: '',
         }
     }
 
+    // eslint-disable-next-line
     componentWillReceiveProps(next) {
         let newState = {}
 
-        // The second conditional is to make sure that 
+        // The second conditional is to make sure that
         // we don't get stuck into an infinite loop, (since
         // saveStepDataToStore is going to trigger this
         // function again)
-        if (next.selectedStep === "" || next.selectedStep === this.state.stepId) {
+        if (
+            next.selectedStep === '' ||
+            next.selectedStep === this.state.stepId
+        ) {
             return
         }
 
-        if (this.state.stepId != "") {
+        if (this.state.stepId !== '') {
             this.saveStepDataToStore()
         }
 
@@ -54,7 +58,7 @@ class StepEditArea extends Component {
 
         newState = {
             ...newState,
-            ...step
+            ...step,
         }
 
         delete newState.selected
@@ -63,42 +67,45 @@ class StepEditArea extends Component {
     }
 
     saveStepDataToStore = () => {
-        const stepData = {...this.state}
+        const stepData = { ...this.state }
         delete stepData.stepId
 
         this.props.onSaveToStore(this.state.stepId, stepData)
     }
 
     stepUpdateHandler = (key, value) => {
-        let newStateObj = {}
+        const newStateObj = {}
         newStateObj[key] = value
         this.setState(newStateObj)
     }
 
     render() {
-        const {steps, selectedStep} = this.props
+        const { steps, selectedStep } = this.props
 
         let displayComponent = null
-        if (selectedStep && steps[selectedStep]["isPreview"]) {
+        if (selectedStep && steps[selectedStep].isPreview) {
             const markdown = this.state.content
             displayComponent = (
-                <ReactMarkdown 
-                    source={markdown} 
+                <ReactMarkdown
+                    source={markdown}
                     escapeHtml={false}
-                    renderers={{code: CodeBlock}}
+                    renderers={{ code: CodeBlock }}
                 />
             )
         } else {
             displayComponent = (
-                <StepContentEdit 
-                    onContentChange={(content) => this.stepUpdateHandler('content', content)}
-                    content={this.state.content} 
+                <StepContentEdit
+                    onContentChange={(content) =>
+                        this.stepUpdateHandler('content', content)
+                    }
+                    content={this.state.content}
+                    selectedStepType={this.state.stepType}
                 />
             )
         }
-        
-        let editAreaComponent = (<div></div>)
-        if (this.state.stepId != "") {
+
+        let editAreaComponent = <div />
+        if (this.state.stepId !== '') {
             editAreaComponent = (
                 <Aux>
                     <StepDataEdit
@@ -113,24 +120,21 @@ class StepEditArea extends Component {
                 </Aux>
             )
         }
-        return (
-            <div className={classes.StepEditArea}>
-                {editAreaComponent}
-            </div>
-        )
+        return <div className={classes.StepEditArea}>{editAreaComponent}</div>
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         selectedStep: state.createEditPathway.selectedStep,
-        steps: state.createEditPathway.steps
+        steps: state.createEditPathway.steps,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSaveToStore: (stepId, stepData) =>  dispatch(actions.updateStep(stepId, stepData))
+        onSaveToStore: (stepId, stepData) =>
+            dispatch(actions.updateStep(stepId, stepData)),
     }
 }
 

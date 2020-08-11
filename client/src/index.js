@@ -6,16 +6,17 @@ import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from '@apollo/react-hooks'
 import ApolloClient from 'apollo-boost'
 import { BrowserRouter } from 'react-router-dom';
-
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 
-import createEditPathwayReducer from './store/reducers/createEditPathway'
+import createEditPathwayReducer from './store/reducers/createEditPathway';
+import DisplayPathwayReducer from './store/reducers/displayPathway';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
-  createEditPathway: createEditPathwayReducer
+  createEditPathway: createEditPathwayReducer,
+  displayPathway: DisplayPathwayReducer,
 })
 
 const store = createStore(rootReducer, composeEnhancers(

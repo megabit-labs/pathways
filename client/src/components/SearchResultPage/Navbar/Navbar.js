@@ -1,22 +1,18 @@
-import React from 'react';
-import {Component} from 'react';
-import classes from "./Navbar.module.css"
+import React from 'react'
+import { Component } from 'react'
+import classes from './Navbar.module.css'
 
-class Navbar extends Component{
-    render(){
-        return(
-
+class Navbar extends React.Component {
+    render() {
+        return (
             <div>
-
-                <div className={classes.navbar}>
-                    <ul className={classes.navs}>
-                        <div className={classes.conatiner}>
-                            <p className={classes.pathways}>Pathways</p>
-                        </div>
-                    </ul>
-                </div>
+                <ul className={classes.navbar}>
+                    <li>
+                        <a href='#'>Pathways</a>
+                    </li>
+                </ul>
             </div>
         )
     }
 }
-export default Navbar;
+export default Navbar

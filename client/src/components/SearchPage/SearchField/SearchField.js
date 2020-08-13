@@ -3,8 +3,7 @@ import classes from './SearchField.module.css'
 import Logo from '../../assets/logo.png'
 import Search from '../../assets/search.png'
 import data from './data'
-import axios from 'axios'
-import {withRouter} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class SearchField extends Component {
     constructor(props) {
@@ -14,23 +13,15 @@ class SearchField extends Component {
             userInput: '',
             matches: [],
             rowHighlighted: -1,
-            results: [],
+            query: '',
+            redirect: false,
         }
-        this.submit = this.submit.bind(this)
-        this.handleUserInput = this.handleUserInput.bind(this)
     }
 
     componentDidMount() {
         this.setState({
             words: data.words,
         })
-    }
-
-    componentDidUpdate = (prevProps, prevState) => {
-        const { history } = this.props
-        if (prevState.results !== this.state.results) {
-            history.push('/results')
-        }
     }
 
     handleUserInput = (e) => {
@@ -49,7 +40,6 @@ class SearchField extends Component {
         this.setState({
             userInput: input,
             matches: matches,
-            [e.target.name]: e.target.value,
         })
     }
 
@@ -84,22 +74,6 @@ class SearchField extends Component {
         })
     }
 
-    submit = (e) => {
-        e.preventDefault();
-        const userInput = e.target.elements.userInput.value;
-        let url = `https://api.themoviedb.org/3/search/tv?api_key=6d9a91a4158b0a021d546ccd83d3f52e&language=en-US&query=${userInput}&page=1`;
-        axios
-          .get(url)
-          .then(({ data }) => {
-            // const info = response.data.results;
-            console.log(data);
-            this.setState({
-              results: data,
-            });
-          })
-          .catch((error) => console.log(error));
-      };
-
     render() {
         return (
             <div>
@@ -108,14 +82,25 @@ class SearchField extends Component {
                 </div>
                 <div className={classes.search}>
                     <div>
-                        <img src={Search} onClick={this.submit} className={classes.srch} />
+                        <img
+                            src={Search}
+                            className={classes.srch}
+                            onClick={() => this.setState({ redirect: true })}
+                        />
                         <input
                             type='text'
-                            name='term'
                             value={this.state.userInput}
-                            onChange={(e) => this.handleUserInput(e)}
+                            onInput={(e) => this.handleUserInput(e)}
                             onKeyDown={(e) => this.handleKeyPress(e)}
+                            onChange={(e) =>
+                                this.setState({ query: e.target.value })
+                            }
                         />
+                        {this.state.redirect ? (
+                            <Redirect
+                                to={`/results/search=${this.state.query}`}
+                            />
+                        ) : null}
                     </div>
                     <div className={classes.newclass}>
                         <div className={classes.autocomplete_suggestions}>

@@ -1,24 +1,61 @@
 import React, { Component } from 'react'
-import SubNavbar from '../../components/SearchResultPage/SubNavbar/SubNavbar'
 import Navbar from '../../components/SearchResultPage/Navbar/Navbar'
+import classes from './SearchResultPage.module.css'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
-class SearchResultPage extends Component {
-    render() {
-        return (
-            <div>
-                <Navbar />
-                <SubNavbar />
-                {/* <div className='search-poster-container'>
-                    {this.props.results &&
-                        this.props.results.length > 0 &&
-                        this.props.results.map((result) => {
-                            ;<p>{result.name}</p>
-                        })}
-                    <h1>Hello Result will fetch here</h1>
-                </div> */}
-            </div>
-        )
+export default function SearchResultPage({ match, props }) {
+    const SearchPathway = gql`
+    query{
+    SearchPathways(searchQuery: "${match.params.query}"){
+    name
+    tags{
+        name
     }
-}
+    }
+}`
 
-export default SearchResultPage;
+    return (
+        <div className={classes.searchResults}>
+            <Navbar />
+            <h3 className={classes.heading}>
+                Displaying search results for "{match.params.query}"
+            </h3>
+
+            <Query query={SearchPathway}>
+                {({ loading, error, data }) => {
+                    if (loading)
+                        return <h3 className={classes.heading}>Loading</h3>
+                    if (error)
+                        return (
+                            <h3 className={classes.heading}>
+                                Error! {error.message}
+                            </h3>
+                        )
+
+                    return data.SearchPathways.map((item) => (
+                        <div className={classes.resultCard}>
+                            <div className={classes.resultCardHeading}>
+                                <a className={classes.link}>{item.name}</a>
+
+                                {item.tags.map((tag) => {
+                                    return (<div className={classes.badge}>
+                                        {tag.name}
+                                    </div>)
+                                })}
+                            </div>
+                            <div className={classes.text}>
+                                <p className={classes.description}>
+                                    A standard dummy text ever since the 1500s
+                                    when an unknown printer took a galley of
+                                    type and scrambled it to make a type
+                                    specimen book it has?
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }}
+            </Query>
+        </div>
+    )
+}

@@ -1,31 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 
-.nav li {
-    position: absolute;
-}
 .navbar {
     width: 100%;
     float: left;
     margin: 0 0 3em 0;
     padding: 0;
     list-style: none;
-    background-color: #000000;
-    border-bottom: 5px solid;
-    position: absolute;
-    height: 60px;
-    border-image: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff) 3;
-    text-align: center;
+    background-color: #fafafa;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
-.navbar{
+
+.navbar li a {
+    display: block;
+    padding: 8px 15px;
     text-decoration: none;
-
-}
-.container{
-    text-align: center;
-}
-.pathways{
-    color:white;
-    font-size: 24px;
-    font-family: 'Poppins', sans-serif;
-
+    font-weight: bold;
+    color: #1a4058;
+    border-right: 1px solid #ccc;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    margin-left: 30px;
+    margin-top: 10px;
 }

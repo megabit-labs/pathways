@@ -1,7 +1,7 @@
 const Query = require('../../core/Query')
 const Model = require('../../core/Model')
 
-const createUpdatePathway = ({id, name, steps}) => {
+const createUpdatePathway = ({ id, name, steps, tags }) => {
     return new Query({
         statement: `
         MERGE (p:Pathway {id: $id})
@@ -42,6 +42,9 @@ const createUpdatePathway = ({id, name, steps}) => {
             }
         )
         YIELD value
+        UNWIND $tags as tag
+        MERGE (t:Tag {name: tag})
+        MERGE (p)-[r:HAS_TAG]->(t)
         WITH DISTINCT p
         RETURN p.id
         `,
@@ -49,7 +52,8 @@ const createUpdatePathway = ({id, name, steps}) => {
             id,
             name,
             steps,
-        }
+            tags,
+        },
     })
 }
 

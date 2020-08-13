@@ -1,6 +1,7 @@
 type Pathway {
     id: String
     name: String
+    tags: [Tag] @relation(name: "HAS_TAG", direction: "OUT")
     steps: [Step] @relation(name: "HAS_PARENT_PATHWAY", direction: "IN")
 }
 
@@ -8,6 +9,11 @@ type Content {
     id: String
     title: String
     content: String
+}
+
+type Tag {
+  name: String
+  pathways: [Pathway] @relation(name: "HAS_TAG", direction: "IN")
 }
 
 
@@ -45,6 +51,7 @@ type Mutation {
         id: String!
         name: String!
         steps: [StepPayload]!
+        tags: [String]
     ): StatusMessage
     deletePathway(
         id: String!

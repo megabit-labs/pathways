@@ -3,20 +3,24 @@ import Navbar from '../../components/SearchResultPage/Navbar/Navbar'
 import classes from './SearchResultPage.module.css'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import { Link } from 'react-router-dom'
 
 export default function SearchResultPage({ match, props }) {
     const SearchPathway = gql`
     query{
     SearchPathways(searchQuery: "${match.params.query}"){
+    id
     name
     tags{
         name
     }
     }
+   
 }`
 
     return (
-        <div className={classes.searchResults}>
+
+       <div className={classes.searchResults}>
             <Navbar />
             <h3 className={classes.heading}>
                 Displaying search results for "{match.params.query}"
@@ -36,12 +40,18 @@ export default function SearchResultPage({ match, props }) {
                     return data.SearchPathways.map((item) => (
                         <div className={classes.resultCard}>
                             <div className={classes.resultCardHeading}>
-                                <a className={classes.link}>{item.name}</a>
-
+                                <Link
+                                    to={"/pathway?id=" + item.id}
+                                    className={classes.link}
+                                >
+                                    {item.name}
+                                </Link>
                                 {item.tags.map((tag) => {
-                                    return (<div className={classes.badge}>
-                                        {tag.name}
-                                    </div>)
+                                    return (
+                                        <div className={classes.badge}>
+                                            {tag.name}
+                                        </div>
+                                    )
                                 })}
                             </div>
                             <div className={classes.text}>

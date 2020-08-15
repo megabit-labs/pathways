@@ -41,6 +41,8 @@ body {
 
 .link {
     cursor: pointer;
+    text-decoration:none;
+    color: #1a4058;
 }
 .description {
     font-size: 15px;

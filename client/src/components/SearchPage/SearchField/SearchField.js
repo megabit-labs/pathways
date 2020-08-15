@@ -91,7 +91,12 @@ class SearchField extends Component {
                             type='text'
                             value={this.state.userInput}
                             onInput={(e) => this.handleUserInput(e)}
-                            onKeyDown={(e) => this.handleKeyPress(e)}
+                            onKeyDownCapture={(e) => this.handleKeyPress(e)}
+                            onKeyDown={(event) =>
+                                event.keyCode == 13
+                                    ? this.setState({ redirect: true })
+                                    : null
+                            }
                             onChange={(e) =>
                                 this.setState({ query: e.target.value })
                             }

@@ -8,7 +8,6 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "apollo-boost": "^0.4.9",
-    "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "gitstar-components": "^1.0.5",
     "graphql": "^15.1.0",

@@ -6,3 +6,8 @@ export {
     selectForPreview,
     updateStep
 } from './createEditPathway'
+
+export {
+    addNewPathway,
+    popLastPathway,
+} from './displayPathway';

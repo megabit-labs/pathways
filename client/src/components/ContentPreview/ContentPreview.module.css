@@ -1,0 +1,31 @@
+.InputField {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: 17px;
+    border-radius: 3px;
+    margin-top: 20px;
+    width: 40%;
+}
+
+.ActionButton {
+    font-size: 17px;
+    font-weight: 800;
+    padding: 5px 10px;
+    margin: 20px 0 auto 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    transition: 0.2s ease;
+}
+
+.ActionButton:hover {
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+    border: 1px solid cornflowerblue;
+}
+
+.PreviewContainer {
+    margin-top: 20px;
+    font-size: 17px;
+}

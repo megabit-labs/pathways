@@ -1,11 +1,12 @@
 const Query = require('../../core/Query')
 const Model = require('../../core/Model')
 
-const createUpdatePathway = ({ id, name, steps, tags }) => {
+const createUpdatePathway = ({ id, name, steps, tags, description }) => {
     return new Query({
         statement: `
         MERGE (p:Pathway {id: $id})
         SET p.name = $name
+        SET p.description = $description
         WITH p
         UNWIND $steps as step
         CALL apoc.do.when(
@@ -53,6 +54,7 @@ const createUpdatePathway = ({ id, name, steps, tags }) => {
             name,
             steps,
             tags,
+            description,
         },
     })
 }

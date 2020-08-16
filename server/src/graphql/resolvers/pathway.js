@@ -3,13 +3,14 @@ const github = require('../../utils/github')
 
 const resolver = {
     Mutation: {
-        async createUpdatePathway(_, { id, name, steps, tags }) {
+        async createUpdatePathway(_, { id, name, steps, tags, description }) {
             console.log(tags)
             const query = queries.pathway.createUpdatePathway({
                 id,
                 name,
                 steps,
                 tags,
+                description,
             })
 
             try {

@@ -3,7 +3,7 @@ import classes from './SearchField.module.css'
 import Logo from '../../assets/logo.png'
 import Search from '../../assets/search.png'
 import data from './data'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class SearchField extends Component {
     constructor(props) {
@@ -74,6 +74,10 @@ class SearchField extends Component {
         })
     }
 
+    searchResultRenderHandler = () => {
+        this.props.history.push(`/results/search=${this.state.query}`)
+    }
+
     render() {
         return (
             <div>
@@ -85,7 +89,10 @@ class SearchField extends Component {
                         <img
                             src={Search}
                             className={classes.srch}
-                            onClick={() => this.setState({ redirect: true })}
+                            onClick={() => {
+                                // this.setState({ redirect: true })
+                                this.searchResultRenderHandler()
+                            }}
                         />
                         <input
                             type='text'
@@ -94,18 +101,13 @@ class SearchField extends Component {
                             onKeyDownCapture={(e) => this.handleKeyPress(e)}
                             onKeyDown={(event) =>
                                 event.keyCode == 13
-                                    ? this.setState({ redirect: true })
+                                    ? this.searchResultRenderHandler()
                                     : null
                             }
                             onChange={(e) =>
                                 this.setState({ query: e.target.value })
                             }
                         />
-                        {this.state.redirect ? (
-                            <Redirect
-                                to={`/results/search=${this.state.query}`}
-                            />
-                        ) : null}
                     </div>
                     <div className={classes.newclass}>
                         <div className={classes.autocomplete_suggestions}>
@@ -139,4 +141,4 @@ class SearchField extends Component {
         )
     }
 }
-export default SearchField
+export default withRouter(SearchField)

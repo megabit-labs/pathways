@@ -14,7 +14,6 @@ class SearchField extends Component {
             matches: [],
             rowHighlighted: -1,
             query: '',
-            redirect: false,
         }
     }
 
@@ -90,7 +89,6 @@ class SearchField extends Component {
                             src={Search}
                             className={classes.srch}
                             onClick={() => {
-                                // this.setState({ redirect: true })
                                 this.searchResultRenderHandler()
                             }}
                         />

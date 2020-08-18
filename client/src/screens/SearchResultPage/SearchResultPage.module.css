@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+.heading {
+    font-family: 'Roboto', sans-serif;
+    color: gray;
+    font-weight: 400;
+    margin-top: 100px;
+    margin-left: 20vw;
+}
+body {
+    background-color: #fafafa;
+}
+
+.firstHeading {
+    font-family: 'Roboto', sans-serif;
+    margin-left: 20vw;
+    margin-bottom: 30px;
+    color: #1a4058;
+}
+.resultHeading {
+    background-color: #ffffff;
+    color: #1a4058;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+.resultCard {
+    margin-left: 20vw;
+    margin-bottom: 30px;
+    width: 60%;
+    display: flex;
+    align-items: baseline;
+    margin-top: 40px;
+    border-radius: 4px;
+    height: 70px;
+    white-space: pre-line;
+    flex-direction: column;
+    background-color: #fafafa;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 20px;
+}
+
+.link {
+    cursor: pointer;
+    text-decoration:none;
+    color: #1a4058;
+}
+.description {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 210px0px;
+    color: #333131;
+    white-space: pre-line;
+}
+.resultCardHeading {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #1a4058;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+}
+.badge {
+    border: 1px solid #b581f8;
+    padding: 2px;
+    border-radius: 10px;
+    font-size: 10px;
+    width: 50px;
+    height: 10px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

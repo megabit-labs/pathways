@@ -1,17 +1,19 @@
-import React, { Component } from "react"
-import classes from "./SearchField.module.css"
-import Logo from "../../assets/logo.png"
-import Search from "../../assets/search.png"
-import data from "./data"
+import React, { Component } from 'react'
+import classes from './SearchField.module.css'
+import Logo from '../../assets/logo.png'
+import Search from '../../assets/search.png'
+import data from './data'
+import { withRouter } from 'react-router-dom'
 
 class SearchField extends Component {
     constructor(props) {
         super(props)
         this.state = {
             words: [],
-            userInput: "",
+            userInput: '',
             matches: [],
             rowHighlighted: -1,
+            query: '',
         }
     }
 
@@ -49,16 +51,16 @@ class SearchField extends Component {
 
     handleKeyPress = (e) => {
         let { rowHighlighted } = this.state
-        if (e.key === "ArrowUp" && rowHighlighted > -1) {
+        if (e.key === 'ArrowUp' && rowHighlighted > -1) {
             rowHighlighted--
         }
         if (
-            e.key === "ArrowDown" &&
+            e.key === 'ArrowDown' &&
             rowHighlighted < this.state.matches.length - 1
         ) {
             rowHighlighted++
         }
-        if (e.key === "Enter") {
+        if (e.key === 'Enter') {
             return this.selectAutocomplete(rowHighlighted)
         }
 
@@ -71,6 +73,10 @@ class SearchField extends Component {
         })
     }
 
+    searchResultRenderHandler = () => {
+        this.props.history.push(`/results/search=${this.state.query}`)
+    }
+
     render() {
         return (
             <div>
@@ -79,12 +85,26 @@ class SearchField extends Component {
                 </div>
                 <div className={classes.search}>
                     <div>
-                        <img src={Search} className={classes.srch} />
+                        <img
+                            src={Search}
+                            className={classes.srch}
+                            onClick={() => {
+                                this.searchResultRenderHandler()
+                            }}
+                        />
                         <input
-                            type="text"
+                            type='text'
                             value={this.state.userInput}
-                            onChange={(e) => this.handleUserInput(e)}
-                            onKeyDown={(e) => this.handleKeyPress(e)}
+                            onInput={(e) => this.handleUserInput(e)}
+                            onKeyDownCapture={(e) => this.handleKeyPress(e)}
+                            onKeyDown={(event) =>
+                                event.keyCode == 13
+                                    ? this.searchResultRenderHandler()
+                                    : null
+                            }
+                            onChange={(e) =>
+                                this.setState({ query: e.target.value })
+                            }
                         />
                     </div>
                     <div className={classes.newclass}>
@@ -92,8 +112,8 @@ class SearchField extends Component {
                             {this.state.matches.map((item, i) => {
                                 let background =
                                     this.state.rowHighlighted === i
-                                        ? "#ccc"
-                                        : "#fff"
+                                        ? '#ccc'
+                                        : '#fff'
                                 return (
                                     <p
                                         key={i}
@@ -119,4 +139,4 @@ class SearchField extends Component {
         )
     }
 }
-export default SearchField
+export default withRouter(SearchField)

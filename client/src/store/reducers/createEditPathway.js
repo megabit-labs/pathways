@@ -10,7 +10,7 @@ import generateId from '../../utils/generateId'
 const initialState = {
     pathwayName: '',
     pathwayDescription: '',
-    pathwayTags: ['Reactt', 'Javascript'],
+    pathwayTags: [],
     stepOrder: ['step1', 'step2', 'step3'],
     steps: {
         step1: {

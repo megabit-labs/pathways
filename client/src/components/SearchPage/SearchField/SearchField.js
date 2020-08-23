@@ -93,6 +93,7 @@ class SearchField extends Component {
                             }}
                         />
                         <input
+                            className={classes.inputField}
                             type='text'
                             value={this.state.userInput}
                             onInput={(e) => this.handleUserInput(e)}

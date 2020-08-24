@@ -2,20 +2,31 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 
-const FETCH_CONTENT_PATHWAY = gql`
-    query FetchPathway($id: String) {
-        Step(id: $id) {
-            name
-            steps {
-                id
-                name
-            }
-        }
-    }
-`
-
 export default function PathwayPreview(props) {
     const { pathwayId } = props
+    const FETCH_CONTENT_PATHWAY = gql`
+        query {
+            Pathway(id: "${pathwayId}") {
+                id
+                name
+                steps {
+                    id
+                    name
+                    time
+                    index
+                    isPathway
+                    content {
+                        id
+                        title
+                        content
+                    }
+                    pathway {
+                        id
+                    }
+                }
+            }
+        }
+    `
     const { data, loading, error } = useQuery(FETCH_CONTENT_PATHWAY, {
         variables: { pathwayId },
     })

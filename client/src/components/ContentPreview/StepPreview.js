@@ -30,13 +30,22 @@ const StepPreview = (props) => {
 
     console.log(data)
 
+    const content =
+        '# ' +
+        data.Step[0].content.title +
+        '\n ** ' +
+        data.Step[0].content.content +
+        '**'
+
     return (
         <div>
-            <ReactMarkdown
-                source={data.Step[0].content.content}
-                escapeHtml={false}
-                renderers={{ code: CodeBlock }}
-            />
+            {data.Step.length > 0 ? (
+                <ReactMarkdown
+                    source={content}
+                    escapeHtml={false}
+                    renderers={{ code: CodeBlock }}
+                />
+            ) : null}
         </div>
     )
 }

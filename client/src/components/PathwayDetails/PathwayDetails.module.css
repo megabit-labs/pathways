@@ -1,8 +1,8 @@
 .outerContainer {
     position: absolute;
-    height: 100vh;
-    width: 100vw;
-    background-color: #e4f2e8;
+    height: 50vh;
+    width: 50vw;
+    background-color: white;
     transition: transform 0.5s ease-out;
     display: flex;
     justify-content: center;
@@ -11,24 +11,17 @@
     z-index: 100;
 }
 
-.hide {
-    transform: translateY(-100vh);
-}
-
-.show {
-    transform: translateY(0);
-}
-
 .InputField {
     border: 1px solid black;
     padding: 5px 10px;
     font-size: 17px;
     border-radius: 3px;
     margin-top: 20px;
-    width: 30%;
+    width: 70%;
 }
 
-.InputField:focus, .InputFieldSmall:focus {
+.InputField:focus,
+.InputFieldSmall:focus {
     text-decoration: none;
     outline: none;
 }
@@ -53,7 +46,7 @@
 }
 
 .tagsContainer {
-    width: 30%;
+    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +84,7 @@
     background-color: white;
     cursor: pointer;
     border-radius: 10px;
-    margin-right: 5px
+    margin-right: 5px;
 }
 
 .tag:hover {

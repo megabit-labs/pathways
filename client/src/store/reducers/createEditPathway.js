@@ -142,7 +142,6 @@ const updatePathwayDetails = (state, action) => {
 const addTag = (state, action) => {
     let tags = [...state.pathwayTags]
     tags.push(action.tag)
-    console.log(tags)
     return {
         ...state,
         pathwayTags: tags,

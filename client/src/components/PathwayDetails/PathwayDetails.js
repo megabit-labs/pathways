@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import classes from './PathwayDetails.module.css'
 import * as actions from '../../store/actions/index'
 
+import Modal from '../Modal/Modal'
+
 class PathwayDetails extends Component {
     constructor(props) {
         super(props)
@@ -33,22 +35,17 @@ class PathwayDetails extends Component {
     }
 
     removeTag = (tag) => {
-        this.props.removeTag(tag);
+        this.props.removeTag(tag)
     }
 
     render() {
         let { showPathwayDetailsScreen } = this.props
 
-        let classesList = [classes.outerContainer, classes.hide]
-
-        if (showPathwayDetailsScreen) {
-            classesList = [classes.outerContainer, classes.show]
-        } else {
-            classesList = [classes.outerContainer, classes.hide]
-        }
-
         return (
-            <div className={classesList.join(' ')}>
+            <Modal
+                show={showPathwayDetailsScreen}
+                modalClosed={this.props.hidePathwayDetailsScreen}
+            >
                 <input
                     className={classes.InputField}
                     placeholder='Enter Name of Pathway'
@@ -79,12 +76,17 @@ class PathwayDetails extends Component {
                         </div>
                     </div>
                     <div className={classes.displayTagsArea}>
-                        { this.props.tags.map((tag) => {
-                                  return (
-                                      <div className={classes.tag} onClick={() => this.removeTag(tag)}>{tag}</div>
-                                  )
-                              })
-                            }
+                        {this.props.tags.map((tag) => {
+                            return (
+                                <div
+                                    key={tag}
+                                    className={classes.tag}
+                                    onClick={() => this.removeTag(tag)}
+                                >
+                                    {tag}
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
                 <div
@@ -96,7 +98,7 @@ class PathwayDetails extends Component {
                 >
                     Done
                 </div>
-            </div>
+            </Modal>
         )
     }
 }

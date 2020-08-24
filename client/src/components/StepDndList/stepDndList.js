@@ -5,12 +5,15 @@ import { connect } from 'react-redux'
 import Step from './Step/step'
 import NumberStat from '../NumberStat/NumberStat'
 
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+
 import PlusIcon from 'react-ionicons/lib/MdAdd'
 import SaveIcon from 'react-ionicons/lib/IosCheckmarkCircleOutline'
 import PreviewIcon from 'react-ionicons/lib/IosPlay'
 import DownloadIcon from 'react-ionicons/lib/IosDownloadOutline'
 import SettingsIcon from 'react-ionicons/lib/IosSettings'
-import StepsDropDown from '../StepsDropDown/StepsDropDown'
 
 import * as actions from '../../store/actions/index'
 
@@ -35,7 +38,22 @@ class StepDndList extends Component {
     constructor(props) {
         super(props)
         this.onDragEnd = this.onDragEnd.bind(this)
-        this.plusIconRef = React.createRef()
+        this.state = {
+            anchorEl: null,
+        }
+    }
+
+    handleClick = (event) => {
+        this.setState({
+            anchorEl: event.currentTarget,
+        })
+    }
+
+    handleClose = (type) => {
+        this.setState({
+            anchorEl: null,
+        })
+        this.onAddBtnClick(type)
     }
 
     onDragEnd(result) {
@@ -47,12 +65,26 @@ class StepDndList extends Component {
         this.props.onReorderSteps(result)
     }
 
-    onAddBtnClick = () => {
-        this.props.onAddStep({
-            heading: 'This is a step',
-            stepType: 'Content',
-            id: `${Math.random()}`,
-        })
+    onAddBtnClick = (type) => {
+        if (type === 'pathway') {
+            this.props.onAddStep({
+                heading: 'This is a step',
+                stepType: 'Pathway',
+                id: `${Math.random()}`,
+            })
+        } else if (type === 'content') {
+            this.props.onAddStep({
+                heading: 'This is a step',
+                stepType: 'Content',
+                id: `${Math.random()}`,
+            })
+        } else if (type === 'shared') {
+            this.props.onAddStep({
+                heading: 'This is a step',
+                stepType: 'Shared Step',
+                id: `${Math.random()}`,
+            })
+        }
     }
 
     setPathwayDetails = () => {
@@ -88,17 +120,45 @@ class StepDndList extends Component {
 
         return (
             <div className={classes.ControlsArea}>
-                <StepsDropDown myref={this.plusIconRef} />
                 <div className={classes.StepListArea}>
                     <div className={classes.StepListTitle}>
                         <p style={{ fontSize: '40px' }}>Steps</p>
-                        <div
-                            ref={this.plusIconRef}
-                            className={classes.AddBtn}
-                            onClick={this.onAddBtnClick}
+                        <Button
+                            aria-controls='simple-menu'
+                            aria-haspopup='true'
+                            onClick={this.handleClick}
                         >
                             <PlusIcon fontSize='30px' color='#555' />
-                        </div>
+                        </Button>
+                        <Menu
+                            id='simple-menu'
+                            anchorEl={this.state.anchorEl}
+                            keepMounted
+                            open={Boolean(this.state.anchorEl)}
+                            onClose={this.handleClose}
+                        >
+                            <MenuItem
+                                onClick={() => this.handleClose('pathway')}
+                            >
+                                <div className={classes.pathwayStep}>
+                                    Pathway
+                                </div>
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => this.handleClose('content')}
+                            >
+                                <div className={classes.contentStep}>
+                                    Content
+                                </div>
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => this.handleClose('shared')}
+                            >
+                                <div className={classes.sharedStep}>
+                                    Shared Step
+                                </div>
+                            </MenuItem>
+                        </Menu>
                     </div>
 
                     <DragDropContext onDragEnd={this.onDragEnd}>

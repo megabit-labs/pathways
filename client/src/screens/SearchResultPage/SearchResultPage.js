@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../components/SearchResultPage/Navbar/Navbar'
 import classes from './SearchResultPage.module.css'
 import gql from 'graphql-tag'
@@ -19,8 +19,7 @@ export default function SearchResultPage({ match, props }) {
 }`
 
     return (
-
-       <div className={classes.searchResults}>
+        <div className={classes.searchResults}>
             <Navbar />
             <h3 className={classes.heading}>
                 Displaying search results for "{match.params.query}"
@@ -41,16 +40,19 @@ export default function SearchResultPage({ match, props }) {
                         <div className={classes.resultCard}>
                             <div className={classes.resultCardHeading}>
                                 <Link
-                                    to={"/pathway?id=" + item.id}
+                                    to={'/pathway?id=' + item.id}
                                     className={classes.link}
                                 >
                                     {item.name}
                                 </Link>
                                 {item.tags.map((tag) => {
                                     return (
-                                        <div className={classes.badge}>
+                                        <Link
+                                            to={`/results/tags/name=${tag.name}`}
+                                            className={classes.badge}
+                                        >
                                             {tag.name}
-                                        </div>
+                                        </Link>
                                     )
                                 })}
                             </div>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+
 import classes from './SearchField.module.css'
 import Logo from '../../assets/logo.png'
-import Search from '../../assets/search.png'
 import data from './data'
 import { withRouter } from 'react-router-dom'
+import IosSearch from 'react-ionicons/lib/IosSearch'
 
 class SearchField extends Component {
     constructor(props) {
@@ -84,14 +85,8 @@ class SearchField extends Component {
                     <img src={Logo} className={classes.logoimage} />
                 </div>
                 <div className={classes.search}>
-                    <div>
-                        <img
-                            src={Search}
-                            className={classes.srch}
-                            onClick={() => {
-                                this.searchResultRenderHandler()
-                            }}
-                        />
+                    <div className={classes.searchBar}>
+                        <IosSearch fontSize='25px' color='#969696' />
                         <input
                             className={classes.inputField}
                             type='text'

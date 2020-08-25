@@ -28,7 +28,12 @@ const StepPreview = (props) => {
     if (loading) return 'loading...'
     if (error) return 'ERROR fetching step'
 
+    if ('Pathway' in data) {
+        return
+    }
+
     console.log(data)
+    if (data.Step.length <= 0) return null
 
     const content =
         '# ' +
@@ -39,13 +44,11 @@ const StepPreview = (props) => {
 
     return (
         <div>
-            {data.Step.length > 0 ? (
-                <ReactMarkdown
-                    source={content}
-                    escapeHtml={false}
-                    renderers={{ code: CodeBlock }}
-                />
-            ) : null}
+            <ReactMarkdown
+                source={content}
+                escapeHtml={false}
+                renderers={{ code: CodeBlock }}
+            />
         </div>
     )
 }

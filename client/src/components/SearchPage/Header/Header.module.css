@@ -33,7 +33,7 @@
 }
 .login {
     background-color: #24292e;
-    height: 5vh;
+    height: 45px;
     display: flex;
     color: white;
     border: none;
@@ -41,7 +41,7 @@
     justify-content: space-evenly;
     align-items: center;
     align-items: center;
-    width: 10vw;
+    width: 170px;
 }
 
 .login:hover {

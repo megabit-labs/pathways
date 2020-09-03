@@ -1,30 +1,58 @@
-import React, { Component } from "react"
-import {connect} from "react-redux"
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
 
-import StepDndList from "../../components/StepDndList/stepDndList"
-import StepEditArea from "../../components/StepEditArea/StepEditArea"
+import StepDndList from '../../components/StepDndList/stepDndList'
+import StepEditArea from '../../components/StepEditArea/StepEditArea'
+import PathwayDetails from '../../components/PathwayDetails/PathwayDetails'
 
-import classes from "./CreateEditPathway.module.css"
+import classes from './CreateEditPathway.module.css'
 
 class CreateEditPathway extends Component {
-    render() {    
+    constructor(props) {
+        super(props)
+        this.state = {
+            showPathwayDetailsScreen: false,
+        }
+    }
+
+    showPathwayDetailsScreen = () => {
+        this.setState({ showPathwayDetailsScreen: true })
+    }
+
+    hidePathwayDetailsScreen = () => {
+        this.setState({ showPathwayDetailsScreen: false })
+    }
+
+    render() {
         return (
-            <div className={classes.Content}>
-                <div className={classes.EditArea}>
-                    <StepEditArea />
+            <Fragment>
+                <PathwayDetails
+                    showPathwayDetailsScreen={
+                        this.state.showPathwayDetailsScreen
+                    }
+                    hidePathwayDetailsScreen={this.hidePathwayDetailsScreen}
+                />
+                <div className={classes.Content}>
+                    <div className={classes.EditArea}>
+                        <StepEditArea />
+                    </div>
+                    <div className={classes.StepList}>
+                        <StepDndList
+                            showPathwayDetailsScreen={
+                                this.showPathwayDetailsScreen
+                            }
+                        />
+                    </div>
                 </div>
-                <div className={classes.StepList}>
-                    <StepDndList />
-                </div>
-            </div>
+            </Fragment>
         )
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         stepId: state.createEditPathway.selectedStep,
-        steps: state.createEditPathway.steps
+        steps: state.createEditPathway.steps,
     }
 }
 

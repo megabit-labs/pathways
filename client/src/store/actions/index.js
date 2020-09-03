@@ -4,10 +4,10 @@ export {
     deleteStep,
     selectForEditing,
     selectForPreview,
-    updateStep
+    updateStep,
+    updatePathwayDetails,
+    addTag,
+    removeTag,
 } from './createEditPathway'
 
-export {
-    addNewPathway,
-    popLastPathway,
-} from './displayPathway';
+export { addNewPathway, popLastPathway } from './displayPathway'

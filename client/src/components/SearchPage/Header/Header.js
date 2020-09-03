@@ -2,10 +2,9 @@ import React, { useState } from "react"
 import { Navbar, Nav } from "react-bootstrap"
 import gql from "graphql-tag"
 import { useMutation } from "@apollo/react-hooks"
+import LogoGithub from 'react-ionicons/lib/LogoGithub'
 
 import classes from "./Header.module.css"
-import Menu from "../../assets/menu.png"
-import GithubIcon from "../../../assets/github.png"
 
 const CLIENT_ID = "8b508ba452a263f604b4"
 
@@ -55,14 +54,11 @@ const Header = (props) => {
         <React.Fragment>
             <Navbar className={classes.navbar}>
                 <Nav className={classes.navlinks}>
-                    <Nav.Link href="#">
-                        <img src={Menu} className={classes.apps} />
-                    </Nav.Link>
                     <Nav.Link
                         href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user`}
                     >
                         <div className={classes.login}>
-                            <img className={classes.github} src={GithubIcon} />
+                            <LogoGithub fontSize="35px" color="white" />
                             <div className={classes.text}>
                                 Login with GitHub
                             </div>

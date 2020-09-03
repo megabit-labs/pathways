@@ -8,55 +8,57 @@ import generateId from '../../utils/generateId'
  * step properties.
  */
 const initialState = {
+    pathwayName: '',
+    pathwayDescription: '',
+    pathwayTags: [],
     stepOrder: ['step1', 'step2', 'step3'],
     steps: {
         step1: {
             heading: 'This is a pathway step',
-            content: "# hello",
+            content: '# hello',
             stepType: 'Pathway',
             selected: false,
             timeLimit: 20,
-            isPreview: false
+            isPreview: false,
             // rating: 2
         },
         step2: {
             heading: 'This is a content step',
-            content: "# hello",
+            content: '# hello',
             stepType: 'Content',
             selected: false,
             timeLimit: 30,
-            isPreview: false
+            isPreview: false,
             // rating: 1
         },
         step3: {
             heading: 'This is a shared step',
-            content: "# hello",
+            content: '# hello',
             stepType: 'Shared Step',
             selected: false,
             timeLimit: 40,
-            isPreview: false
+            isPreview: false,
             // rating: 3
-        }
+        },
     },
-    selectedStep: ""
+    selectedStep: '',
 }
 
 const addStep = (state, action) => {
     const id = generateId('Step')
     action.stepData[id] = id
-    
+
     const newStepOrder = state.stepOrder.concat(id)
 
-    let newSteps = {...(state.steps)}
+    let newSteps = { ...state.steps }
     newSteps[id] = action.stepData
 
     return {
         ...state,
         stepOrder: newStepOrder,
-        steps: newSteps
+        steps: newSteps,
     }
 }
-
 
 const reorderSteps = (state, action) => {
     const result = action.result
@@ -66,7 +68,7 @@ const reorderSteps = (state, action) => {
 
     return {
         ...state,
-        stepOrder: newSteps
+        stepOrder: newSteps,
     }
 }
 
@@ -80,16 +82,16 @@ const deleteStep = (state, action) => {
     const index = stepOrder.indexOf(action.stepId)
     stepOrder.splice(index, 1)
     const newStepOrder = [...stepOrder]
-    
+
     return {
         ...state,
-        stepOrder: newStepOrder
+        stepOrder: newStepOrder,
     }
 }
 
 const selectStepForEditing = (state, action) => {
-    let newSteps = {...(state.steps)}
-    if (state.selectedStep != "") {
+    let newSteps = { ...state.steps }
+    if (state.selectedStep != '') {
         newSteps[state.selectedStep].selected = false
     }
 
@@ -98,13 +100,13 @@ const selectStepForEditing = (state, action) => {
     return {
         ...state,
         steps: newSteps,
-        selectedStep: action.stepId
+        selectedStep: action.stepId,
     }
 }
 
 const selectStepForPreview = (state, action) => {
-    let newSteps = {...(state.steps)}
-    let isPreview = newSteps[state.selectedStep]["isPreview"]
+    let newSteps = { ...state.steps }
+    let isPreview = newSteps[state.selectedStep]['isPreview']
 
     newSteps[action.stepId].isPreview = !isPreview
     return {
@@ -118,26 +120,65 @@ const updateStep = (state, action) => {
     let updatedStep = state.steps[id]
     updatedStep = {
         ...updatedStep,
-        ...(action.stepData)
+        ...action.stepData,
     }
-    const updatedSteps = {...(state.steps)}
+    const updatedSteps = { ...state.steps }
     updatedSteps[id] = updatedStep
 
     return {
         ...state,
-        steps: updatedSteps
+        steps: updatedSteps,
+    }
+}
+
+const updatePathwayDetails = (state, action) => {
+    return {
+        ...state,
+        pathwayName: action.name,
+        pathwayDescription: action.description,
+    }
+}
+
+const addTag = (state, action) => {
+    let tags = [...state.pathwayTags]
+    tags.push(action.tag)
+    return {
+        ...state,
+        pathwayTags: tags,
+    }
+}
+
+const removeTag = (state, action) => {
+    let tags = [...state.pathwayTags]
+    let finalTags = tags.filter((tag) => tag !== action.tag)
+    return {
+        ...state,
+        pathwayTags: finalTags,
     }
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_STEP: return addStep(state, action)
-        case actionTypes.REORDER_STEPS: return reorderSteps(state, action)
-        case actionTypes.DELETE_STEP: return deleteStep(state, action)
-        case actionTypes.SELECT_FOR_EDITING: return selectStepForEditing(state, action)
-        case actionTypes.UPDATE_STEP: return updateStep(state, action)
-        case actionTypes.SELECT_FOR_PREVIEW: return selectStepForPreview(state,action)
-        default: return state
+        case actionTypes.ADD_STEP:
+            return addStep(state, action)
+        case actionTypes.REORDER_STEPS:
+            return reorderSteps(state, action)
+        case actionTypes.DELETE_STEP:
+            return deleteStep(state, action)
+        case actionTypes.SELECT_FOR_EDITING:
+            return selectStepForEditing(state, action)
+        case actionTypes.UPDATE_STEP:
+            return updateStep(state, action)
+        case actionTypes.SELECT_FOR_PREVIEW:
+            return selectStepForPreview(state, action)
+        case actionTypes.UPDATE_PATHWAY_NAME:
+            return updatePathwayDetails(state, action)
+        case actionTypes.ADD_TAG:
+            return addTag(state, action)
+        case actionTypes.REMOVE_TAG:
+            return removeTag(state, action)
+        default:
+            return state
     }
 }
 

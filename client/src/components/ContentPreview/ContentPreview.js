@@ -5,26 +5,36 @@ import StepPreview from './StepPreview'
 import PathwayPreview from './PathwayPreview'
 
 function ContentPreview(props) {
-    const [id, setId] = useState('')
+    const [pathwayId, setPathwayId] = useState('');
+    const [stepId, setStepId] = useState('');
     const [shouldDisplay, setDisplay] = useState(false)
     const { stepType } = props
 
     let displayComponent = null
     if (stepType === 'Shared Step') {
-        displayComponent = <StepPreview stepId={id} />
+        displayComponent = <StepPreview stepId={stepId} />
     } else {
-        displayComponent = <PathwayPreview pathwayId={id} />
+        displayComponent = <PathwayPreview pathwayId={pathwayId} />
     }
 
     return (
         <div style={{ marginLeft: '18px' }}>
             <div style={{ display: 'flex' }}>
-                <input
-                    className={classes.InputField}
-                    placeholder='Enter ID of relevant component'
-                    onChange={(e) => setId(e.target.value)}
-                    value={id}
-                />
+                {stepType === 'Shared Step' ? (
+                    <input
+                        className={classes.InputField}
+                        placeholder='Enter ID of Step'
+                        onChange={(e) => setStepId(e.target.value)}
+                        value={stepId}
+                    />
+                ) : (
+                    <input
+                        className={classes.InputField}
+                        placeholder='Enter ID of relevant component'
+                        onChange={(e) => setPathwayId(e.target.value)}
+                        value={pathwayId}
+                    />
+                )}
                 <div
                     className={classes.ActionButton}
                     onClick={(e) => {

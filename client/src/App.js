@@ -4,7 +4,8 @@ import GetPathway from './components/GetPathway/GetPathway';
 import CreateEditPathway from './screens/CreateEditPathway/CreateEditPathway'
 import SearchPage from "../src/screens/SearchPage/SearchPage"
 import SearchResultPage from "../src/screens/SearchResultPage/SearchResultPage"
-    
+import GithubAuth from './components/GithubAuth/GithubAuth';    
+
     class App extends Component {
     render() {
         return (

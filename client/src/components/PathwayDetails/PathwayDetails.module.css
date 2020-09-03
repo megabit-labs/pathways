@@ -1,0 +1,91 @@
+.outerContainer {
+    position: absolute;
+    height: 50vh;
+    width: 50vw;
+    background-color: white;
+    transition: transform 0.5s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.InputField {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: 17px;
+    border-radius: 3px;
+    margin-top: 20px;
+    width: 70%;
+}
+
+.InputField:focus,
+.InputFieldSmall:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.ActionButton {
+    font-size: 17px;
+    font-weight: 800;
+    padding: 5px 10px;
+    margin: 20px 0;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid black;
+    transition: 0.2s ease;
+    cursor: pointer;
+    background-color: white;
+    transition: all 0.1s linear;
+}
+
+.ActionButton:hover {
+    background-color: #33354d;
+    color: white;
+}
+
+.tagsContainer {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.addTagsArea {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.InputFieldSmall {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: 17px;
+    border-radius: 3px;
+    width: 85%;
+}
+
+.displayTagsArea {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.tag {
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid #102e4a;
+    color: #102e4a;
+    padding: 0 30px;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.tag:hover {
+    background-color: #ccc;
+}

@@ -75,7 +75,7 @@ class SearchField extends Component {
     }
 
     searchResultRenderHandler = () => {
-        this.props.history.push(`/results/search=${this.state.query}`)
+        this.props.history.push(`/results/search?name=${this.state.query}`)
     }
 
     render() {

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Component } from 'react'
+import {Link} from 'react-router-dom'
+
 import classes from './Navbar.module.css'
 
 class Navbar extends React.Component {
@@ -8,7 +9,7 @@ class Navbar extends React.Component {
             <div>
                 <ul className={classes.navbar}>
                     <li>
-                        <a href='#'>Pathways</a>
+                        <Link to="/" >Pathways</Link>
                     </li>
                 </ul>
             </div>

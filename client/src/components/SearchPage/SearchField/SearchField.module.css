@@ -46,6 +46,7 @@
     width: 30vw;
     margin-left: 1vw;
     font-family: arial, sans-serif;
+    background-color: #fafafa
 }
 
 .inputField:focus,

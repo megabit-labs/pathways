@@ -17,13 +17,11 @@ import TagsResultPage from '../src/screens/TagsResultPage/TagsResultPage'
                     <Route path='/create' exact component={CreateEditPathway} />
                     <Route path='/pathway' component={GetPathway} />
                     <Route
-                        path='/results/search=:query'
-                        exact
+                        path='/results/search'
                         component={SearchResultPage}
                     />
                     <Route
-                        path='/results/tags/name=:query'
-                        exact
+                        path='/results/tags'
                         component={TagsResultPage}
                     />
                 </Switch>

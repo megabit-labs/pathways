@@ -1,0 +1,33 @@
+.profileInfo {
+    margin-top: 6vh;
+    margin-bottom: 2vh;
+}
+
+.profilePhoto {
+    max-height: 300px;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.profileInfo .profileName {
+    padding-top: 20px;
+    font-size: 1.6em;
+    color: #1A4058;
+}
+
+.profileInfo .profileID {
+    padding-top: 5px;
+    font-size: 1.1em;
+    color: #666666;
+    font-weight: 500;
+}
+
+.profileID span {
+    color: black;
+}
+
+.profileInfo .profileDesc {
+    padding-top: 10px;
+    font-size: 1em;
+    color: #1A4058;
+}

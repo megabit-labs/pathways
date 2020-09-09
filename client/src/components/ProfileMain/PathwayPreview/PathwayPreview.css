@@ -1,0 +1,46 @@
+.previewBox {
+    background: white;
+    width: 42%;
+    margin-bottom: 2vh;
+    border: 1px solid rgba(155, 93, 229, 0.1);
+    border-radius: 15px;
+    padding: 2vh 2vw;
+    background: #FEFEFE;
+}
+
+.previewHeader {
+    margin-bottom: 6vh;
+}
+
+.previewHeader .previewTopic {
+    color: rgba(155, 93, 229, 0.81);
+    /* font-weight: 500; */
+    font-size: 1.2em;
+}
+
+.previewHeader .previewSubtopic {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: rgba(85, 85, 85, 0.75);
+    font-weight: 500;
+}
+
+.previewFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.previewFooter .previewTime {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    color: #777;
+    /* font-weight: 600; */
+}
+
+.previewFooter .previewResume {
+    color: rgba(155, 93, 229, 0.81);
+    /* font-weight: 500; */
+    font-size: 1.4em;
+}

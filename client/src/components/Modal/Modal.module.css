@@ -1,0 +1,14 @@
+.Modal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    z-index: 550;
+    background-color: white;
+    width: 40vw;
+    height: 60vh;
+    left: 30vw;
+    top: 20vh;
+    transition: all 0.4s ease-out;
+}

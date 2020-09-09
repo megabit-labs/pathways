@@ -4,18 +4,23 @@ import { useQuery } from '@apollo/react-hooks'
 import ReactMarkdown from 'react-markdown'
 import CodeBlock from '../Markdown/CodeBlock'
 
-const FETCH_CONTENT_STEP = gql`
-    query FetchStep($id: String) {
-        Step(id: $id) {
-            content {
-                content
+const StepPreview = (props) => {
+    const { stepId } = props
+    const FETCH_CONTENT_STEP = gql`
+        query {
+            Step(id: "${stepId}") {
+                id
+                name
+                time
+                index
+                content {
+                    id
+                    title
+                    content
+                }
             }
         }
-    }
-`
-
-export default function StepPreview(props) {
-    const { stepId } = props
+    `
     const { data, loading, error } = useQuery(FETCH_CONTENT_STEP, {
         variables: { stepId },
     })
@@ -23,13 +28,29 @@ export default function StepPreview(props) {
     if (loading) return 'loading...'
     if (error) return 'ERROR fetching step'
 
+    if ('Pathway' in data) {
+        return
+    }
+
+    console.log(data)
+    if (data.Step.length <= 0) return null
+
+    const content =
+        '# ' +
+        data.Step[0].content.title +
+        '\n ** ' +
+        data.Step[0].content.content +
+        '**'
+
     return (
         <div>
             <ReactMarkdown
-                source={data.content.content}
+                source={content}
                 escapeHtml={false}
                 renderers={{ code: CodeBlock }}
             />
         </div>
     )
 }
+
+export default StepPreview

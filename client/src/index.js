@@ -28,6 +28,7 @@ const store = createStore(rootReducer, composeEnhancers(
 
 const client = new ApolloClient({
   uri: 'https://pathways.bitsacm.in/graphql',
+  // uri: 'http://localhost:3003/graphql',
 });
 
 const app = (

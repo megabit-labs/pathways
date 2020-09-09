@@ -5,6 +5,7 @@ import CreateEditPathway from './screens/CreateEditPathway/CreateEditPathway'
 import SearchPage from "../src/screens/SearchPage/SearchPage"
 import SearchResultPage from "../src/screens/SearchResultPage/SearchResultPage";
 import UserProfile from "../src/screens/UserProfile/UserProfile";
+import GithubAuth from './components/GithubAuth/GithubAuth';    
 
 class App extends Component {
     render() {

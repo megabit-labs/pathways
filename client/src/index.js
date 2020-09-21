@@ -12,11 +12,13 @@ import thunk from 'redux-thunk'
 
 import createEditPathwayReducer from './store/reducers/createEditPathway';
 import DisplayPathwayReducer from './store/reducers/displayPathway';
+import DisplayProfileReducer from './store/reducers/displayProfile';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const rootReducer = combineReducers({
   createEditPathway: createEditPathwayReducer,
   displayPathway: DisplayPathwayReducer,
+  displayProfile: DisplayProfileReducer,
 })
 
 const store = createStore(rootReducer, composeEnhancers(

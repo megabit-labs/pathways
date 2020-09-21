@@ -1,0 +1,46 @@
+.profileBio {
+    margin: 0 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.createPathwayLink {
+    margin-top: 4vh;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.createPathwayLink a {
+    padding: 10px 30px;
+    border-radius: 10px;
+    background: #9B5DE5;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.5s ease-in-out;
+}
+
+.createPathwayLink a:hover {
+    box-shadow: 0px 0px 0px 2.5px white inset, 0px 0px 0px 5px #A682FF;
+}
+
+.createPathwayLink span {
+    margin-left: 15px;
+    text-decoration: none;
+    color: white;
+}
+
+.profileBio hr { 
+    border: 1px solid #e2e4e8;
+}
+   
+.profileBio .profileFooter {
+    padding: 15px 0;
+    text-align: center; 
+    color: #DEDEDE;
+    font-weight: 600;
+    font-size: 1.2em
+}

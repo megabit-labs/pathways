@@ -1,8 +1,18 @@
 import React, {Component} from 'react';
 import './ProfileMain.css';
 
-import RecentPathway from './RecentPathway/RecentPathway';
-import PathwayPreview from './PathwayPreview/PathwayPreview';
+import PathwayOngoing from './PathwayOngoing/PathwayOngoing';
+import PathwayCreated from './PathwayCreated/PathwayCreated';
+import PathwayCompleted from './PathwayCompleted/PathwayCompleted';
+
+const TabDescription = props => {
+    switch(props.selectedTab.label) {
+        case "On-going": return(<PathwayOngoing selectedTab={props.selectedTab} />);
+        case "Created": return(<PathwayCreated selectedTab={props.selectedTab} />)
+        case "Completed": return(<PathwayCompleted selectedTab={props.selectedTab} />)
+        default: return(<div>Invalid tab</div>)
+    }
+}
 
 class ProfileMain extends Component {
 
@@ -42,14 +52,6 @@ class ProfileMain extends Component {
                 </div>
             );
         })
-        
-        const PreviewData = this.state.selectedTab.pathways.map(pathway => {
-            if(pathway.id !== this.state.selectedTab.recentPathway.id) {
-                return(
-                    <PathwayPreview data={pathway} />
-                );
-            }
-        });
 
         return(
             <div className='profileMain'>
@@ -60,21 +62,7 @@ class ProfileMain extends Component {
                 <div className='profileMainContent'>
                     {/* {this.state.selectedTab.text} */}
 
-                    <span class='header-first'> Jump right back in!</span>
-
-                    <div>
-                        <RecentPathway data={this.state.selectedTab.recentPathway} />
-                    </div>
-
-                    <hr />
-
-                    <span class='header-second'>Stuff you procastinated about</span>
-
-                    <div>
-                        <div className='previewWrapper'>
-                            {PreviewData}
-                        </div>
-                    </div> 
+                     <TabDescription selectedTab={this.state.selectedTab} />
                 </div>
             </div>
         );

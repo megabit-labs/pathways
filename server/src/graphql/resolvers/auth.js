@@ -1,26 +1,24 @@
-const queries = require("../../db/queries/queries")
+const queries = require('../../db/queries/queries')
 
-const User = require("../../db/models/user")
-const ghOAuth = require("../../utils/ghOAuth")
-
+const User = require('../../db/models/user')
+const ghOAuth = require('../../utils/ghOAuth')
 
 const resolver = {
     Mutation: {
         async GithubAuth(_, { code }) {
-            let accessToken = ""
+            let accessToken = ''
             try {
                 accessToken = await ghOAuth.getGHAccessToken(code)
             } catch (e) {
-                return { status: "ERROR", message: e.toString(), token: null }
+                return { status: 'ERROR', message: e.toString(), token: null }
             }
 
-            let ghUser = ""
+            let ghUser = ''
             try {
                 ghUser = await ghOAuth.getGHUser(accessToken)
             } catch (e) {
-                return { status: "ERROR", message: e.toString(), token: null }
+                return { status: 'ERROR', message: e.toString(), token: null }
             }
-
 
             const query = queries.user.findOne({ username: ghUser.username })
 
@@ -28,21 +26,25 @@ const resolver = {
             try {
                 result = await query.run()
             } catch (e) {
-                return { status: "ERROR", message: e.toString(), token: null }
+                return { status: 'ERROR', message: e.toString(), token: null }
             }
 
-            if (result.records.length == 0) {
+            if (result.records.length === 0) {
                 // If user does not exist create a new user
                 try {
                     const newQuery = queries.user.createUser(ghUser)
                     result = await newQuery.run()
                     console.log(result)
                 } catch (e) {
-                    return { status: "ERROR", message: e.toString(), token: null }
+                    return {
+                        status: 'ERROR',
+                        message: e.toString(),
+                        token: null,
+                    }
                 }
             }
-            
-            const records = result.records
+
+            const { records } = result
 
             const userNode = records[0].get(0)
             const user = new User(userNode)
@@ -50,10 +52,14 @@ const resolver = {
             console.log(user)
 
             const jwt = user.generateToken()
-            console.log("JWT", jwt)
+            console.log('JWT', jwt)
 
-            return { status: 'OK', message: null, token: jwt }
-
+            return {
+                status: 'OK',
+                message: null,
+                token: jwt,
+                username: user.username,
+            }
         },
     },
 }

@@ -11,3 +11,5 @@ export {
 } from './createEditPathway'
 
 export { addNewPathway, popLastPathway } from './displayPathway'
+
+export { userLogin } from './displayProfile';

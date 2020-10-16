@@ -15,6 +15,7 @@ const createUpdatePathway = ({
         MERGE (p:Pathway {id: $id})
         SET p.name = $name
         SET p.description = $description
+        SET p.last_modified = localdatetime()
         MERGE (u)-[:HAS_CREATED]->(p)
         WITH p
         UNWIND $steps as step

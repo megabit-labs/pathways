@@ -5,6 +5,7 @@ type Pathway {
     steps: [Step] @relation(name: "HAS_PARENT_PATHWAY", direction: "IN")
     author: User @relation(name: "HAS_CREATED", direction: "IN")
     description: String
+    lastModified: DateTime
 }
 
 type Content {
@@ -12,6 +13,7 @@ type Content {
     title: String
     content: String
     author: User @relation(name: "HAS_CREATED", direction: "IN")
+    lastModified: DateTime
 }
 
 type Tag {

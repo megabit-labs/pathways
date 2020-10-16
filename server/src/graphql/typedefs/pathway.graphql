@@ -3,6 +3,7 @@ type Pathway {
     name: String
     tags: [Tag] @relation(name: "HAS_TAG", direction: "OUT")
     steps: [Step] @relation(name: "HAS_PARENT_PATHWAY", direction: "IN")
+    author: User @relation(name: "HAS_CREATED", direction: "IN")
     description: String
 }
 
@@ -10,6 +11,7 @@ type Content {
     id: String
     title: String
     content: String
+    author: User @relation(name: "HAS_CREATED", direction: "IN")
 }
 
 type Tag {

@@ -3,14 +3,19 @@ const github = require('../../utils/github')
 
 const resolver = {
     Mutation: {
-        async createUpdatePathway(_, { id, name, steps, tags, description }) {
-            console.log(tags)
+        async createUpdatePathway(
+            _,
+            { id, name, steps, tags, description },
+            context
+        ) {
+            const { username } = context.user
             const query = queries.pathway.createUpdatePathway({
                 id,
                 name,
                 steps,
                 tags,
                 description,
+                username,
             })
 
             try {
@@ -35,10 +40,12 @@ const resolver = {
             }
         },
         async createUpdateContent(_, { id, title, content }, context) {
+            const { username } = context.user
             const query = queries.content.createUpdateContent({
                 id,
                 title,
                 content,
+                username,
             })
 
             try {

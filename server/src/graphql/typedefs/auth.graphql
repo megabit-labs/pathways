@@ -1,6 +1,7 @@
 type ResponseMessage {
     status: String!
     message: String
+    username: String
     token: String
 }
 

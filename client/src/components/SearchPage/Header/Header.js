@@ -3,8 +3,12 @@ import { Navbar, Nav } from "react-bootstrap"
 import gql from "graphql-tag"
 import { useMutation } from "@apollo/react-hooks"
 import LogoGithub from 'react-ionicons/lib/LogoGithub'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import classes from "./Header.module.css"
+
+import * as actions from '../../../store/actions/index';
 
 const CLIENT_ID = "8b508ba452a263f604b4"
 
@@ -39,6 +43,7 @@ const Header = (props) => {
     let token
 
     if (code && !isLoggedIn) {
+        console.log(code);
         isLoggedInHandler(true)
         getToken({ variables: { code: code } })
     }
@@ -46,6 +51,8 @@ const Header = (props) => {
     if (data && !isTouched) {
         isTouchedHandler(true)
         token = data.GithubAuth.token
+        console.log(token, data);
+        props.userLogin(null);
         localStorage.setItem("token", token)
         alert("You are logged in !!!")
     }
@@ -69,4 +76,11 @@ const Header = (props) => {
         </React.Fragment>
     )
 }
-export default Header
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userLogin: (payload) => dispatch(actions.userLogin(payload)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(Header))

@@ -12,4 +12,4 @@ export {
 
 export { addNewPathway, popLastPathway } from './displayPathway'
 
-export { userLogin } from './displayProfile';
+export { userLogin, userLogout, updateProfile } from './displayProfile';

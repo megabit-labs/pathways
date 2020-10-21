@@ -15,3 +15,5 @@ export const ADD_NEW_PATHWAY = 'ADD_NEW_PATHWAY'
 export const POP_LAST_PATHWAY = 'POP_LAST_PATHWAY'
 
 export const USER_LOGIN = 'USER_LOGIN'
+export const USER_LOGOUT = 'USER_LOGOUT'
+export const UPDATE_PROFILE = 'UPDATE_PROFILE'

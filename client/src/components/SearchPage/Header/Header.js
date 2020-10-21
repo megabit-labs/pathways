@@ -17,6 +17,7 @@ const GET_TOKEN = gql`
         GithubAuth(code: $code) {
             status
             message
+            username
             token
         }
     }
@@ -40,10 +41,9 @@ const Header = (props) => {
         )
     )
 
-    let token
+    let token, username
 
     if (code && !isLoggedIn) {
-        console.log(code);
         isLoggedInHandler(true)
         getToken({ variables: { code: code } })
     }
@@ -51,9 +51,9 @@ const Header = (props) => {
     if (data && !isTouched) {
         isTouchedHandler(true)
         token = data.GithubAuth.token
-        console.log(token, data);
-        props.userLogin(null);
+        username = data.GithubAuth.username
         localStorage.setItem("token", token)
+        props.userLogin({"username": username})
         alert("You are logged in !!!")
     }
 

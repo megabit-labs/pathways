@@ -51,6 +51,15 @@ const CreatedWrapper = props => props.selectedTab.pathways.map(pathway => {
 })
 
 const PathwayCreated = props => {
+
+    if(props.selectedTab.pathways.length === 0) {
+        return(
+            <div className='emptyWrapper'>
+                You have not created any pathway
+            </div>
+        )
+    }
+
     return(
         <div className='createdWrapper'>
             <CreatedWrapper selectedTab={props.selectedTab} />

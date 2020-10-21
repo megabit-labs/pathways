@@ -44,6 +44,15 @@ const CompletedContainer = props => {
 }
 
 const PathwayCompleted = props => {
+
+    if(props.selectedTab.pathways.length === 0) {
+        return(
+            <div className='emptyWrapper'>
+                No pathways completed!
+            </div>
+        )
+    }
+
     const content = groupBy(props.selectedTab.pathways);
     let containers = [];
     Object.keys(content).sort().reverse().forEach(key => {

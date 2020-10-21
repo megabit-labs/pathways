@@ -13,6 +13,15 @@ const PreviewData = props => props.selectedTab.pathways.map(pathway => {
 });
 
 const PathwayOngoing = props => {
+
+    if(props.selectedTab.pathways.length === 0) {
+        return(
+            <div className='emptyWrapper'>
+                Start a new pathway
+            </div>
+        )
+    }
+
     return (
         <React.Fragment>
             <span class='ongoing-header-first'> Jump right back in!</span>

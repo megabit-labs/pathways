@@ -7,7 +7,7 @@ const createUpdateContent = ({ id, title, content, username }) => {
         MATCH (u:User {username: $username})
         MERGE (c:Content {id: $id})
         SET c.content = $content, c.title = $title
-        SET p.lastModified = localdatetime()
+        SET c.lastModified = localdatetime()
         MERGE (u)-[:HAS_CREATED]->(c)
         RETURN c
         `,

@@ -20,7 +20,7 @@ const createUpdatePathway = ({
         WITH p
         UNWIND $steps as step
         CALL apoc.do.when(
-            step.isPathway,
+            step.stepType =~ "PATHWAY_STEP",
             '
             MERGE (s:Step {id: step.id})
             SET s.name = step.name, s.time = step.time, s.index = step.index
@@ -36,7 +36,7 @@ const createUpdatePathway = ({
             ',
             '
             MERGE (s:Step {id: step.id})
-            SET s.name = step.name, s.time = step.time, s.index = step.index, s.isPathway = step.isPathway
+            SET s.name = step.name, s.time = step.time, s.index = step.index, s.stepType = step.stepType
             WITH s, p, step
             OPTIONAL MATCH (s)-[r1:HAS_CONTENT]->(:Content)
             OPTIONAL MATCH (s)-[r2:INCLUDES]->(:Pathway)

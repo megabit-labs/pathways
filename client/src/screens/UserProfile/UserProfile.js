@@ -11,27 +11,15 @@ import './UserProfile.css';
 
 import * as actions from '../../store/actions/index';
 
-const mapStateToProps = state => {
-    return {
-        contentExisting: state.displayProfile.contentExisting,
-        content: state.displayProfile.content,
-        username: state.displayProfile.username,
-        isLoggedIn: state.displayProfile.isLoggedIn
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateProfile: (payload) => dispatch(actions.updateProfile(payload))
-    }
-}
-
 const statusEnum = {
     "NOT_STARTED": 0,
     "IN_PROGRESS": 1,
     "HAS_COMPLETED": 2
 }
 
+// function to convert data into appropriate
+// format to load the profile page
+// check /store/shared/profileData.js for required data structure
 const convertData = (userdata) => {
     let bio = {}
     
@@ -51,9 +39,9 @@ const convertData = (userdata) => {
     created["label"] = "Created"
     created["pathways"] = []
     
-    userdata.pathwaysInProgress.forEach((pathway) => {
+    userdata.pathwaysInProgress.forEach((pathway, idx) => {
         let pathwayDetails = {}
-        pathwayDetails["id"] = pathway.id
+        pathwayDetails["id"] = idx
         pathwayDetails["topic"] = pathway.name
             
         if(pathway.steps[pathway.steps.length-1].userStatus == statusEnum.HAS_COMPLETED) {
@@ -76,7 +64,6 @@ const convertData = (userdata) => {
                 totalTime += step.time
             })
 
-            pathwayDetails["id"] = pathway.id
             pathwayDetails["timeLeft"] = totalTime - timeSpent
             pathwayDetails["subtopic"] = pathway.step[idx].name
             pathwayDetails["totalTime"] = totalTime
@@ -87,11 +74,11 @@ const convertData = (userdata) => {
 
     userdata.created.forEach((pathway) => {
         let createdDetails = {}
-        createdDetails["topic"] = pathway.topic
+        createdDetails["topic"] = pathway.name
         createdDetails["description"] = pathway.description
         createdDetails["tags"] = pathway.tags.map(tag => tag.name)
-        createdDetails["lastUpdated"] = pathway.lastUpdated.formatted
-        createdDetails["haveDone"] = pathway.steps.length
+        createdDetails["lastUpdated"] = pathway.lastModified.formatted
+        createdDetails["steps"] = pathway.steps.length
         createdDetails["supported"] = pathway.steps.reduce((prev, step) => {
             if(step.isPathway) {
                 return prev + 1
@@ -99,7 +86,8 @@ const convertData = (userdata) => {
                 return prev
             }
         }, 0)
-        // pathways have completed
+        // no of users that have completed the pathway
+        created.pathways.push(createdDetails)
     })
 
     // for now recent pathway is initial pathway
@@ -119,7 +107,7 @@ const convertData = (userdata) => {
     content.pathwayData["completed"] = completed
     content.pathwayData["created"] = created
 
-    // console.log(content)
+    console.log(content, userdata)
     return content
 }
 
@@ -216,6 +204,21 @@ class UserProfile extends Component {
                 <div> Login to view this page</div>
             )
         }
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        contentExisting: state.displayProfile.contentExisting,
+        content: state.displayProfile.content,
+        username: state.displayProfile.username,
+        isLoggedIn: state.displayProfile.isLoggedIn
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateProfile: (payload) => dispatch(actions.updateProfile(payload))
     }
 }
 

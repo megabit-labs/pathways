@@ -55,6 +55,7 @@ function StepDataEdit(props) {
                         onClick={(e) => {
                             e.preventDefault()
                             onSaveStep()
+                            console.log(props.steps, props.heading, props.selectedStep, props.content)
                             updateStep({
                                 variables: {
                                     id: selectedStep,

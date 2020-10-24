@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Mutation } from 'react-apollo'
 
 import classes from './PathwayDetails.module.css'
 import * as actions from '../../store/actions/index'
 
 import Modal from '../Modal/Modal'
+import generateId from '../../utils/generateId'
+import * as mutations from '../../utils/mutations/updatePathway'
 
 class PathwayDetails extends Component {
     constructor(props) {
@@ -12,7 +15,9 @@ class PathwayDetails extends Component {
         this.state = {
             name: this.props.name,
             description: this.props.description,
+            tags: this.props.tags,
             newTag: '',
+            errors: ''
         }
     }
 
@@ -22,29 +27,98 @@ class PathwayDetails extends Component {
         })
     }
 
-    savePathwayDetails = () => {
-        this.props.updatePathwayDetails(this.state.name, this.state.description)
-        this.props.hidePathwayDetailsScreen()
+    updatePathwayError = err => {
+        this.setState({
+            ...this.state,
+            errors: err
+        })
+    }
+
+    savePathwayDetails = (createPathway) => {
+        
+        if(this.state.name === "" || this.state.description === "") {
+            this.setState({
+                ...this.state,
+                errors: 'Enter Valid Input'
+            })
+            return
+        }
+
+        const pathwayId = this.props.id === '' ? generateId("pathway") : this.props.id
+        this.props.updatePathwayDetails(this.state.id, this.state.name, this.state.description)
+
+        // create a new pathway or update existing
+        createPathway({
+            variables: {
+                id: pathwayId,
+                name: this.state.name,
+                steps: [],
+                tags: this.state.tags,
+                description: this.state.description
+            }
+        })
+        .then( res => {
+            if(!res.errors) {
+                if(res['data']['createUpdatePathway']['status'] === "ERROR") {
+                    this.updatePathwayError(res['data']['createUpdatePathway']['message'])
+                    return
+                } else {
+                    console.log("Pathway " + this.state.name + " has been added")
+                    this.setState({
+                        ...this.state,
+                        errors: ''
+                    })
+                    this.props.hidePathwayDetailsScreen()
+                }
+            } else {
+                console.log(res.errors)
+                return
+            }
+        })
+        .catch (e => {
+            const err = JSON.parse(JSON.stringify(e))
+            this.updatePathwayError(err)
+            return
+        })
+
     }
 
     addTag = () => {
         this.setState({
+            ...this.state,
+            tags: [...this.state.tags, this.state.newTag],
             newTag: '',
         })
         this.props.addTag(this.state.newTag)
     }
 
     removeTag = (tag) => {
+        this.setState({
+            ...this.state,
+            tags: this.state.tags.filter((tagVal) => tagVal !== tag)
+        })
         this.props.removeTag(tag)
     }
 
     render() {
         let { showPathwayDetailsScreen } = this.props
+        let modalClosed = this.props.hidePathwayDetailsScreen
+        if(this.props.modalCloseOnOverlay === false) {
+            modalClosed = null
+        }
+
+        const FormValidationError = () => {
+            if(this.state.errors !== "") {
+                return(<div>{this.state.errors}</div>)
+            } else {
+                return(<span></span>)
+            }
+        }
 
         return (
             <Modal
                 show={showPathwayDetailsScreen}
-                modalClosed={this.props.hidePathwayDetailsScreen}
+                modalClosed={modalClosed}
             >
                 <input
                     className={classes.InputField}
@@ -89,15 +163,20 @@ class PathwayDetails extends Component {
                         })}
                     </div>
                 </div>
-                <div
-                    className={classes.ActionButton}
-                    aria-hidden='true'
-                    onClick={() => {
-                        this.savePathwayDetails()
-                    }}
-                >
-                    Done
-                </div>
+                <FormValidationError />
+                <Mutation mutation={mutations.CREATE_UPDATE_PATHWAY} >
+                    {(createPathway) => (
+                        <div
+                            className={classes.ActionButton}
+                            aria-hidden='true'
+                            onClick={() => {
+                                this.savePathwayDetails(createPathway)
+                            }}
+                        >
+                        Done
+                        </div>
+                    )}
+                </Mutation>
             </Modal>
         )
     }
@@ -105,6 +184,7 @@ class PathwayDetails extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        id: state.createEditPathway.pathwayId,
         name: state.createEditPathway.pathwayName,
         description: state.createEditPathway.pathwayDescription,
         tags: state.createEditPathway.pathwayTags,

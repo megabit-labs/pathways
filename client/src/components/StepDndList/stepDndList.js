@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { connect } from 'react-redux'
+import { Mutation } from 'react-apollo'
 
 import Step from './Step/step'
 import NumberStat from '../NumberStat/NumberStat'
@@ -18,6 +19,8 @@ import SettingsIcon from 'react-ionicons/lib/IosSettings'
 import * as actions from '../../store/actions/index'
 
 import classes from './StepDndList.module.css'
+import generateId from '../../utils/generateId'
+import * as mutations from '../../utils/mutations/updatePathway'
 
 const getListStyle = (isDraggingOver) => ({
     background: '#fafafa',
@@ -49,11 +52,11 @@ class StepDndList extends Component {
         })
     }
 
-    handleClose = (type) => {
+    handleClose = (type, mutationHandler) => {
         this.setState({
             anchorEl: null,
         })
-        this.onAddBtnClick(type)
+        this.onAddBtnClick(type, mutationHandler)
     }
 
     onDragEnd(result) {
@@ -65,24 +68,56 @@ class StepDndList extends Component {
         this.props.onReorderSteps(result)
     }
 
-    onAddBtnClick = (type) => {
+    onAddBtnClick = (type, mutationHandler) => {
+        const stepId = generateId("step")
+        let stepName
         if (type === 'pathway') {
             this.props.onAddStep({
                 heading: 'This is a step',
                 stepType: 'Pathway',
-                id: `${Math.random()}`,
+                id: stepId,
             })
+            stepName = 'Pathway'
         } else if (type === 'content') {
             this.props.onAddStep({
                 heading: 'This is a step',
                 stepType: 'Content',
-                id: `${Math.random()}`,
+                id: stepId,
             })
+            stepName = 'Content'
         } else if (type === 'shared') {
             this.props.onAddStep({
                 heading: 'This is a step',
                 stepType: 'Shared Step',
-                id: `${Math.random()}`,
+                id: stepId,
+            })
+            stepName = 'Shared Step'
+        }
+
+        // let currentSteps = []
+
+        const newStep = {
+            id: stepId,
+            name: stepName,
+            time: 30,
+            index: 0,
+            isPathway: (type==='pathway'),
+            typeId: this.props.pathwayId
+        }
+
+        if(mutationHandler) {
+            mutationHandler({variables: {
+                id: this.props.pathwayId,
+                name: this.props.pathwayName,
+                steps: [newStep],
+                tags: this.props.pathwayTags,
+                description: this.props.pathwayDescription
+            }})
+            .then( res => {
+                console.log(res)
+            })
+            .catch(e => {
+                console.log(JSON.parse(JSON.stringify(e)))
             })
         }
     }
@@ -130,35 +165,39 @@ class StepDndList extends Component {
                         >
                             <PlusIcon fontSize='30px' color='#555' />
                         </Button>
-                        <Menu
-                            id='simple-menu'
-                            anchorEl={this.state.anchorEl}
-                            keepMounted
-                            open={Boolean(this.state.anchorEl)}
-                            onClose={this.handleClose}
-                        >
-                            <MenuItem
-                                onClick={() => this.handleClose('pathway')}
-                            >
-                                <div className={classes.pathwayStep}>
-                                    Pathway
-                                </div>
-                            </MenuItem>
-                            <MenuItem
-                                onClick={() => this.handleClose('content')}
-                            >
-                                <div className={classes.contentStep}>
-                                    Content
-                                </div>
-                            </MenuItem>
-                            <MenuItem
-                                onClick={() => this.handleClose('shared')}
-                            >
-                                <div className={classes.sharedStep}>
-                                    Shared Step
-                                </div>
-                            </MenuItem>
-                        </Menu>
+                        <Mutation mutation={mutations.CREATE_UPDATE_PATHWAY}>
+                            {(updatePathway) => (
+                                <Menu
+                                    id='simple-menu'
+                                    anchorEl={this.state.anchorEl}
+                                    keepMounted
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem
+                                        onClick={() => this.handleClose('pathway', updatePathway)}
+                                    >
+                                        <div className={classes.pathwayStep}>
+                                            Pathway
+                                        </div>
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() => this.handleClose('content', updatePathway)}
+                                    >
+                                        <div className={classes.contentStep}>
+                                            Content
+                                        </div>
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() => this.handleClose('shared', updatePathway)}
+                                    >
+                                        <div className={classes.sharedStep}>
+                                            Shared Step
+                                        </div>
+                                    </MenuItem>
+                                </Menu>
+                            )}
+                        </Mutation>
                     </div>
 
                     <DragDropContext onDragEnd={this.onDragEnd}>
@@ -216,6 +255,11 @@ const mapStateToProps = (state) => {
     return {
         stepOrder: state.createEditPathway.stepOrder,
         steps: state.createEditPathway.steps,
+        // current pathway data needed to add a step
+        pathwayId: state.createEditPathway.pathwayId,
+        pathwayName: state.createEditPathway.pathwayName,
+        pathwayTags: state.createEditPathway.pathwayTags,
+        pathwayDescription: state.createEditPathway.pathwayDescription,
     }
 }
 

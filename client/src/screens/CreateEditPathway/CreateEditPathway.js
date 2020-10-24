@@ -6,31 +6,22 @@ import StepEditArea from '../../components/StepEditArea/StepEditArea'
 import PathwayDetails from '../../components/PathwayDetails/PathwayDetails'
 
 import classes from './CreateEditPathway.module.css'
+import * as actions from '../../store/actions/index';
 
 class CreateEditPathway extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            showPathwayDetailsScreen: false,
-        }
-    }
-
-    showPathwayDetailsScreen = () => {
-        this.setState({ showPathwayDetailsScreen: true })
-    }
-
-    hidePathwayDetailsScreen = () => {
-        this.setState({ showPathwayDetailsScreen: false })
-    }
 
     render() {
         return (
             <Fragment>
                 <PathwayDetails
                     showPathwayDetailsScreen={
-                        this.state.showPathwayDetailsScreen
+                        this.props.showPathwayDetailsScreen
                     }
-                    hidePathwayDetailsScreen={this.hidePathwayDetailsScreen}
+                    hidePathwayDetailsScreen={
+                        () => this.props.togglePathwayDetailsScreen(false)
+                    }
+                    modalCloseOnOverlay={this.props.modalCloseOnOverlay}
+                    toggleModalCloseOnOverlay={this.props.toggleModalCloseOnOverlay}
                 />
                 <div className={classes.Content}>
                     <div className={classes.EditArea}>
@@ -39,7 +30,7 @@ class CreateEditPathway extends Component {
                     <div className={classes.StepList}>
                         <StepDndList
                             showPathwayDetailsScreen={
-                                this.showPathwayDetailsScreen
+                                () => this.props.togglePathwayDetailsScreen(true)
                             }
                         />
                     </div>
@@ -53,7 +44,16 @@ const mapStateToProps = (state) => {
     return {
         stepId: state.createEditPathway.selectedStep,
         steps: state.createEditPathway.steps,
+        showPathwayDetailsScreen: state.createEditPathway.showPathwayDetailsScreen,
+        modalCloseOnOverlay: state.createEditPathway.modalCloseOnOverlay
     }
 }
 
-export default connect(mapStateToProps)(CreateEditPathway)
+const mapDispatchToProps = dispatch => {
+    return {
+        togglePathwayDetailsScreen: (payload) => dispatch(actions.togglePathwayDetailsScreen(payload)),
+        toggleModalCloseOnOverlay: () => dispatch(actions.toggleModalCloseOnOverlay()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEditPathway)

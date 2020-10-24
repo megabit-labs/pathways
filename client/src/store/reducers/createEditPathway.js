@@ -8,8 +8,9 @@ import generateId from '../../utils/generateId'
  * step properties.
  */
 const initialState = {
-    pathwayName: '',
-    pathwayDescription: '',
+    pathwayId: 'pathway_ 1603514311507_66325',
+    pathwayName: 'Apollo',
+    pathwayDescription: 'Apollo Client GraphQL',
     pathwayTags: [],
     stepOrder: ['step1', 'step2', 'step3'],
     steps: {
@@ -20,6 +21,7 @@ const initialState = {
             selected: false,
             timeLimit: 20,
             isPreview: false,
+            isDummy: true
             // rating: 2
         },
         step2: {
@@ -29,6 +31,7 @@ const initialState = {
             selected: false,
             timeLimit: 30,
             isPreview: false,
+            isDummy: true
             // rating: 1
         },
         step3: {
@@ -38,16 +41,17 @@ const initialState = {
             selected: false,
             timeLimit: 40,
             isPreview: false,
+            isDummy: true
             // rating: 3
         },
     },
     selectedStep: '',
+    showPathwayDetailsScreen: false,
+    modalCloseOnOverlay: true,
 }
 
 const addStep = (state, action) => {
-    const id = generateId('Step')
-    action.stepData[id] = id
-
+    const id = action.stepData.id
     const newStepOrder = state.stepOrder.concat(id)
 
     let newSteps = { ...state.steps }
@@ -134,6 +138,7 @@ const updateStep = (state, action) => {
 const updatePathwayDetails = (state, action) => {
     return {
         ...state,
+        pathwayId: action.id,
         pathwayName: action.name,
         pathwayDescription: action.description,
     }
@@ -157,6 +162,31 @@ const removeTag = (state, action) => {
     }
 }
 
+// When user creates a new pathway, modal shouldn't be closed without filling pathway details
+// Overlay closing disabled on creating pathway
+const toggleModalCloseOnOverlay = (state) => {
+    return {
+        ...state,
+        modalCloseOnOverlay: true
+    }
+}
+
+// When user creates a new pathway, the modal should be the first thing visible on the screen
+// This action also controls the modal opening and closing
+const togglePathwayDetailsScreen = (state, action=null) => {
+    if(action.payload != null) {
+        return {
+            ...state,
+            showPathwayDetailsScreen: action.payload
+        }
+    } else {
+        return {
+            ...state,
+            showPathwayDetailsScreen: !state.showPathwayDetailsScreen
+        }
+    }
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_STEP:
@@ -177,6 +207,10 @@ const reducer = (state = initialState, action) => {
             return addTag(state, action)
         case actionTypes.REMOVE_TAG:
             return removeTag(state, action)
+        case actionTypes.TOGGLE_PATHWAY_DETAILS_SCREEN:
+            return togglePathwayDetailsScreen(state, action)
+        case actionTypes.TOGGLE_MODAL_CLOSE_ON_OVERLAY:
+            return toggleModalCloseOnOverlay(state)
         default:
             return state
     }

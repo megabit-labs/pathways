@@ -8,6 +8,8 @@ export {
     updatePathwayDetails,
     addTag,
     removeTag,
+    togglePathwayDetailsScreen, 
+    toggleModalCloseOnOverlay
 } from './createEditPathway'
 
 export { addNewPathway, popLastPathway } from './displayPathway'

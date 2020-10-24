@@ -1,0 +1,20 @@
+.ongoing-header-first, .ongoing-header-second {
+    display: inline-block;
+    margin-top: 2vh;
+    font-size: 20px;
+    color: #555555;
+    font-weight: 500;
+}
+
+.ongoing-header-second {
+    margin-top: 3vh;
+    margin-bottom: 2vh;
+}
+
+.previewWrapper {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 2vh;
+}

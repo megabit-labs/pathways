@@ -1,5 +1,6 @@
 .profileMain {
     margin: 3vh 10% 0 10%;
+    min-height: 97vh;
 }
 
 .profileMain .tabContainer {
@@ -23,32 +24,8 @@
     border-bottom: 5px solid #9B5DE5;
 }
 
-.profileMainContent {
-    /* margin-top: 2vh; */
-}
-
 .profileMainContent hr {
     width: 40%;
     margin: 0 auto;
     border: 1px solid #e2e4e8;
-}
-
-.profileMainContent .header-first, .profileMainContent .header-second {
-    display: inline-block;
-    margin-top: 2vh;
-    font-size: 20px;
-    color: #555555;
-    font-weight: 500;
-}
-
-.profileMainContent .header-second {
-    margin-top: 3vh;
-    margin-bottom: 2vh;
-}
-
-.profileMain .previewWrapper {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    flex-wrap: wrap;
 }

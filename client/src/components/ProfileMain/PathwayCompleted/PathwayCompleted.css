@@ -1,0 +1,47 @@
+.completedWrapper {
+    margin: 2vh auto;
+}
+
+.completedDate {
+    font-size: 20px;
+    color: #555;
+    padding-left: 5px;
+}
+
+.completedBody {
+    display: flex;
+    flex-direction: row;
+}
+
+.verticalRule {
+    border: 1px solid #E2E4E8;
+    margin-left: 40px;
+}
+
+.completedContentContainer {
+    margin-left: 2vw;
+    margin-top: 2vh;
+}
+
+.completedContent > div {
+    display: inline-block;
+    background: #FFF;
+    border: 1px solid #EEEEEE;
+    margin-bottom: 2vh;
+    border-radius: 10px;
+    padding: 1vh 1.5vw;
+}
+
+.completedTitle {
+    font-size: 26px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.completedTags span {
+    display: inline-block;
+    padding-right: 15px;
+    font-size: 14px;
+    color: #9B5DE5;
+}

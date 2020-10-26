@@ -17,6 +17,12 @@ const statusEnum = {
     "HAS_COMPLETED": 2
 }
 
+const stepType = {
+    "CONTENT_STEP": 0,
+    "SHARED_STEP": 1,
+    "PATHWAY_STEP": 2
+}
+
 // function to convert data into appropriate
 // format to load the profile page
 // check /store/shared/profileData.js for required data structure
@@ -80,7 +86,7 @@ const convertData = (userdata) => {
         createdDetails["lastUpdated"] = pathway.lastModified.formatted
         createdDetails["steps"] = pathway.steps.length
         createdDetails["supported"] = pathway.steps.reduce((prev, step) => {
-            if(step.isPathway) {
+            if(step.stepType === stepType.PATHWAY_STEP ) {
                 return prev + 1
             } else {
                 return prev
@@ -146,7 +152,7 @@ class UserProfile extends Component {
                             description
                             steps {
                                 id
-                                isPathway
+                                stepType
                             }
                             lastModified {
                                 formatted

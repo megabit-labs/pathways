@@ -36,13 +36,13 @@ class PathwayDetails extends Component {
 
     savePathwayDetails = (createPathway) => {
         
-        if(this.state.name === "" || this.state.description === "") {
-            this.setState({
-                ...this.state,
-                errors: 'Enter Valid Input'
-            })
-            return
-        }
+        // if(this.state.name === "" || this.state.description === "") {
+        //     this.setState({
+        //         ...this.state,
+        //         errors: 'Enter Valid Input'
+        //     })
+        //     return
+        // }
 
         const pathwayId = this.props.id === '' ? generateId("pathway") : this.props.id
         this.props.updatePathwayDetails(this.state.id, this.state.name, this.state.description)
@@ -50,11 +50,11 @@ class PathwayDetails extends Component {
         // create a new pathway or update existing
         createPathway({
             variables: {
-                id: pathwayId,
-                name: this.state.name,
+                id: "pathway_ 1603514311507_66325",
+                name: "philosophy",
                 steps: [],
-                tags: this.state.tags,
-                description: this.state.description
+                tags: ['no tag'],
+                description: "kns"
             }
         })
         .then( res => {

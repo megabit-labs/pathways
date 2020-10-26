@@ -27,7 +27,7 @@ type Step {
     name: String
     time: Int
     index: Int
-    isPathway: Boolean
+    stepType: StepType
     pathway: Pathway @relation(name: "INCLUDES", direction: "OUT")
     content: Content @relation(name: "HAS_CONTENT", direction: "OUT")
     userStatus: StepStatus
@@ -37,12 +37,18 @@ enum _StepOrdering {
     index_asc
 }
 
+enum StepType {
+  CONTENT_STEP
+  SHARED_STEP
+  PATHWAY_STEP
+}
+
 input StepPayload {
     id: String!
     name: String
     time: Int
     index: Int
-    isPathway: Boolean!
+    stepType: StepType
     typeId: String
 }
 
@@ -61,8 +67,9 @@ type Mutation {
     ): StatusMessage
     deletePathway(
         id: String!
-        steps: [StepPayload]!
-        whole: Boolean!
+    ): StatusMessage
+    deleteStep(
+        id: String!
     ): StatusMessage
     createUpdateContent(
         id: String!

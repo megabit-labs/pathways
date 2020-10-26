@@ -24,14 +24,20 @@ function ContentPreview(props) {
                     <input
                         className={classes.InputField}
                         placeholder='Enter ID of Step'
-                        onChange={(e) => setStepId(e.target.value)}
+                        onChange={(e) => {
+                            setStepId(e.target.value)
+                            props.onValueChange(e.target.value, 'linkId')
+                        }}
                         value={stepId}
                     />
                 ) : (
                     <input
                         className={classes.InputField}
                         placeholder='Enter ID of relevant component'
-                        onChange={(e) => setPathwayId(e.target.value)}
+                        onChange={(e) => {
+                            setPathwayId(e.target.value)
+                            props.onValueChange(e.target.value, 'linkId')
+                        }}
                         value={pathwayId}
                     />
                 )}

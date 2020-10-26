@@ -36,25 +36,25 @@ class PathwayDetails extends Component {
 
     savePathwayDetails = (createPathway) => {
         
-        // if(this.state.name === "" || this.state.description === "") {
-        //     this.setState({
-        //         ...this.state,
-        //         errors: 'Enter Valid Input'
-        //     })
-        //     return
-        // }
+        if(this.state.name === "" || this.state.description === "") {
+            this.setState({
+                ...this.state,
+                errors: 'Enter Valid Input'
+            })
+            return
+        }
 
         const pathwayId = this.props.id === '' ? generateId("pathway") : this.props.id
-        this.props.updatePathwayDetails(this.state.id, this.state.name, this.state.description)
+        this.props.updatePathwayDetails(pathwayId, this.state.name, this.state.description)
 
         // create a new pathway or update existing
         createPathway({
             variables: {
-                id: "pathway_ 1603514311507_66325",
-                name: "philosophy",
+                id: pathwayId,
+                name: this.state.name,
                 steps: [],
-                tags: ['no tag'],
-                description: "kns"
+                tags: this.state.tags,
+                description: this.state.description
             }
         })
         .then( res => {
@@ -193,8 +193,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updatePathwayDetails: (name, description) =>
-            dispatch(actions.updatePathwayDetails(name, description)),
+        updatePathwayDetails: (id, name, description) =>
+            dispatch(actions.updatePathwayDetails(id, name, description)),
         addTag: (tag) => dispatch(actions.addTag(tag)),
         removeTag: (tag) => dispatch(actions.removeTag(tag)),
     }

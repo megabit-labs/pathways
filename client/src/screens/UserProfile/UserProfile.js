@@ -12,15 +12,15 @@ import './UserProfile.css';
 import * as actions from '../../store/actions/index';
 
 const statusEnum = {
-    "NOT_STARTED": 0,
-    "IN_PROGRESS": 1,
-    "HAS_COMPLETED": 2
+    "NOT_STARTED": "NOT_STARTED",
+    "IN_PROGRESS": "IN_PROGRESS",
+    "HAS_COMPLETED": "HAS_COMPLETED"
 }
 
 const stepType = {
-    "CONTENT_STEP": 0,
-    "SHARED_STEP": 1,
-    "PATHWAY_STEP": 2
+    "CONTENT_STEP": "CONTENT_STEP",
+    "SHARED_STEP": "SHARED_STEP",
+    "PATHWAY_STEP": "PATHWAY_STEP"
 }
 
 // function to convert data into appropriate

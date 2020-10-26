@@ -13,8 +13,6 @@ const initialState = {
 const reducer = ( state = initialState, action ) => {
     switch(action.type) {
         case actionTypes.USER_LOGIN: {
-
-            console.log(action)
             localStorage.setItem("isLoggedIn", true)
             if("username" in action.payload) {
                 localStorage.setItem("username", action.payload.username)

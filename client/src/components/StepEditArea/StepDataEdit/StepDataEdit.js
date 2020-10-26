@@ -21,6 +21,15 @@ const UPDATE_STEP = gql`
     }
 `
 
+const FORK_CONTENT = gql`
+    mutation($id: String!, $title: String, $content: String, $stepId: String!) {
+        forkContent(id: $id, title: $title, content: $content, stepId: $stepId) {
+            status
+            message
+        }
+    }
+`
+
 function StepDataEdit(props) {
     const stepTypes = ['Content', 'Pathway', 'Shared Step']
     const {
@@ -29,8 +38,10 @@ function StepDataEdit(props) {
         onStepDataUpdate,
         onSaveStep,
         stepType,
+        linkId
     } = props
     const [updateStep] = useMutation(UPDATE_STEP)
+    const [forkContent] = useMutation(FORK_CONTENT)
 
     return (
         <div className={classes.StepDataEdit}>
@@ -53,16 +64,35 @@ function StepDataEdit(props) {
                     <div
                         className={classes.ActionButton}
                         onClick={(e) => {
+                            // console.log(selectedStep, props.heading, props.content, stepType, linkId)
                             e.preventDefault()
                             onSaveStep()
-                            console.log(props.steps, props.heading, props.selectedStep, props.content)
-                            updateStep({
-                                variables: {
+                            if(stepType === 'Content') {
+                                updateStep({
+                                    variables: {
+                                        id: selectedStep,
+                                        title: props.heading,
+                                        content: props.content,
+                                    },
+                                })
+                                .then(res => {
+                                    console.log(res)
+                                })
+                                .catch((err) => console.log(err))
+                            
+                            } else if(stepType === 'Shared Step') {
+                                forkContent({ variables: {
                                     id: selectedStep,
                                     title: props.heading,
                                     content: props.content,
-                                },
-                            }).catch((err) => console.log(err))
+                                    stepId: linkId
+                                }})
+                                .then(res => {
+                                    console.log(res)
+                                })
+                                .catch((err) => console.log(err))
+                            }
+                        
                         }}
                         role='button'
                         aria-hidden='true'

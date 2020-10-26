@@ -8,9 +8,9 @@ import generateId from '../../utils/generateId'
  * step properties.
  */
 const initialState = {
-    pathwayId: 'pathway_ 1603514311507_66325',
-    pathwayName: 'Apollo',
-    pathwayDescription: 'Apollo Client GraphQL',
+    pathwayId: '',
+    pathwayName: '',
+    pathwayDescription: '',
     pathwayTags: [],
     stepOrder: ['step1', 'step2', 'step3'],
     steps: {
@@ -21,7 +21,7 @@ const initialState = {
             selected: false,
             timeLimit: 20,
             isPreview: false,
-            isDummy: true
+            linkId: '',
             // rating: 2
         },
         step2: {
@@ -31,7 +31,7 @@ const initialState = {
             selected: false,
             timeLimit: 30,
             isPreview: false,
-            isDummy: true
+            linkId: '',
             // rating: 1
         },
         step3: {
@@ -41,7 +41,7 @@ const initialState = {
             selected: false,
             timeLimit: 40,
             isPreview: false,
-            isDummy: true
+            linkId: '',
             // rating: 3
         },
     },

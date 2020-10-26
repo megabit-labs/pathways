@@ -52,7 +52,7 @@ class StepDndList extends Component {
         })
     }
 
-    handleClose = (type, mutationHandler) => {
+    handleClose = (type, mutationHandler=null) => {
         this.setState({
             anchorEl: null,
         })
@@ -70,7 +70,7 @@ class StepDndList extends Component {
 
     onAddBtnClick = (type, mutationHandler) => {
         const stepId = generateId("step")
-        let stepName
+        let stepName, stepType
         if (type === 'pathway') {
             this.props.onAddStep({
                 heading: 'This is a step',
@@ -78,6 +78,7 @@ class StepDndList extends Component {
                 id: stepId,
             })
             stepName = 'Pathway'
+            stepType = 'PATHWAY_STEP'
         } else if (type === 'content') {
             this.props.onAddStep({
                 heading: 'This is a step',
@@ -85,6 +86,7 @@ class StepDndList extends Component {
                 id: stepId,
             })
             stepName = 'Content'
+            stepType = 'CONTENT_STEP'
         } else if (type === 'shared') {
             this.props.onAddStep({
                 heading: 'This is a step',
@@ -92,16 +94,15 @@ class StepDndList extends Component {
                 id: stepId,
             })
             stepName = 'Shared Step'
+            stepType = 'SHARED_STEP'
         }
-
-        // let currentSteps = []
 
         const newStep = {
             id: stepId,
             name: stepName,
             time: 30,
             index: 0,
-            isPathway: (type==='pathway'),
+            stepType: stepType,
             typeId: this.props.pathwayId
         }
 
@@ -172,7 +173,7 @@ class StepDndList extends Component {
                                     anchorEl={this.state.anchorEl}
                                     keepMounted
                                     open={Boolean(this.state.anchorEl)}
-                                    onClose={this.handleClose}
+                                    onClose={() => {this.handleClose("", null)}}
                                 >
                                     <MenuItem
                                         onClick={() => this.handleClose('pathway', updatePathway)}

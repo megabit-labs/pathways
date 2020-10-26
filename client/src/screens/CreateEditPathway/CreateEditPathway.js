@@ -11,32 +11,36 @@ import * as actions from '../../store/actions/index';
 class CreateEditPathway extends Component {
 
     render() {
-        return (
-            <Fragment>
-                <PathwayDetails
-                    showPathwayDetailsScreen={
-                        this.props.showPathwayDetailsScreen
-                    }
-                    hidePathwayDetailsScreen={
-                        () => this.props.togglePathwayDetailsScreen(false)
-                    }
-                    modalCloseOnOverlay={this.props.modalCloseOnOverlay}
-                    toggleModalCloseOnOverlay={this.props.toggleModalCloseOnOverlay}
-                />
-                <div className={classes.Content}>
-                    <div className={classes.EditArea}>
-                        <StepEditArea />
+        if(!this.props.isLoggedIn) {
+            return(<div>Please Login to create and edit pathways</div>)
+        } else {
+            return (
+                <Fragment>
+                    <PathwayDetails
+                        showPathwayDetailsScreen={
+                            (this.props.pathwayId === '') ? true : this.props.showPathwayDetailsScreen
+                        }
+                        hidePathwayDetailsScreen={
+                            () => this.props.togglePathwayDetailsScreen(false)
+                        }
+                        modalCloseOnOverlay={(this.props.pathwayId === '') ? false : this.props.modalCloseOnOverlay}
+                        toggleModalCloseOnOverlay={this.props.toggleModalCloseOnOverlay}
+                    />
+                    <div className={classes.Content}>
+                        <div className={classes.EditArea}>
+                            <StepEditArea />
+                        </div>
+                        <div className={classes.StepList}>
+                            <StepDndList
+                                showPathwayDetailsScreen={
+                                    () => this.props.togglePathwayDetailsScreen(true)
+                                }
+                            />
+                        </div>
                     </div>
-                    <div className={classes.StepList}>
-                        <StepDndList
-                            showPathwayDetailsScreen={
-                                () => this.props.togglePathwayDetailsScreen(true)
-                            }
-                        />
-                    </div>
-                </div>
-            </Fragment>
-        )
+                </Fragment>
+            )
+        }
     }
 }
 
@@ -45,7 +49,9 @@ const mapStateToProps = (state) => {
         stepId: state.createEditPathway.selectedStep,
         steps: state.createEditPathway.steps,
         showPathwayDetailsScreen: state.createEditPathway.showPathwayDetailsScreen,
-        modalCloseOnOverlay: state.createEditPathway.modalCloseOnOverlay
+        modalCloseOnOverlay: state.createEditPathway.modalCloseOnOverlay,
+        pathwayId: state.createEditPathway.pathwayId,
+        isLoggedIn: state.displayProfile.isLoggedIn,
     }
 }
 

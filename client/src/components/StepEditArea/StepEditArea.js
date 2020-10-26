@@ -31,6 +31,7 @@ class StepEditArea extends Component {
             content: 'This is the content',
             timeLimit: 30,
             stepId: '',
+            linkId: ''
         }
     }
 
@@ -95,8 +96,8 @@ class StepEditArea extends Component {
         } else {
             displayComponent = (
                 <StepContentEdit
-                    onContentChange={(content) =>
-                        this.stepUpdateHandler('content', content)
+                    onContentChange={(content, key='content') =>
+                        this.stepUpdateHandler(key, content)
                     }
                     content={this.state.content}
                     selectedStepType={this.state.stepType}
@@ -113,6 +114,7 @@ class StepEditArea extends Component {
                         heading={this.state.heading}
                         content={this.state.content}
                         stepType={this.state.stepType}
+                        linkId={this.state.linkId}
                         timeLimit={this.state.timeLimit}
                         onSaveStep={this.saveStepDataToStore}
                     />

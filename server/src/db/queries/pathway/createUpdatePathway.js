@@ -28,7 +28,7 @@ const createUpdatePathway = ({
             MERGE (s:Step {id: step.id})
             SET s.name = step.name, s.time = step.time, s.index = step.index, s.stepType = step.stepType
             WITH s, step, p
-            MATCH (s)-[r]->() DELETE r
+            OPTIONAL MATCH (s)-[r]->() DELETE r
             MERGE (s)-[:HAS_PARENT_PATHWAY]->(p)
             WITH s, step, p
             MATCH (n {id: step.typeId})

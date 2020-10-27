@@ -11,53 +11,29 @@ const createUpdatePathway = ({
 }) => {
     return new Query({
         statement: `
-        MATCH (u:User {username: $username})
-        MERGE (p:Pathway {id: $id})
-        SET p.name = $name
-        SET p.description = $description
-        SET p.lastModified = localdatetime()
-        MERGE (u)-[:HAS_CREATED]->(p)
-        WITH p
-        UNWIND $steps as step
-        CALL apoc.do.when(
-            step.stepType =~ "PATHWAY_STEP",
-            '
-            MERGE (s:Step {id: step.id})
-            SET s.name = step.name, s.time = step.time, s.index = step.index
-            WITH s, p, step
-            OPTIONAL MATCH (s)-[r1:HAS_CONTENT]->(:Content)
-            OPTIONAL MATCH (s)-[r2:INCLUDES]->(:Pathway)
-            DELETE r1, r2
-            WITH s, p, step
-            MATCH (pother:Pathway {id: step.typeId})
-            CREATE (pother)<-[r:INCLUDES]-(s)
-            MERGE (p)<-[:HAS_PARENT_PATHWAY]-(s)
-            RETURN p
-            ',
-            '
+            MERGE (p:Pathway {id: $id})
+            SET p.name = $name
+            SET p.description = $description
+            SET p.lastModified = localdatetime()
+            WITH p
+            MATCH (u {username: $username})
+            WITH p, u
+            MERGE (u)-[:HAS_CREATED]->(p)
+            WITH p
+            UNWIND $tags as tag
+            MERGE (t:Tag {name: tag})
+            MERGE (p)-[:HAS_TAG]->(t)
+            WITH distinct p
+            UNWIND $steps as step
             MERGE (s:Step {id: step.id})
             SET s.name = step.name, s.time = step.time, s.index = step.index, s.stepType = step.stepType
-            WITH s, p, step
-            OPTIONAL MATCH (s)-[r1:HAS_CONTENT]->(:Content)
-            OPTIONAL MATCH (s)-[r2:INCLUDES]->(:Pathway)
-            DELETE r1, r2
-            WITH s, p, step
-            MATCH (c:Content {id: step.typeId})
-            CREATE (c)<-[:HAS_CONTENT]-(s)
-            MERGE (p)<-[:HAS_PARENT_PATHWAY]-(s)
+            WITH s, step, p
+            MATCH (s)-[r]->() DELETE r
+            MERGE (s)-[:HAS_PARENT_PATHWAY]->(p)
+            WITH s, step, p
+            MATCH (n {id: step.typeId})
+            MERGE (s)-[:INCLUDES]->(n)
             RETURN p
-            ',
-            {
-                step: step,
-                p: p
-            }
-        )
-        YIELD value
-        UNWIND $tags as tag
-        MERGE (t:Tag {name: tag})
-        MERGE (p)-[r:HAS_TAG]->(t)
-        WITH DISTINCT p
-        RETURN p.id
         `,
         params: {
             id,

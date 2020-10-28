@@ -29,7 +29,7 @@ type Step {
     index: Int
     stepType: StepType
     pathway: Pathway @relation(name: "INCLUDES", direction: "OUT")
-    content: Content @relation(name: "HAS_CONTENT", direction: "OUT")
+    content: Content @relation(name: "INCLUDES", direction: "OUT")
     userStatus: StepStatus
 }
 

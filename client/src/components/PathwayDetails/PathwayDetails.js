@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Mutation } from 'react-apollo'
+import { Redirect, useLocation } from 'react-router-dom'
 
 import classes from './PathwayDetails.module.css'
 import * as actions from '../../store/actions/index'
@@ -17,7 +18,7 @@ class PathwayDetails extends Component {
             description: this.props.description,
             tags: this.props.tags,
             newTag: '',
-            errors: ''
+            errors: '',
         }
     }
 
@@ -64,10 +65,6 @@ class PathwayDetails extends Component {
                     return
                 } else {
                     console.log("Pathway " + this.state.name + " has been added")
-                    this.setState({
-                        ...this.state,
-                        errors: ''
-                    })
                     this.props.hidePathwayDetailsScreen()
                 }
             } else {
@@ -101,6 +98,12 @@ class PathwayDetails extends Component {
     }
 
     render() {
+        
+        if(this.props.id !== '' && (this.props.location==='/create' || this.props.location === '/create/')) {
+            const redirectTo = 'create/' + this.props.id
+            return <Redirect push to={redirectTo} />;
+        }
+
         let { showPathwayDetailsScreen } = this.props
         let modalClosed = this.props.hidePathwayDetailsScreen
         if(this.props.modalCloseOnOverlay === false) {

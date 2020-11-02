@@ -9,7 +9,8 @@ export {
     addTag,
     removeTag,
     togglePathwayDetailsScreen, 
-    toggleModalCloseOnOverlay
+    toggleModalCloseOnOverlay,
+    updatePathwayInitialState
 } from './createEditPathway'
 
 export { addNewPathway, popLastPathway } from './displayPathway'

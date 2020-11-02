@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Navbar, Nav } from "react-bootstrap"
 import gql from "graphql-tag"
-import { useMutation } from "@apollo/react-hooks"
+import { useMutation } from "react-apollo"
 import LogoGithub from 'react-ionicons/lib/LogoGithub'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import gql from 'graphql-tag';
-// import { useQuery } from '@apollo/react-hooks';
 import { Query } from "react-apollo";
 
 import ProfileBio from '../../components/ProfileBio/ProfileBio';
@@ -49,6 +48,7 @@ const convertData = (userdata) => {
         let pathwayDetails = {}
         pathwayDetails["id"] = idx
         pathwayDetails["topic"] = pathway.name
+        pathwayDetails["pathwayId"] = pathway.id
             
         if(pathway.steps[pathway.steps.length-1].userStatus == statusEnum.HAS_COMPLETED) {
             
@@ -80,6 +80,7 @@ const convertData = (userdata) => {
 
     userdata.created.forEach((pathway) => {
         let createdDetails = {}
+        createdDetails["pathwayId"] = pathway.id
         createdDetails["topic"] = pathway.name
         createdDetails["description"] = pathway.description
         createdDetails["tags"] = pathway.tags.map(tag => tag.name)
@@ -145,6 +146,7 @@ class UserProfile extends Component {
                             description
                         }
                         created {
+                            id
                             name
                             tags {
                                 name

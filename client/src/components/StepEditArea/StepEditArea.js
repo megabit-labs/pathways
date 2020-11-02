@@ -27,18 +27,19 @@ class StepEditArea extends Component {
         super(props)
         this.state = {
             heading: 'This the heading',
-            stepType: 'Content',
+            stepType: 'CONTENT_STEP',
             content: 'This is the content',
             timeLimit: 30,
             stepId: '',
-            linkId: ''
+            typeId: '',
+            shareId: '',
         }
     }
 
     // eslint-disable-next-line
-    componentWillReceiveProps(next) {
+    componentDidMount() {
         let newState = {}
-
+        let next = this.props
         // The second conditional is to make sure that
         // we don't get stuck into an infinite loop, (since
         // saveStepDataToStore is going to trigger this
@@ -114,7 +115,8 @@ class StepEditArea extends Component {
                         heading={this.state.heading}
                         content={this.state.content}
                         stepType={this.state.stepType}
-                        linkId={this.state.linkId}
+                        typeId={this.state.typeId}
+                        shareId={this.state.shareId}
                         timeLimit={this.state.timeLimit}
                         onSaveStep={this.saveStepDataToStore}
                     />

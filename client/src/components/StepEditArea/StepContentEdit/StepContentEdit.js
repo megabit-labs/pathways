@@ -15,7 +15,7 @@ const stepContentEdit = (props) => {
     const { content, onContentChange, selectedStepType } = props
 
     let editor = null
-    if (selectedStepType === 'Shared Step' || selectedStepType === 'Pathway') {
+    if (selectedStepType === 'SHARED_STEP' || selectedStepType === 'PATHWAY_STEP') {
         editor = <ContentPreview stepType={selectedStepType} onValueChange={onContentChange} />
     } else {
         editor = (

@@ -4,10 +4,10 @@ import './PathwayOngoing.css';
 import RecentPathway from './RecentPathway/RecentPathway';
 import PathwayPreview from './PathwayPreview/PathwayPreview';
 
-const PreviewData = props => props.selectedTab.pathways.map(pathway => {
+const PreviewData = props => props.selectedTab.pathways.map((pathway, idx) => {
     if(pathway.id !== props.selectedTab.recentPathway.id) {
         return(
-            <PathwayPreview data={pathway} />
+            <PathwayPreview key={idx} data={pathway} />
         );
     }
 });

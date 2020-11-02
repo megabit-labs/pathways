@@ -78,3 +78,10 @@ export const toggleModalCloseOnOverlay = () => {
     type: actionTypes.TOGGLE_MODAL_CLOSE_ON_OVERLAY
   }
 };
+
+export const updatePathwayInitialState = (payload) => {
+    return {
+        type: actionTypes.UPDATE_PATHWAY_INITIAL_STATE,
+        payload: payload
+    }
+}

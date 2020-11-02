@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import { ApolloProvider } from '@apollo/react-hooks'
-// import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { setContext } from 'apollo-link-context';
+import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
@@ -37,7 +36,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: localStorage.getItem('token') || null,
+      authorization: token || null,
     }
   }
 });

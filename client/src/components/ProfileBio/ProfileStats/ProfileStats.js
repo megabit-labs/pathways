@@ -25,7 +25,7 @@ class ProfileStats extends Component {
         const stats = Object.entries(this.props.content).map((item, i) => {
             const tab = item[1];
             return(
-                <div>
+                <div key={i}>
                     <span style={styles[i % styles.length]}>{tab.total}</span> Pathways {tab.label}
                 </div>
             )

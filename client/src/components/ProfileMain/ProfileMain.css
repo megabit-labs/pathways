@@ -29,3 +29,9 @@
     margin: 0 auto;
     border: 1px solid #e2e4e8;
 }
+
+.emptyWrapper {
+    margin-top: 4vh;
+    font-size: 25px;
+    color: #555;
+}

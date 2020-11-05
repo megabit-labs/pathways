@@ -44,11 +44,11 @@ const step = (props) => {
 
     let tagColor
     switch (props.stepType) {
-        case 'Content': tagColor = '#0077b6'; break;
-        case 'Pathway': tagColor = '#2ec4b6'; break;
-        case 'Shared Step': tagColor = '#9b5de5'; break;
+        case 'CONTENT_STEP': tagColor = '#0077b6'; break;
+        case 'PATHWAY_STEP': tagColor = '#2ec4b6'; break;
+        case 'SHARED_STEP': tagColor = '#9b5de5'; break;
     }
-
+    
     const content = props.heading.length < 40 ? props.heading
                                               : `${props.heading.slice(0, 40)}...`
 

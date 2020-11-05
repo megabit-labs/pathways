@@ -16,9 +16,9 @@ const groupBy = function(xs) {
     }, {});
 };
 
-const CompletedContent = props => props.data.map(ele => {
+const CompletedContent = props => props.data.map((ele, idx) => {
     return(
-        <div className='completedContent'>
+        <div key={idx} className='completedContent'>
             <div>
                 <div className='completedTitle'>{ele.topic}</div>
                 <div className='completedTags'>
@@ -44,10 +44,19 @@ const CompletedContainer = props => {
 }
 
 const PathwayCompleted = props => {
+
+    if(props.selectedTab.pathways.length === 0) {
+        return(
+            <div className='emptyWrapper'>
+                No pathways completed!
+            </div>
+        )
+    }
+
     const content = groupBy(props.selectedTab.pathways);
     let containers = [];
     Object.keys(content).sort().reverse().forEach(key => {
-        containers.push(<CompletedContainer data={content[key]} />)
+        containers.push(<CompletedContainer key={key} data={content[key]} />)
     });
     
     return(

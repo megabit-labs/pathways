@@ -11,7 +11,7 @@ function ContentPreview(props) {
     const { stepType } = props
 
     let displayComponent = null
-    if (stepType === 'Shared Step') {
+    if (stepType === 'SHARED_STEP') {
         displayComponent = <StepPreview stepId={stepId} />
     } else {
         displayComponent = <PathwayPreview pathwayId={pathwayId} />
@@ -20,18 +20,24 @@ function ContentPreview(props) {
     return (
         <div style={{ marginLeft: '18px' }}>
             <div style={{ display: 'flex' }}>
-                {stepType === 'Shared Step' ? (
+                {stepType === 'SHARED_STEP' ? (
                     <input
                         className={classes.InputField}
                         placeholder='Enter ID of Step'
-                        onChange={(e) => setStepId(e.target.value)}
+                        onChange={(e) => {
+                            setStepId(e.target.value)
+                            props.onValueChange(e.target.value, 'shareId')
+                        }}
                         value={stepId}
                     />
                 ) : (
                     <input
                         className={classes.InputField}
                         placeholder='Enter ID of relevant component'
-                        onChange={(e) => setPathwayId(e.target.value)}
+                        onChange={(e) => {
+                            setPathwayId(e.target.value)
+                            props.onValueChange(e.target.value, 'shareId')
+                        }}
                         value={pathwayId}
                     />
                 )}

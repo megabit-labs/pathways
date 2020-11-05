@@ -15,6 +15,7 @@ class App extends Component {
                     <Route path="/" exact component={SearchPage} />
                     <Route path="/profile" exact component={UserProfile}/>
                     <Route path="/create" exact component={CreateEditPathway} />
+                    <Route path="/create/:pathwayId" exact component={CreateEditPathway} />
                      <Route path="/pathway" component={GetPathway} />
                     <Route path="/results/search=:query" exact component={SearchResultPage}/>
                 </Switch>

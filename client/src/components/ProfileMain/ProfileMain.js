@@ -40,14 +40,14 @@ class ProfileMain extends Component {
 
     render() {
 
-        const Tabs = Object.entries(this.props.content).map(item => {
+        const Tabs = Object.entries(this.props.content).map((item, idx) => {
             let classes = 'tab';
             const tab = item[1];
             if(this.state.selectedTab.label === tab.label)
                 classes += ' tabActive';
 
             return(
-                <div className={classes} onClick={() => this.changeTab(tab.label)}>
+                <div key={idx} className={classes} onClick={() => this.changeTab(tab.label)}>
                     <span>{tab.label}</span>
                 </div>
             );

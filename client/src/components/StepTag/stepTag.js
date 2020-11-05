@@ -3,9 +3,9 @@ import React from 'react'
 const stepTag = (props) => {
     let tagColor
     switch (props.stepType) {
-        case 'Content': tagColor = '#0077b6'; break;
-        case 'Pathway': tagColor = '#2ec4b6'; break;
-        case 'Shared Step': tagColor = '#9b5de5'; break;
+        case 'CONTENT_STEP': tagColor = '#0077b6'; break;
+        case 'PATHWAY_STEP': tagColor = '#2ec4b6'; break;
+        case 'SHARED_STEP': tagColor = '#9b5de5'; break;
     }
 
     // These styles are kinda messed up, with the transform and all.

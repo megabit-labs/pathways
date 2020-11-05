@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from 'react-apollo'
 import ReactMarkdown from 'react-markdown'
 import CodeBlock from '../Markdown/CodeBlock'
 

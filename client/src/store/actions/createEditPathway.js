@@ -43,9 +43,10 @@ export const updateStep = (stepId, stepData) => {
     }
 }
 
-export const updatePathwayDetails = (name, description) => {
+export const updatePathwayDetails = (id, name, description) => {
     return {
         type: actionTypes.UPDATE_PATHWAY_NAME,
+        id: id,
         name: name,
         description: description,
     }
@@ -62,5 +63,25 @@ export const removeTag = (tag) => {
     return {
         type: actionTypes.REMOVE_TAG,
         tag: tag,
+    }
+}
+
+export const togglePathwayDetailsScreen = (payload) => {
+  return  {
+    type: actionTypes.TOGGLE_PATHWAY_DETAILS_SCREEN,
+    payload: payload
+  }
+};
+
+export const toggleModalCloseOnOverlay = () => {
+  return {
+    type: actionTypes.TOGGLE_MODAL_CLOSE_ON_OVERLAY
+  }
+};
+
+export const updatePathwayInitialState = (payload) => {
+    return {
+        type: actionTypes.UPDATE_PATHWAY_INITIAL_STATE,
+        payload: payload
     }
 }

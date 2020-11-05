@@ -32,7 +32,7 @@
     margin-right: 10vw;
 }
 
-.createdHeader div:nth-child(2) {
+.createdHeader .createdLink {
     color: #ccc;
     font-size: 36px;
     width: 2vw;

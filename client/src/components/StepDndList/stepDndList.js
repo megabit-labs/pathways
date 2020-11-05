@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { connect } from 'react-redux'
+import { Mutation } from 'react-apollo'
 
 import Step from './Step/step'
 import NumberStat from '../NumberStat/NumberStat'
@@ -18,6 +19,9 @@ import SettingsIcon from 'react-ionicons/lib/IosSettings'
 import * as actions from '../../store/actions/index'
 
 import classes from './StepDndList.module.css'
+import generateId from '../../utils/generateId'
+import * as mutations from '../../utils/mutations/updatePathway'
+import UPDATE_STEP from '../../utils/mutations/updateStep'
 
 const getListStyle = (isDraggingOver) => ({
     background: '#fafafa',
@@ -49,11 +53,11 @@ class StepDndList extends Component {
         })
     }
 
-    handleClose = (type) => {
+    handleClose = (type, updatePathway=null, updateStep=null) => {
         this.setState({
             anchorEl: null,
         })
-        this.onAddBtnClick(type)
+        this.onAddBtnClick(type, updatePathway, updateStep)
     }
 
     onDragEnd(result) {
@@ -65,24 +69,87 @@ class StepDndList extends Component {
         this.props.onReorderSteps(result)
     }
 
-    onAddBtnClick = (type) => {
-        if (type === 'pathway') {
+    onAddBtnClick = (type, updatePathway, updateStep) => {
+        const stepId = generateId("step")
+        const contentId = generateId('content')
+        const timeLimit = 30
+        let stepName, stepType
+
+        if (type === 'PATHWAY_STEP') {
             this.props.onAddStep({
                 heading: 'This is a step',
-                stepType: 'Pathway',
-                id: `${Math.random()}`,
+                stepType: 'PATHWAY_STEP',
+                id: stepId,
+                timeLimit: timeLimit
             })
-        } else if (type === 'content') {
+            stepName = 'Pathway Step'
+            stepType = 'PATHWAY_STEP'
+        } else if (type === 'CONTENT_STEP') {
             this.props.onAddStep({
                 heading: 'This is a step',
-                stepType: 'Content',
-                id: `${Math.random()}`,
+                stepType: 'CONTENT_STEP',
+                id: stepId,
+                timeLimit: timeLimit,
+                typeId: contentId
             })
-        } else if (type === 'shared') {
+            stepName = 'Content Step'
+            stepType = 'CONTENT_STEP'
+        } else if (type === 'SHARED_STEP') {
             this.props.onAddStep({
                 heading: 'This is a step',
-                stepType: 'Shared Step',
-                id: `${Math.random()}`,
+                stepType: 'SHARED_STEP',
+                id: stepId,
+                timeLimit: timeLimit
+            })
+            stepName = 'Shared Step'
+            stepType = 'SHARED_STEP'
+        }
+        
+        const newStep = {
+            id: stepId,
+            name: stepName,
+            time: timeLimit,
+            index: Object.keys(this.props.steps).length,
+            stepType: stepType,
+            typeId: ""
+        }
+
+        if(type === 'CONTENT_STEP' && updateStep) {
+            
+            updateStep({
+                variables: {
+                    id: contentId,
+                    title: 'This is a step',
+                    content: 'Step Content',
+                },
+            })
+            .then(res => {
+                console.log(res)
+                newStep["typeId"] = contentId
+                this.addNewStep(newStep, updatePathway)
+            })
+            .catch((err) => console.log(err))
+            
+        } else {
+            this.addNewStep(newStep, updatePathway)
+        }
+
+    }
+
+    addNewStep = (newStep, updatePathway) => {
+        if(updatePathway) {
+            updatePathway({variables: {
+                id: this.props.pathwayId,
+                name: this.props.pathwayName,
+                steps: [newStep],
+                tags: this.props.pathwayTags,
+                description: this.props.pathwayDescription
+            }})
+            .then( res => {
+                console.log(res)
+            })
+            .catch(e => {
+                console.log(JSON.parse(JSON.stringify(e)))
             })
         }
     }
@@ -113,7 +180,6 @@ class StepDndList extends Component {
                     stepType={currentStep.stepType}
                     selected={currentStep.selected}
                     rating={currentStep.rating}
-                    selected={currentStep.selected}
                 />
             )
         })
@@ -130,35 +196,43 @@ class StepDndList extends Component {
                         >
                             <PlusIcon fontSize='30px' color='#555' />
                         </Button>
-                        <Menu
-                            id='simple-menu'
-                            anchorEl={this.state.anchorEl}
-                            keepMounted
-                            open={Boolean(this.state.anchorEl)}
-                            onClose={this.handleClose}
-                        >
-                            <MenuItem
-                                onClick={() => this.handleClose('pathway')}
-                            >
-                                <div className={classes.pathwayStep}>
-                                    Pathway
-                                </div>
-                            </MenuItem>
-                            <MenuItem
-                                onClick={() => this.handleClose('content')}
-                            >
-                                <div className={classes.contentStep}>
-                                    Content
-                                </div>
-                            </MenuItem>
-                            <MenuItem
-                                onClick={() => this.handleClose('shared')}
-                            >
-                                <div className={classes.sharedStep}>
-                                    Shared Step
-                                </div>
-                            </MenuItem>
-                        </Menu>
+                        <Mutation mutation={ mutations.CREATE_UPDATE_PATHWAY }>
+                            {(updatePathway) => (
+                                <Menu
+                                    id='simple-menu'
+                                    anchorEl={this.state.anchorEl}
+                                    keepMounted
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={() => {this.handleClose("", null)}}
+                                >
+                                    <MenuItem
+                                        onClick={() => this.handleClose('PATHWAY_STEP', updatePathway)}
+                                    >
+                                        <div className={classes.pathwayStep}>
+                                            Pathway
+                                        </div>
+                                    </MenuItem>
+                                    <Mutation mutation={UPDATE_STEP}>
+                                        {(updateStep) => (  
+                                            <MenuItem
+                                                onClick={() => this.handleClose('CONTENT_STEP', updatePathway, updateStep)}
+                                            >
+                                                <div className={classes.contentStep}>
+                                                    Content
+                                                </div>
+                                            </MenuItem>
+                                        )}
+                                    </Mutation>
+                                    <MenuItem
+                                        onClick={() => this.handleClose('SHARED_STEP', updatePathway)}
+                                    >
+                                        <div className={classes.sharedStep}>
+                                            Shared Step
+                                        </div>
+                                    </MenuItem>
+                                </Menu>
+                            )}
+                        </Mutation>
                     </div>
 
                     <DragDropContext onDragEnd={this.onDragEnd}>
@@ -216,6 +290,11 @@ const mapStateToProps = (state) => {
     return {
         stepOrder: state.createEditPathway.stepOrder,
         steps: state.createEditPathway.steps,
+        // current pathway data needed to add a step
+        pathwayId: state.createEditPathway.pathwayId,
+        pathwayName: state.createEditPathway.pathwayName,
+        pathwayTags: state.createEditPathway.pathwayTags,
+        pathwayDescription: state.createEditPathway.pathwayDescription,
     }
 }
 

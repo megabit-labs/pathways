@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './PathwayCreated.css';
 
 import PathwayTags from '../PathwayTags/PathwayTags';
@@ -11,7 +12,9 @@ const CreatedContainer = props => {
             <div className='createdDescription'>
                 <div className='createdHeader'>
                     <div className='createdTitle'>{props.data.topic}</div>                    
-                    <div><FontAwesomeIcon icon={faExternalLinkAlt} /></div>
+                    <div><Link className='createdLink' to={`/create/${props.data.pathwayId}`}>
+                        <FontAwesomeIcon icon={faExternalLinkAlt} />
+                    </Link></div>
                 </div>
 
                 <div className='createdBody'>
@@ -46,11 +49,20 @@ const CreatedContainer = props => {
 
 const CreatedWrapper = props => props.selectedTab.pathways.map(pathway => {
     return(
-        <CreatedContainer data={pathway}/>
+        <CreatedContainer key={pathway.pathwayId} data={pathway}/>
     )
 })
 
 const PathwayCreated = props => {
+
+    if(props.selectedTab.pathways.length === 0) {
+        return(
+            <div className='emptyWrapper'>
+                You have not created any pathway
+            </div>
+        )
+    }
+
     return(
         <div className='createdWrapper'>
             <CreatedWrapper selectedTab={props.selectedTab} />

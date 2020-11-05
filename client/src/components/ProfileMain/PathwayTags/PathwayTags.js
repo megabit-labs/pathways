@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PathwayTags = props => props.tags.map(tag => {
+const PathwayTags = props => props.tags.map((tag, idx) => {
     return(
-        <span>#{tag}</span>
+        <span key={idx}>#{tag}</span>
     )
 })
 

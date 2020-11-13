@@ -10,7 +10,8 @@ import classes from "./Header.module.css"
 
 import * as actions from '../../../store/actions/index';
 
-const CLIENT_ID = "8b508ba452a263f604b4"
+// const CLIENT_ID = "8b508ba452a263f604b4"
+const CLIENT_ID = "37454df5e11a69f88833"
 
 const GET_TOKEN = gql`
     mutation($code: String!) {
@@ -46,6 +47,12 @@ const Header = (props) => {
     if (code && !isLoggedIn) {
         isLoggedInHandler(true)
         getToken({ variables: { code: code } })
+        .then( (res) => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log('Error logging in\n', err)
+        })
     }
 
     if (data && !isTouched) {

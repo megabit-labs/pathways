@@ -29,7 +29,6 @@ const GetPathway = (props) => {
                         title
                         content
                     }
-                    _id
                 }
             }
         }

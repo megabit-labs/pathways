@@ -21,15 +21,15 @@ const GetPathway = (props) => {
                     name
                     time
                     index
-                    isPathway
+                    pathway{
+                        name
+                    }
                     content{
                         id
                         title
                         content
                     }
-                    pathway {
-                        id
-                    }
+                    _id
                 }
             }
         }

@@ -22,6 +22,7 @@ const GetPathway = (props) => {
                     time
                     index
                     pathway{
+                        id
                         name
                     }
                     content{

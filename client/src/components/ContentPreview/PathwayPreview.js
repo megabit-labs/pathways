@@ -21,15 +21,15 @@ export default function PathwayPreview(props) {
                     name
                     time
                     index
-                    isPathway
+                    pathway {
+                        name
+                    }
                     content {
                         id
                         title
                         content
                     }
-                    pathway {
-                        id
-                    }
+                    id
                 }
             }
         }

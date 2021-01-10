@@ -18,6 +18,8 @@ services:
     env_file: ./server/config.env
     ports:
       - "3003:3000"
+    expose:
+      - "3000"
     volumes:
       - ./server:/home/node/app
     depends_on:
@@ -28,6 +30,8 @@ services:
     env_file: ./client/config.env
     ports:
       - "3000:3000"
+    expose:
+      - "3000"
     volumes:
       - react_build:/app/build
   nginx:

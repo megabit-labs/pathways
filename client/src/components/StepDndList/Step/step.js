@@ -7,47 +7,46 @@ import StepTag from '../../StepTag/stepTag'
 
 import DeleteIcon from 'react-ionicons/lib/IosTrash'
 import EditIcon from 'react-ionicons/lib/IosCreateOutline'
+import { FaGripVertical } from 'react-icons/fa'
 
 import * as actions from '../../../store/actions/index'
 import classes from './Step.module.css'
 
 
-const getItemStyle = (isDragging, draggableStyle, selected = false, color) => {
+const getItemStyle = (isDragging, draggableStyle, selected = false) => {
     let variableStyles = {}
 
     if (isDragging) {
         variableStyles = {
-            boxShadow: "0px 0px 16px 4px #ddd"
+            boxShadow: 'var(--heavy-shadow)'
         }
     } else {
         variableStyles = {
-            boxShadow: "0px 0px 8px 4px #eee"
+            boxShadow: 'var(--light-shadow)'
         }
     }
 
     if (selected) {
-        variableStyles['border'] = `3px solid ${color}`
+        variableStyles['boxShadow'] = 'var(--heavy-shadow)'
     }
 
     return {
         userSelect: "none",
-        padding: 16,
+        padding: '16px',
         margin: "0 0 16px 0",
-        borderRadius: "5px",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        height: '170px',
+        borderRadius: 'var(--border-radius-l)',
         background: "white",
+        cursor: 'pointer',
         ...variableStyles,
         ...draggableStyle,
     };
 };
 
 const step = (props) => {
-
-    let tagColor
-    switch (props.stepType) {
-        case 'CONTENT_STEP': tagColor = '#0077b6'; break;
-        case 'PATHWAY_STEP': tagColor = '#2ec4b6'; break;
-        case 'SHARED_STEP': tagColor = '#9b5de5'; break;
-    }
     
     const content = props.heading.length < 40 ? props.heading
                                               : `${props.heading.slice(0, 40)}...`
@@ -64,13 +63,12 @@ const step = (props) => {
                 <div
                     ref={provided.innerRef}
                     {...provided.draggableProps}
-                    {...provided.dragHandleProps}
                     style={getItemStyle(
                         snapshot.isDragging,
                         provided.draggableProps.style,
-                        selected,
-                        tagColor
+                        selected
                     )}
+                    onClick={() => props.onSelectStep(props.id)}
                 >
                     <div className={classes.TopRow}>
                         <div className={classes.StepTitle}>
@@ -78,10 +76,10 @@ const step = (props) => {
                         </div>
 
                         <div 
-                            className={classes.EditBtn}
-                            onClick={() => props.onSelectStep(props.id)}
+                            className={classes.DragHandle}
+                            {...provided.dragHandleProps}
                         >
-                            <EditIcon fontSize="45px" color="#555"/>
+                            <FaGripVertical/>
                         </div>
                     </div>
                     
@@ -95,10 +93,6 @@ const step = (props) => {
                     
                     <div className={classes.BottomRow}>
                         <StepTag value={props.stepType} />
-
-                        {selected ? <div className={classes.Unsaved} style={{backgroundColor: `${tagColor}`}}/> 
-                                  : null}
-
                         <div 
                             className={classes.DeleteBtn}
                             onClick={() => props.onDeleteStep(props.id)}

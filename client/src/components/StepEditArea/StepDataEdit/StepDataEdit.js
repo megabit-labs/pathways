@@ -76,7 +76,7 @@ function StepDataEdit(props) {
                 >
                     <Toggle
                         vals={stepTypes.map((val) => ({
-                            component: <StepTag stepType={val} />,
+                            component: <StepTag value={val} />,
                             value: val,
                         }))}
                         onValueChange={(value) =>

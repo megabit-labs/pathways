@@ -1,36 +1,11 @@
 import React from 'react'
 
+import classes from './stepTag.module.css'
+
 const stepTag = (props) => {
-    let tagColor
-    switch (props.stepType) {
-        case 'CONTENT_STEP': tagColor = '#0077b6'; break;
-        case 'PATHWAY_STEP': tagColor = '#2ec4b6'; break;
-        case 'SHARED_STEP': tagColor = '#9b5de5'; break;
-    }
-
-    // These styles are kinda messed up, with the transform and all.
-    // TODO: Get a real front-end dev to fix these.
-    const typeStyle = {
-        display: "inline-block",
-        backgroundColor: tagColor,
-        height: "23px",
-        borderRadius: "5px",
-        fontSize: "15px",
-        boxSizing: "border-box",
-        paddingLeft: "10px",
-        paddingRight: "10px",
-        marginTop: "auto",
-        marginBottom: "auto",
-        // transform: "translateY(-20%)",
-        textAlign: "center",
-        color: "white",
-        fontWeight: "800",
-        verticalAligh: "middle"
-    }
-
     return (
-        <div style={typeStyle}>
-            <p>{props.stepType}</p>
+        <div className={classes.StepTag}>
+            {props.value.split('_').join(' ')}
         </div>
     )
 }

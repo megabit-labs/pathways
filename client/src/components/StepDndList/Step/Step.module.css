@@ -1,6 +1,7 @@
 .StepTitle {
     /* background-color: yellowgreen; */
-    font-size: 30px;
+    font-size: var(--text-m);
+    color: #888;
     line-height: 1.2em;
     width: 350px;
 }

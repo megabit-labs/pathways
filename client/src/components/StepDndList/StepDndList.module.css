@@ -40,15 +40,15 @@
 
 .StepListTitle {
     display: flex;
-    background-color: #fafafa;
-    /* background-color: red; */
+    font-size: var(--text-s);
+    color: #ddd;
     width: 500px;
     height: 50px;
     box-sizing: border-box;
     padding-left: 10px;
     padding-right: 35px;
     justify-content: space-between;
-    color: #777;
+    align-items: center;
     font-weight: 700;
 }
 

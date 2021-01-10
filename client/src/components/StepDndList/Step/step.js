@@ -94,7 +94,7 @@ const step = (props) => {
                     
                     
                     <div className={classes.BottomRow}>
-                        <StepTag stepType={props.stepType} />
+                        <StepTag value={props.stepType} />
 
                         {selected ? <div className={classes.Unsaved} style={{backgroundColor: `${tagColor}`}}/> 
                                   : null}

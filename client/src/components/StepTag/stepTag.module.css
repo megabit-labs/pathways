@@ -1,0 +1,13 @@
+.StepTag {
+    background-color: red;
+    font-size: var(--text-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    font-weight: var(--fontweight-medium);
+    color: var(--primary);
+    background-color: var(--highlight);
+    border-radius: var(--border-radius-l);
+}

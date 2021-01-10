@@ -1,5 +1,5 @@
 .Content {
-    background-color: aqua;
+    background-color: var(--background-color);
     height: 100vh;
     display: flex;
     /* flex-grow: 0; */
@@ -18,7 +18,7 @@
 
 .StepList {
     /* float: right; */
-    background-color: red;
+    /* background-color: red; */
     width: 600px;
     height: 100%;
 }

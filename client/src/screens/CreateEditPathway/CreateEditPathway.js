@@ -16,6 +16,7 @@ class CreateEditPathway extends Component {
         const PathwayCreateEdit = () => {
             return(
                 <Fragment>
+
                     <PathwayDetails
                         showPathwayDetailsScreen={
                             (this.props.pathwayId === '') ? true : this.props.showPathwayDetailsScreen
@@ -27,6 +28,7 @@ class CreateEditPathway extends Component {
                         toggleModalCloseOnOverlay={this.props.toggleModalCloseOnOverlay}
                         location={this.props.location.pathname}
                     />
+
                     <div className={classes.Content}>
                         <div className={classes.EditArea}>
                             <StepEditArea />

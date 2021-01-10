@@ -7,6 +7,8 @@ import SearchResultPage from "../src/screens/SearchResultPage/SearchResultPage";
 import UserProfile from "../src/screens/UserProfile/UserProfile";
 import GithubAuth from './components/GithubAuth/GithubAuth';    
 
+import './App.css'
+
 class App extends Component {
     render() {
         return (

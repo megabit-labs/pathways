@@ -1,3 +1,32 @@
+:root {
+  --background-color: #fafafa;
+  --primary-blue: 58,134,255;
+  --primary-red: 255, 0, 0;
+  --primary: rgba(var(--primary-blue), 0.6);
+  --highlight: rgba(var(--primary-blue), 0.05);
+  --light-gray: #9999998a;
+  --light-red: rgba(var(--primary-red), 0.5);
+  --very-light-gray: rgba(221, 221, 221, 0.54);
+  --entity-color: #fff;
+  --formfield-background: #fefefe;
+
+  --text-xs: 16px;
+  --text-s: 18px;
+  --text-m: 26px;
+  --text-l: 32px;
+  --fontweight-medium: 500;
+  --fontweight-bold: 700;
+  --text-color-regular: #888;
+  
+  --light-shadow: 0px 0px 16px 4px #eeeeee80;
+  --heavy-shadow: 0px 0px 8px 4px rgba(var(--primary-blue), 0.12);
+  --heavy-shadow-red: 0px 0px 8px 4px rgba(255, 0, 0, 0.12);
+  --heavy-shadow-blur: 0px 0px 8px 4px rgba(var(--primary-blue), 0.24);
+
+  --border-radius-l: 10px;
+  --border-radius-m: 5px; 
+}
+
 .App {
   text-align: center;
 }

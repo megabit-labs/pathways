@@ -188,7 +188,7 @@ class StepDndList extends Component {
             <div className={classes.ControlsArea}>
                 <div className={classes.StepListArea}>
                     <div className={classes.StepListTitle}>
-                        <p style={{ fontSize: '40px' }}>Steps</p>
+                        <div>STEPS</div>
                         <Button
                             aria-controls='simple-menu'
                             aria-haspopup='true'

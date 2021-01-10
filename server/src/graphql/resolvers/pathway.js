@@ -25,12 +25,8 @@ const resolver = {
                 return { status: 'ERROR', message: e.toString() }
             }
         },
-        async deletePathway(_, { id, steps, whole }) {
-            const query = queries.pathway.deletePathway({
-                id,
-                steps,
-                whole,
-            })
+        async deletePathway(_, { id }) {
+            const query = queries.pathway.deletePathway({ id })
 
             try {
                 await query.run()
@@ -38,6 +34,18 @@ const resolver = {
             } catch (e) {
                 return { status: 'ERROR', message: e.toString() }
             }
+        },
+
+        async deleteStep(_, { id }) {
+            const query = queries.pathway.deleteStep()
+
+            try {
+                query.run()
+            } catch (e) {
+                return { status: 'ERROR', message: e.toString() }
+            }
+
+            return { status: 'OK', message: null }
         },
         async createUpdateContent(_, { id, title, content }, context) {
             const { username } = context.user

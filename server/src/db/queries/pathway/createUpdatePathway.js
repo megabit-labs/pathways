@@ -20,9 +20,10 @@ const createUpdatePathway = ({
             WITH p, u
             MERGE (u)-[:HAS_CREATED]->(p)
             WITH p
-            UNWIND $tags as tag
-            MERGE (t:Tag {name: tag})
-            MERGE (p)-[:HAS_TAG]->(t)
+            FOREACH (tag in $tags | 
+                MERGE (t:Tag {name: tag})
+                MERGE (p)-[:HAS_TAG]->(t)
+            )
             WITH distinct p
             UNWIND $steps as step
             MERGE (s:Step {id: step.id})

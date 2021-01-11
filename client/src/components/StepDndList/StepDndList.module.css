@@ -17,8 +17,9 @@
 
 .MoreControls {
     /* background-color: yellow; */
-    background-color: white;
-    width: 100px;
+    background-color: var(--entity-color);
+    box-shadow: var(--light-shadow);
+    width: 90px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

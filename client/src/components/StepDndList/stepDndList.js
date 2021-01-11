@@ -38,45 +38,29 @@ const getListStyle = (isDraggingOver) => ({
  * But...but...
  * class based components are so easy to use!
  */
-class StepDndList extends Component {
-    constructor(props) {
-        super(props)
-        this.onDragEnd = this.onDragEnd.bind(this)
-        this.state = {
-            anchorEl: null,
-        }
+const StepDndList = (props) => {
+
+    function handleClose (type, updatePathway=null, updateStep=null) {
+        onAddBtnClick(type, updatePathway, updateStep)
     }
 
-    handleClick = (event) => {
-        this.setState({
-            anchorEl: event.currentTarget,
-        })
-    }
-
-    handleClose = (type, updatePathway=null, updateStep=null) => {
-        this.setState({
-            anchorEl: null,
-        })
-        this.onAddBtnClick(type, updatePathway, updateStep)
-    }
-
-    onDragEnd(result) {
+    function onDragEnd(result) {
         if (!result.destination) {
             return
         }
 
         // from redux
-        this.props.onReorderSteps(result)
+        props.onReorderSteps(result)
     }
 
-    onAddBtnClick = (type, updatePathway, updateStep) => {
+    function onAddBtnClick(type, updatePathway, updateStep) {
         const stepId = generateId("step")
         const contentId = generateId('content')
         const timeLimit = 30
         let stepName, stepType
 
         if (type === 'PATHWAY_STEP') {
-            this.props.onAddStep({
+            props.onAddStep({
                 heading: 'This is a step',
                 stepType: 'PATHWAY_STEP',
                 id: stepId,
@@ -85,7 +69,7 @@ class StepDndList extends Component {
             stepName = 'Pathway Step'
             stepType = 'PATHWAY_STEP'
         } else if (type === 'CONTENT_STEP') {
-            this.props.onAddStep({
+            props.onAddStep({
                 heading: 'This is a step',
                 stepType: 'CONTENT_STEP',
                 id: stepId,
@@ -95,7 +79,7 @@ class StepDndList extends Component {
             stepName = 'Content Step'
             stepType = 'CONTENT_STEP'
         } else if (type === 'SHARED_STEP') {
-            this.props.onAddStep({
+            props.onAddStep({
                 heading: 'This is a step',
                 stepType: 'SHARED_STEP',
                 id: stepId,
@@ -109,7 +93,7 @@ class StepDndList extends Component {
             id: stepId,
             name: stepName,
             time: timeLimit,
-            index: Object.keys(this.props.steps).length,
+            index: Object.keys(props.steps).length,
             stepType: stepType,
             typeId: ""
         }
@@ -126,24 +110,24 @@ class StepDndList extends Component {
             .then(res => {
                 console.log(res)
                 newStep["typeId"] = contentId
-                this.addNewStep(newStep, updatePathway)
+                addNewStep(newStep, updatePathway)
             })
             .catch((err) => console.log(err))
             
         } else {
-            this.addNewStep(newStep, updatePathway)
+            addNewStep(newStep, updatePathway)
         }
 
     }
 
-    addNewStep = (newStep, updatePathway) => {
+    function addNewStep(newStep, updatePathway) {
         if(updatePathway) {
             updatePathway({variables: {
-                id: this.props.pathwayId,
-                name: this.props.pathwayName,
+                id: props.pathwayId,
+                name: props.pathwayName,
                 steps: [newStep],
-                tags: this.props.pathwayTags,
-                description: this.props.pathwayDescription
+                tags: props.pathwayTags,
+                description: props.pathwayDescription
             }})
             .then( res => {
                 console.log(res)
@@ -154,129 +138,81 @@ class StepDndList extends Component {
         }
     }
 
-    setPathwayDetails = () => {
-        this.props.showPathwayDetailsScreen()
+    function setPathwayDetails() {
+        props.showPathwayDetailsScreen()
     }
 
-    getParentSize() {
+    const stepData = props.steps
+    const steps = props.stepOrder.map((stepId, index) => {
+        const currentStep = stepData[stepId]
         return (
-            (this.plusIconRef &&
-                this.plusIconRef.current &&
-                this.plusIconRef.current.offsetTop) ||
-            0
+            <Step
+                key={index}
+                id={stepId}
+                index={index}
+                heading={currentStep.heading}
+                stepType={currentStep.stepType}
+                selected={currentStep.selected}
+                rating={currentStep.rating}
+            />
         )
-    }
+    })
 
-    render() {
-        const stepData = this.props.steps
-        const steps = this.props.stepOrder.map((stepId, index) => {
-            const currentStep = stepData[stepId]
-            return (
-                <Step
-                    key={index}
-                    id={stepId}
-                    index={index}
-                    heading={currentStep.heading}
-                    stepType={currentStep.stepType}
-                    selected={currentStep.selected}
-                    rating={currentStep.rating}
-                />
-            )
-        })
-
-        return (
-            <div className={classes.ControlsArea}>
-                <div className={classes.StepListArea}>
-                    <div className={classes.StepListTitle}>
-                        <div>STEPS</div>
-                        <Button
-                            aria-controls='simple-menu'
-                            aria-haspopup='true'
-                            onClick={this.handleClick}
-                        >
-                            <PlusIcon fontSize='30px' color='#555' />
-                        </Button>
-                        <Mutation mutation={ mutations.CREATE_UPDATE_PATHWAY }>
-                            {(updatePathway) => (
-                                <Menu
-                                    id='simple-menu'
-                                    anchorEl={this.state.anchorEl}
-                                    keepMounted
-                                    open={Boolean(this.state.anchorEl)}
-                                    onClose={() => {this.handleClose("", null)}}
-                                >
-                                    <MenuItem
-                                        onClick={() => this.handleClose('PATHWAY_STEP', updatePathway)}
-                                    >
-                                        <div className={classes.pathwayStep}>
-                                            Pathway
-                                        </div>
-                                    </MenuItem>
-                                    <Mutation mutation={UPDATE_STEP}>
-                                        {(updateStep) => (  
-                                            <MenuItem
-                                                onClick={() => this.handleClose('CONTENT_STEP', updatePathway, updateStep)}
-                                            >
-                                                <div className={classes.contentStep}>
-                                                    Content
-                                                </div>
-                                            </MenuItem>
-                                        )}
-                                    </Mutation>
-                                    <MenuItem
-                                        onClick={() => this.handleClose('SHARED_STEP', updatePathway)}
-                                    >
-                                        <div className={classes.sharedStep}>
-                                            Shared Step
-                                        </div>
-                                    </MenuItem>
-                                </Menu>
-                            )}
-                        </Mutation>
-                    </div>
-
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId='myNiggaThatsCrazy'>
-                            {(provided, snapshot) => (
-                                <div
-                                    {...provided.droppableProps}
-                                    ref={provided.innerRef}
-                                    style={getListStyle(
-                                        snapshot.isDraggingOver
-                                    )}
-                                >
-                                    {steps}
-                                    {provided.placeholder}
-                                </div>
-                            )}
-                        </Droppable>
-                    </DragDropContext>
+    return (
+        <div className={classes.ControlsArea}>
+            <div className={classes.StepListArea}>
+                <div className={classes.StepListTitle}>
+                    <div>STEPS</div>
+                    <Button
+                        aria-controls='simple-menu'
+                        aria-haspopup='true'
+                        // onClick={handleClick}
+                    >
+                        <PlusIcon fontSize='30px' color='#555' />
+                    </Button>
                 </div>
-                <div className={classes.MoreControls}>
-                    <div>
-                        <div className={classes.MoreControlsIcon}>
-                            <SaveIcon fontSize='50px' color='#102e4a' />
-                        </div>
-                        <div
-                            className={classes.MoreControlsIcon}
-                            onClick={this.setPathwayDetails}
-                        >
-                            <SettingsIcon fontSize='50px' color='#102e4a' />
-                        </div>
-                        <div className={classes.MoreControlsIcon}>
-                            {/* Clicking on this icon should render a preview of the pathway */}
-                            <PreviewIcon fontSize='50px' color='#102e4a' />
-                        </div>
+
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId='myNiggaThatsCrazy'>
+                        {(provided, snapshot) => (
+                            <div
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                                style={getListStyle(
+                                    snapshot.isDraggingOver
+                                )}
+                            >
+                                {steps}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            </div>
+            <div className={classes.MoreControls}>
+                <div>
+                    <div className={classes.MoreControlsIcon}>
+                        <SaveIcon fontSize='50px' color='#102e4a' />
                     </div>
-                    <div>
-                        <div className={classes.MoreControlsIcon}>
-                            <DownloadIcon fontSize='50px' color='#102e4a' />
-                        </div>
+                    <div
+                        className={classes.MoreControlsIcon}
+                        onClick={setPathwayDetails}
+                    >
+                        <SettingsIcon fontSize='50px' color='#102e4a' />
+                    </div>
+                    <div className={classes.MoreControlsIcon}>
+                        {/* Clicking on this icon should render a preview of the pathway */}
+                        <PreviewIcon fontSize='50px' color='#102e4a' />
+                    </div>
+                </div>
+                <div>
+                    <div className={classes.MoreControlsIcon}>
+                        <DownloadIcon fontSize='50px' color='#102e4a' />
                     </div>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 const mapDispatchToProps = (dispatch) => {

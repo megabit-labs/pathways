@@ -3,19 +3,24 @@
     outline: 0;
     border: 0;
     /* border-bottom: 1px solid #ccc; */
-    background-color: #eee;
-    width: 30px;
+    background-color: transparent;
+    width: 25px;
     margin-left: 5px;
+    font-weight: var(--fontweight-medium);
+    color: var(--primary);
 }
 
 .TimeInput {
-    background-color: #eee;
+    font-size: var(--text-xs);
+    background-color: var(--highlight);
     display: flex;
+    align-items: center;
     box-sizing: border-box;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 5px;
-    transform: translateY(-5px)
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: var(--fontweight-medium);
+    border-radius: var(--border-radius-l);
+    color: var(--primary);
+    margin-left: 20px;
+    /* transform: translateY(-5px); */
 }

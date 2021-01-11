@@ -68,7 +68,7 @@ const step = (props) => {
                         provided.draggableProps.style,
                         selected
                     )}
-                    onClick={() => props.onSelectStep(props.id)}
+                    onClick={props.onSelect}
                 >
                     <div className={classes.TopRow}>
                         <div className={classes.StepTitle}>
@@ -108,8 +108,7 @@ const step = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDeleteStep: (stepId) => dispatch(actions.deleteStep(stepId)),
-        onSelectStep: (stepId) => dispatch(actions.selectForEditing(stepId))
+        onDeleteStep: (stepId) => dispatch(actions.deleteStep(stepId))
     }
 }
 

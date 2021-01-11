@@ -1,12 +1,12 @@
 import React from 'react'
-import ClockIcon from 'react-ionicons/lib/IosTimeOutline'
+import { FaRegClock } from 'react-icons/fa'
 
 import classes from './timeInput.module.css'
 
 const timeInput = (props) => {
     return (
         <div className={classes.TimeInput}>
-            <ClockIcon />
+            <FaRegClock />
             <input 
                 type="number"
                 onChange={(e) => props.onValueChange(e.target.value)}

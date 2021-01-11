@@ -13,6 +13,14 @@ import * as mutations from '../../../utils/mutations/updatePathway'
 
 import classes from './StepDataEdit.module.css'
 
+const StepTypeToggle = (props) => {
+    return (
+        <div className={classes.StepTypeToggle}>
+            {props.value.split('_').join(' ')}
+        </div>
+    )
+}
+
 function StepDataEdit(props) {
     const stepTypes = ['CONTENT_STEP', 'PATHWAY_STEP', 'SHARED_STEP']
     const {
@@ -33,7 +41,7 @@ function StepDataEdit(props) {
                 >
                     <Toggle
                         vals={stepTypes.map((val) => ({
-                            component: <StepTag value={val} />,
+                            component: <StepTypeToggle value={val} />,
                             value: val,
                         }))}
                         onValueChange={(value) =>

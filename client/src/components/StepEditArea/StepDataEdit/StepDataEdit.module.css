@@ -55,3 +55,22 @@
     /* padding-left: 5px; */
     /* border: 1px solid black; */
 }
+
+.StepTypeToggle {
+    background-color: var(--entity-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 100%;
+    border-radius: var(--border-radius-l);
+    box-shadow: var(--heavy-shadow);
+    padding: 0px 10px;
+    font-weight: var(--fontweight-medium);
+    color: var(--primary);
+    transition: transform 0.2s ease;
+}
+
+.StepTypeToggle:active {
+    transform: translateY(4px);
+}

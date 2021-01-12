@@ -1,9 +1,14 @@
 .StepContentEdit {
     background-color: #fafafa;
+    /* background-color: aqua; */
+    height: 80vh;
+    overflow-y: scroll;
     /* flex: 1 1 auto; */
     /* height: 100%; */
 }
 
 textarea {
     outline: 0;
+    /* background-color: yellow; */
+    /* height: 100%; */
 }

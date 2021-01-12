@@ -1,8 +1,19 @@
-.StepEditArea {
-    background-color: #fafafa;
+.Wrapper {
+    /* background-color: greenyellow; */
     width: 1000px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    justify-content: space-between;
+}
+
+.StepEditArea {
+    background-color: #fafafa;
+    /* background-color: red; */
+    width: 100%;
+    margin: 0 auto;
+    /* height: 100%; */
 }
 
 .ActionButton {
@@ -21,4 +32,50 @@
     color: white;
     cursor: pointer;
     border: 1px solid cornflowerblue;
+}
+
+.ActionArea {
+    /* background-color: green; */
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+
+.SaveBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--text-s);
+    font-weight: var(--fontweight-medium);
+    color: var(--entity-color);
+    border-radius: var(--border-radius-l);
+    background-color: var(--primary);
+    box-shadow: var(--heavy-shadow);
+    cursor: pointer;
+    padding: 0 15px;
+    box-sizing: border-box;
+    height: 30px;
+}
+
+.PreviewBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--primary);
+    padding: 0 15px;
+    margin-left: 15px;
+    color: var(--primary);
+    font-size: var(--text-s);
+    font-weight: var(--fontweight-medium);
+    border-radius: var(--border-radius-l);
+    box-sizing: border-box;
+    height: 30px;
+    cursor: pointer;
+}
+
+.Preview {
+    height: 80vh;
+    overflow-y: scroll;
+    font-size: var(--text-s);
+    padding: 0px 10px;
 }

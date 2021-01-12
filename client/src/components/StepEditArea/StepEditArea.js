@@ -14,13 +14,6 @@ import classes from './StepEditArea.module.css'
 
 const StepEditArea = (props) => {
 
-
-    function stepUpdateHandler(key, value) {
-        const newStateObj = {}
-        newStateObj[key] = value
-        this.setState(newStateObj)
-    }
-
     const step = props.step
 
     let displayComponent = null
@@ -28,6 +21,7 @@ const StepEditArea = (props) => {
         const markdown = step.content
         displayComponent = (
             <ReactMarkdown
+                className={classes.Preview}
                 source={markdown}
                 escapeHtml={false}
                 renderers={{ code: CodeBlock }}
@@ -59,7 +53,24 @@ const StepEditArea = (props) => {
             </Aux>
         )
     }
-    return <div className={classes.StepEditArea}>{editAreaComponent}</div>
+    return (
+        <div className={classes.Wrapper}>
+            <div className={classes.StepEditArea}>
+                {editAreaComponent}
+            </div>
+            <div className={classes.ActionArea}>
+                <div className={classes.SaveBtn}>
+                    Save Step
+                </div>
+                <div
+                    className={classes.PreviewBtn}
+                    onClick={props.togglePreview}    
+                >
+                    Preview
+                </div>
+            </div>
+        </div>
+    )
 }
 
 

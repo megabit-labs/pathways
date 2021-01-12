@@ -134,6 +134,14 @@ const CreateEditPathway = (props) => {
         }))
     }
 
+    function togglePreview() {
+        setUiState(update(uiState, {
+            isPreview: {
+                $apply: (isPreview) => !isPreview
+            }
+        }))
+    }
+
     if (loading || uiState.loading) {
         return (
             <div>
@@ -162,6 +170,7 @@ const CreateEditPathway = (props) => {
                                         selectedStep={uiState.selectedStep}
                                         isPreview={uiState.isPreview}
                                         updateStep={onUpdateStep}
+                                        togglePreview={togglePreview}
                                     />
                             )
                             :   <div/>

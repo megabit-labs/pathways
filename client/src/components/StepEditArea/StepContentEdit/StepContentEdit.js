@@ -28,7 +28,9 @@ const stepContentEdit = (props) => {
                     fontFamily: '"Fira code", "Fira Mono", monospace',
                     fontSize: 'var(--text-s)',
                     minHeight: '500px',
-                    color: 'var(--text-color-regular)'
+                    color: 'var(--text-color-regular)',
+                    // overflowY: 'scroll',
+                    // backgroundColor: 'yellow'
                 }}
                 wrap='soft'
             />

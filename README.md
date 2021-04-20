@@ -1,5 +1,5 @@
 # pathways
-Pathways aims to be the roadmap for learning any skill. It is a curated and opinionated collection of tutorials.
+Pathways aims to be the roadmap for learning any skill. It is a curated and opinionated collection of tutorials, with a pretty interface to view them.
 
 ## The Goal
 The internet is full of amazing and *free* resources of varying qualities. However there is **no guide to decide which one is best or relevant for a particular skill level**. Not free ones anyway. **Pathways solves this by collecting the best tutorials into steps**. Steps that form a comprehensive guide for learning any skill upto a desired level.
